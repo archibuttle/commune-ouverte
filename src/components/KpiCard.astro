@@ -65,6 +65,54 @@ if (invertedKpis.includes(label) && delta_pct !== null) {
   if (delta_pct > 2) { deltaColor = "text-emerald-600"; }
   else if (delta_pct < -2) { deltaColor = "text-red-600"; }
 }
+
+// Micro-interpretation: one plain-French sentence per KPI + badge
+const interpretations: Record<string, Record<string, string>> = {
+  "Encours de dette": {
+    "BON": "Endettement ma\u00eetris\u00e9, nettement en dessous des villes comparables.",
+    "CORRECT": "Endettement raisonnable, proche de la moyenne.",
+    "MOYEN": "Endettement mod\u00e9r\u00e9 mais \u00e0 surveiller.",
+    "FAIBLE": "Endettement \u00e9lev\u00e9, au-dessus des villes comparables.",
+    "CRITIQUE": "Endettement tr\u00e8s \u00e9lev\u00e9 : la ville est fortement endett\u00e9e.",
+  },
+  "D\u00e9penses d'investissement": {
+    "BON": "La ville investit fortement dans les \u00e9quipements publics.",
+    "CORRECT": "Investissement dans la moyenne des villes comparables.",
+    "MOYEN": "Investissement mod\u00e9r\u00e9, pourrait \u00eatre renforc\u00e9.",
+    "FAIBLE": "La ville investit peu : \u00e9coles, voirie, \u00e9quipements re\u00e7oivent moins.",
+    "CRITIQUE": "Investissement tr\u00e8s faible : les \u00e9quipements publics risquent de se d\u00e9grader.",
+  },
+  "Recettes de fonctionnement": {
+    "BON": "Recettes solides, la ville a les moyens de ses ambitions.",
+    "CORRECT": "Recettes dans la norme pour cette taille de ville.",
+    "MOYEN": "Recettes mod\u00e9r\u00e9es, peu de marge de man\u0153uvre.",
+    "FAIBLE": "Recettes faibles, ce qui limite les services aux habitants.",
+    "CRITIQUE": "Recettes tr\u00e8s insuffisantes par rapport aux villes comparables.",
+  },
+  "D\u00e9penses de fonctionnement": {
+    "BON": "D\u00e9penses de fonctionnement ma\u00eetris\u00e9es.",
+    "CORRECT": "D\u00e9penses de fonctionnement dans la norme.",
+    "MOYEN": "D\u00e9penses de fonctionnement mod\u00e9r\u00e9ment \u00e9lev\u00e9es.",
+    "FAIBLE": "D\u00e9penses de fonctionnement \u00e9lev\u00e9es : le quotidien co\u00fbte cher.",
+    "CRITIQUE": "D\u00e9penses de fonctionnement excessives par rapport aux villes comparables.",
+  },
+  "Frais de personnel": {
+    "BON": "Masse salariale bien contenue par rapport aux villes comparables.",
+    "CORRECT": "Masse salariale dans la moyenne.",
+    "MOYEN": "Masse salariale mod\u00e9r\u00e9ment \u00e9lev\u00e9e.",
+    "FAIBLE": "Masse salariale \u00e9lev\u00e9e, ce qui p\u00e8se sur le budget.",
+    "CRITIQUE": "Masse salariale tr\u00e8s \u00e9lev\u00e9e : premier poste de d\u00e9pense pr\u00e9occupant.",
+  },
+  "\u00c9pargne brute": {
+    "BON": "La ville d\u00e9gage de bonnes marges pour investir et rembourser.",
+    "CORRECT": "\u00c9pargne suffisante pour maintenir la capacit\u00e9 d'investissement.",
+    "MOYEN": "\u00c9pargne mod\u00e9r\u00e9e, la marge de man\u0153uvre est limit\u00e9e.",
+    "FAIBLE": "\u00c9pargne faible : la ville peine \u00e0 d\u00e9gager des marges.",
+    "CRITIQUE": "\u00c9pargne tr\u00e8s insuffisante : risque sur la capacit\u00e9 \u00e0 investir et rembourser.",
+  },
+};
+
+const interpretation = interpretations[label]?.[badge] || "";
 ---
 <div class="bg-white rounded-2xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.06)] border border-neutral-100 flex flex-col">
   <div class="flex items-start justify-between mb-3">
@@ -100,6 +148,10 @@ if (invertedKpis.includes(label) && delta_pct !== null) {
       <span>{annees[annees.length - 1]}</span>
     </div>
   </div>
+
+  {interpretation && (
+    <p class="text-xs text-neutral-500 italic mb-2">{interpretation}</p>
+  )}
 
   {moyenne_strate !== null && (
     <div class="text-xs text-neutral-500 border-t border-neutral-100 pt-2 mt-auto">

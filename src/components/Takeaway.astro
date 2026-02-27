@@ -1,0 +1,97 @@
+---
+interface Kpi {
+  label: string;
+  badge: string;
+  delta_pct: number | null;
+}
+
+interface ElectionRound {
+  participation_pct: number;
+  listes: any[];
+}
+
+interface Props {
+  kpis: Record<string, Kpi>;
+  badge_global: string;
+  t1: ElectionRound | null;
+  t2: ElectionRound | null;
+  nom: string;
+}
+
+const { kpis, badge_global, t1, t2, nom } = Astro.props;
+
+// Generate 2-3 key takeaways from the data
+const takeaways: string[] = [];
+
+// 1. Financial health summary
+const kpiLabels: Record<string, string> = {
+  "Encours de dette": "l'endettement",
+  "D\u00e9penses d'investissement": "l'investissement dans les \u00e9quipements publics",
+  "Recettes de fonctionnement": "les recettes",
+  "D\u00e9penses de fonctionnement": "les d\u00e9penses courantes",
+  "Frais de personnel": "la masse salariale",
+  "\u00c9pargne brute": "la capacit\u00e9 d'\u00e9pargne",
+};
+
+// Find the most concerning KPI (CRITIQUE with highest absolute delta)
+let worstKpi: { label: string; delta: number } | null = null;
+let bestKpi: { label: string; delta: number } | null = null;
+
+for (const [key, kpi] of Object.entries(kpis)) {
+  if (kpi.badge === "CRITIQUE" && kpi.delta_pct !== null) {
+    if (!worstKpi || Math.abs(kpi.delta_pct) > Math.abs(worstKpi.delta)) {
+      worstKpi = { label: kpiLabels[kpi.label] || kpi.label, delta: kpi.delta_pct };
+    }
+  }
+  if (kpi.badge === "BON" && kpi.delta_pct !== null) {
+    if (!bestKpi || Math.abs(kpi.delta_pct) > Math.abs(bestKpi.delta)) {
+      bestKpi = { label: kpiLabels[kpi.label] || kpi.label, delta: kpi.delta_pct };
+    }
+  }
+}
+
+if (worstKpi) {
+  takeaways.push(`Point de vigilance : ${worstKpi.label} est en situation critique par rapport aux villes comparables.`);
+}
+
+if (bestKpi) {
+  takeaways.push(`Point fort : ${bestKpi.label} est un atout par rapport aux villes comparables.`);
+}
+
+// 2. Participation insight
+const natT2 = 41.60;
+const natT1 = 44.66;
+if (t2 || t1) {
+  const pct = t2?.participation_pct ?? t1?.participation_pct ?? 0;
+  const nat = t2 ? natT2 : natT1;
+  if (pct < nat - 5) {
+    takeaways.push(`La participation en 2020 \u00e9tait faible (\u00e0 ${pct.toFixed(0)}%). Chaque voix comptera en 2026.`);
+  } else if (pct > nat + 5) {
+    takeaways.push(`Les \u00e9lecteurs se sont fortement mobilis\u00e9s en 2020 (${pct.toFixed(0)}%), signe d'un int\u00e9r\u00eat marqu\u00e9 pour la politique locale.`);
+  }
+}
+
+// 3. If no strong takeaway, add a neutral one based on overall badge
+if (takeaways.length < 2) {
+  if (badge_global === "BON" || badge_global === "CORRECT") {
+    takeaways.push(`${nom} pr\u00e9sente une situation financi\u00e8re globalement saine, ce qui laisse de la marge au prochain mandat.`);
+  } else if (badge_global === "FAIBLE" || badge_global === "CRITIQUE") {
+    takeaways.push(`La situation financi\u00e8re de ${nom} appelle des choix importants pour le prochain mandat.`);
+  } else {
+    takeaways.push(`${nom} est dans la moyenne : ni alarme, ni confort. Les choix du prochain mandat seront d\u00e9terminants.`);
+  }
+}
+---
+{takeaways.length > 0 && (
+  <div class="bg-neutral-900 rounded-2xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.12)]">
+    <div class="text-xs font-medium text-neutral-400 uppercase tracking-wide mb-3">&Agrave; retenir avant de voter</div>
+    <ul class="space-y-2">
+      {takeaways.map((t) => (
+        <li class="flex gap-2 text-sm text-neutral-200 leading-relaxed">
+          <span class="text-blue-400 shrink-0 mt-0.5">&bull;</span>
+          <span>{t}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+)}

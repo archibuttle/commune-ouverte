@@ -17,6 +17,19 @@ const { t1, t2 } = Astro.props;
 const natT1 = 44.66;
 const natT2 = 41.60;
 
+// Context interpretation
+const mainPct = t2?.participation_pct ?? t1?.participation_pct ?? 0;
+const mainNat = t2 ? natT2 : natT1;
+const diff = mainPct - mainNat;
+let participationContext = "";
+if (diff < -5) {
+  participationContext = "Un taux de participation faible : les \u00e9lecteurs se sont peu mobilis\u00e9s.";
+} else if (diff > 5) {
+  participationContext = "Un taux de participation \u00e9lev\u00e9 : les \u00e9lecteurs \u00e9taient mobilis\u00e9s.";
+} else {
+  participationContext = "Un taux de participation proche de la moyenne nationale.";
+}
+
 function formatDelta(val: number, ref: number): string {
   const diff = val - ref;
   const sign = diff > 0 ? "+" : "";
@@ -60,4 +73,8 @@ function deltaColor(val: number, ref: number): string {
       </div>
     )}
   </div>
+
+  <p class="text-xs text-neutral-500 italic mt-3 border-t border-neutral-100 pt-3">
+    {participationContext} Le scrutin de 2020 a &eacute;t&eacute; marqu&eacute; par le d&eacute;but de la pand&eacute;mie de Covid-19, ce qui a r&eacute;duit la participation partout en France.
+  </p>
 </div>

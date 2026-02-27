@@ -6,6 +6,8 @@ import KpiCard from '../../components/KpiCard.astro';
 import ParticipationCard from '../../components/ParticipationCard.astro';
 import ElectionResults from '../../components/ElectionResults.astro';
 import Footer from '../../components/Footer.astro';
+import VerdictCard from '../../components/VerdictCard.astro';
+import Takeaway from '../../components/Takeaway.astro';
 import SearchTrends from '../../components/SearchTrends.astro';
 import SocialSentiment from '../../components/SocialSentiment.astro';
 import EmergingSignals from '../../components/EmergingSignals.astro';
@@ -61,6 +63,15 @@ const tourLabel = showT2 ? "2nd tour 2020" : "1er tour 2020";
       <MayorCard maire={commune.maire} />
     </div>
 
+    <!-- Verdict: bilan du mandat -->
+    <div class="mt-4">
+      <VerdictCard
+        maire={commune.maire}
+        badge_global={commune.finances.badge_global}
+        kpis={commune.finances.kpis}
+      />
+    </div>
+
     <!-- Financial KPIs -->
     <h2 class="text-xl font-medium tracking-tight text-neutral-900 mt-10 mb-4">Finances du mandat (2020-2024)</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -96,6 +107,17 @@ const tourLabel = showT2 ? "2nd tour 2020" : "1er tour 2020";
         Les r&eacute;sultats d&eacute;taill&eacute;s ne sont pas encore int&eacute;gr&eacute;s.
       </div>
     )}
+
+    <!-- Takeaway: a retenir -->
+    <div class="mt-10">
+      <Takeaway
+        kpis={commune.finances.kpis}
+        badge_global={commune.finances.badge_global}
+        t1={commune.elections?.t1}
+        t2={commune.elections?.t2}
+        nom={commune.nom}
+      />
+    </div>
 
     <!-- Intelligence sociale (Synthesio) -->
     <h2 class="text-xl font-medium tracking-tight text-neutral-900 mt-10 mb-2">Intelligence sociale</h2>
