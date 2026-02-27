@@ -80,16 +80,17 @@ const tourLabel = showT2 ? "2nd tour 2020" : "1er tour 2020";
 
     <!-- Elections Section -->
     <h2 class="text-lg font-semibold text-neutral-900 mt-8 mb-4">Municipales 2020</h2>
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-      <ParticipationCard t1={commune.elections?.t1} t2={commune.elections?.t2} />
-      {mainElection?.listes?.length > 0 && (
-        <ElectionResults listes={mainElection.listes} tour={tourLabel} />
-      )}
-    </div>
-
-    {!commune.elections?.t1 && !commune.elections?.t2 && (
+    {commune.elections?.t1 || commune.elections?.t2 ? (
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <ParticipationCard t1={commune.elections?.t1} t2={commune.elections?.t2} />
+        {mainElection?.listes?.length > 0 && (
+          <ElectionResults listes={mainElection.listes} tour={tourLabel} />
+        )}
+      </div>
+    ) : (
       <div class="bg-white rounded-xl p-5 shadow-sm border border-neutral-200 text-center text-neutral-500">
-        Donn&eacute;es &eacute;lectorales non disponibles pour cette commune (format PLM sp&eacute;cifique).
+        Paris, Lyon et Marseille utilisent un scrutin sp&eacute;cifique (loi PLM).
+        Les r&eacute;sultats d&eacute;taill&eacute;s ne sont pas encore int&eacute;gr&eacute;s.
       </div>
     )}
 
