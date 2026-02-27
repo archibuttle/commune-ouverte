@@ -16,30 +16,10 @@ const baseUrl = import.meta.env.BASE_URL;
       </p>
     </div>
 
-    <!-- Search bar -->
-    <div class="relative mb-8">
-      <div class="relative">
-        <svg class="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <circle cx="11" cy="11" r="8" />
-          <path d="m21 21-4.35-4.35" stroke-linecap="round" />
-        </svg>
-        <input
-          id="city-search"
-          type="text"
-          placeholder="Rechercher une ville..."
-          autocomplete="off"
-          class="w-full rounded-full border-2 border-neutral-200 focus:border-blue-400 focus:outline-none pl-14 pr-6 py-4 text-lg text-neutral-800 placeholder:text-neutral-400 shadow-[0_2px_12px_rgba(0,0,0,0.06)] transition-all"
-        />
-      </div>
-      <!-- Filtered dropdown (hidden by default, shown by JS) -->
-      <div id="search-results" class="hidden absolute z-10 w-full mt-2 bg-white rounded-2xl shadow-lg border border-neutral-100 overflow-hidden">
-      </div>
-    </div>
-
     <!-- City grid -->
     <div class="bg-white rounded-2xl p-6 shadow-[0_2px_12px_rgba(0,0,0,0.06)] border border-neutral-100">
       <label class="block text-sm font-medium text-neutral-500 mb-4">
-        Ou choisissez parmi les 10 plus grandes villes
+        Choisissez une ville
       </label>
       <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
         {index.map((city: any) => (
@@ -62,42 +42,3 @@ const baseUrl = import.meta.env.BASE_URL;
     <Footer />
   </main>
 </Layout>
-
-<script define:vars={{ baseUrl, cities: index }}>
-  const input = document.getElementById('city-search');
-  const results = document.getElementById('search-results');
-
-  input.addEventListener('input', (e) => {
-    const q = e.target.value.toLowerCase().trim();
-    if (!q) {
-      results.classList.add('hidden');
-      results.innerHTML = '';
-      return;
-    }
-
-    const matches = cities.filter(c =>
-      c.nom.toLowerCase().includes(q) || c.code.includes(q)
-    );
-
-    if (matches.length === 0) {
-      results.classList.add('hidden');
-      results.innerHTML = '';
-      return;
-    }
-
-    results.innerHTML = matches.map(c =>
-      `<a href="${baseUrl}commune/${c.code}" class="flex items-center justify-between px-5 py-3 hover:bg-blue-50 transition-colors">
-        <span class="font-medium text-neutral-800">${c.nom}</span>
-        <span class="text-sm text-neutral-400">${c.dep_code}</span>
-      </a>`
-    ).join('');
-    results.classList.remove('hidden');
-  });
-
-  // Close dropdown when clicking outside
-  document.addEventListener('click', (e) => {
-    if (!input.contains(e.target) && !results.contains(e.target)) {
-      results.classList.add('hidden');
-    }
-  });
-</script>
