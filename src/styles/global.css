@@ -75,6 +75,8 @@
 }
 
 body {
-  background-color: var(--color-neutral-100);
+  background: linear-gradient(180deg, #FFFFFF 0%, #EFF6FF 50%, #F0FDFA 100%);
+  background-attachment: fixed;
   color: var(--color-neutral-800);
+  min-height: 100vh;
 }

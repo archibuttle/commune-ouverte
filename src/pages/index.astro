@@ -6,23 +6,46 @@ import index from '../../public/data/communes-index.json';
 const baseUrl = import.meta.env.BASE_URL;
 ---
 <Layout title="Commune Ouverte - Municipales 2026">
-  <main class="max-w-2xl mx-auto px-4 py-16">
-    <div class="text-center mb-12">
-      <h1 class="text-4xl font-bold text-neutral-900 mb-3">Commune Ouverte</h1>
-      <p class="text-lg text-neutral-600">
+  <main class="max-w-2xl mx-auto px-4 py-20">
+    <div class="text-center mb-14">
+      <h1 class="text-5xl font-light text-neutral-900 mb-4">
+        Commune <span class="text-blue-600">Ouverte</span>
+      </h1>
+      <p class="text-xl text-neutral-500">
         Consultez les finances et le bilan &eacute;lectoral de votre commune avant les municipales 2026.
       </p>
     </div>
 
-    <div class="bg-white rounded-xl p-6 shadow-sm border border-neutral-200">
-      <label for="city-select" class="block text-sm font-medium text-neutral-700 mb-3">
-        Choisissez une ville
+    <!-- Search bar -->
+    <div class="relative mb-8">
+      <div class="relative">
+        <svg class="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35" stroke-linecap="round" />
+        </svg>
+        <input
+          id="city-search"
+          type="text"
+          placeholder="Rechercher une ville..."
+          autocomplete="off"
+          class="w-full rounded-full border-2 border-neutral-200 focus:border-blue-400 focus:outline-none pl-14 pr-6 py-4 text-lg text-neutral-800 placeholder:text-neutral-400 shadow-[0_2px_12px_rgba(0,0,0,0.06)] transition-all"
+        />
+      </div>
+      <!-- Filtered dropdown (hidden by default, shown by JS) -->
+      <div id="search-results" class="hidden absolute z-10 w-full mt-2 bg-white rounded-2xl shadow-lg border border-neutral-100 overflow-hidden">
+      </div>
+    </div>
+
+    <!-- City grid -->
+    <div class="bg-white rounded-2xl p-6 shadow-[0_2px_12px_rgba(0,0,0,0.06)] border border-neutral-100">
+      <label class="block text-sm font-medium text-neutral-500 mb-4">
+        Ou choisissez parmi les 10 plus grandes villes
       </label>
       <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
         {index.map((city: any) => (
           <a
             href={`${baseUrl}commune/${city.code}`}
-            class="flex items-center gap-2 px-4 py-3 rounded-lg border border-neutral-200 hover:border-blue-400 hover:bg-blue-50 transition-colors"
+            class="flex items-center gap-2 px-4 py-3 rounded-xl border border-neutral-100 hover:border-blue-400 hover:bg-blue-50 hover:shadow-md transition-all"
           >
             <span class="text-sm font-medium text-neutral-800">{city.nom}</span>
             <span class="text-xs text-neutral-400">({city.dep_code})</span>
@@ -31,7 +54,7 @@ const baseUrl = import.meta.env.BASE_URL;
       </div>
     </div>
 
-    <div class="text-center mt-8 text-sm text-neutral-500">
+    <div class="text-center mt-10 text-sm text-neutral-400">
       <p>Donn&eacute;es ouvertes : OFGL, RNE, Minist&egrave;re de l'int&eacute;rieur</p>
       <p class="mt-1">10 plus grandes villes &middot; Extension &agrave; venir</p>
     </div>
@@ -39,3 +62,42 @@ const baseUrl = import.meta.env.BASE_URL;
     <Footer />
   </main>
 </Layout>
+
+<script define:vars={{ baseUrl, cities: index }}>
+  const input = document.getElementById('city-search');
+  const results = document.getElementById('search-results');
+
+  input.addEventListener('input', (e) => {
+    const q = e.target.value.toLowerCase().trim();
+    if (!q) {
+      results.classList.add('hidden');
+      results.innerHTML = '';
+      return;
+    }
+
+    const matches = cities.filter(c =>
+      c.nom.toLowerCase().includes(q) || c.code.includes(q)
+    );
+
+    if (matches.length === 0) {
+      results.classList.add('hidden');
+      results.innerHTML = '';
+      return;
+    }
+
+    results.innerHTML = matches.map(c =>
+      `<a href="${baseUrl}commune/${c.code}" class="flex items-center justify-between px-5 py-3 hover:bg-blue-50 transition-colors">
+        <span class="font-medium text-neutral-800">${c.nom}</span>
+        <span class="text-sm text-neutral-400">${c.dep_code}</span>
+      </a>`
+    ).join('');
+    results.classList.remove('hidden');
+  });
+
+  // Close dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!input.contains(e.target) && !results.contains(e.target)) {
+      results.classList.add('hidden');
+    }
+  });
+</script>

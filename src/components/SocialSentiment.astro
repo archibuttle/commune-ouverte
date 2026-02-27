@@ -1,0 +1,120 @@
+---
+interface Props {
+  commune: string;
+}
+
+const { commune } = Astro.props;
+
+// Placeholder sentiment data per commune
+const PLACEHOLDER_DATA: Record<string, { score: number; mentions: string; trend: number[] }> = {
+  "75056": { score: 42, mentions: "14.2K", trend: [38, 45, 40, 44, 39, 42] },
+  "13055": { score: 35, mentions: "5.8K", trend: [40, 37, 32, 30, 38, 35] },
+  "69123": { score: 55, mentions: "4.1K", trend: [48, 52, 50, 58, 53, 55] },
+  "31555": { score: 62, mentions: "3.2K", trend: [55, 58, 60, 65, 59, 62] },
+  "06088": { score: 48, mentions: "2.9K", trend: [45, 50, 44, 52, 46, 48] },
+  "44109": { score: 58, mentions: "2.5K", trend: [52, 55, 60, 56, 61, 58] },
+  "34172": { score: 51, mentions: "2.1K", trend: [48, 46, 53, 55, 49, 51] },
+  "67482": { score: 64, mentions: "1.8K", trend: [58, 60, 62, 66, 61, 64] },
+  "33063": { score: 60, mentions: "2.7K", trend: [55, 58, 57, 63, 59, 60] },
+  "59350": { score: 45, mentions: "2.3K", trend: [42, 40, 48, 44, 47, 45] },
+};
+
+const defaultData = { score: 50, mentions: "1.5K", trend: [45, 48, 52, 47, 50, 50] };
+const data = PLACEHOLDER_DATA[commune] || defaultData;
+const isPlaceholder = true;
+
+// Gauge SVG parameters
+const radius = 40;
+const circumference = Math.PI * radius; // half circle
+const offset = circumference - (data.score / 100) * circumference;
+
+// Gauge color
+const gaugeColor = data.score >= 60 ? "#10B981" : data.score >= 40 ? "#F59E0B" : "#EF4444";
+const gaugeLabel = data.score >= 60 ? "Positif" : data.score >= 40 ? "Mitig\u00e9" : "N\u00e9gatif";
+
+// Sparkline for sentiment trend (6 months)
+const sparkW = 120;
+const sparkH = 36;
+const pad = 2;
+const minV = Math.min(...data.trend);
+const maxV = Math.max(...data.trend);
+const rangeV = maxV - minV || 1;
+
+const sparkPoints = data.trend.map((v, i) => {
+  const x = pad + (i / (data.trend.length - 1)) * (sparkW - pad * 2);
+  const y = sparkH - pad - ((v - minV) / rangeV) * (sparkH - pad * 2);
+  return `${x},${y}`;
+}).join(" ");
+
+// Area fill points
+const areaPoints = `${pad},${sparkH - pad} ${sparkPoints} ${sparkW - pad},${sparkH - pad}`;
+
+const months = ["Sept.", "Oct.", "Nov.", "D\u00e9c.", "Janv.", "F\u00e9vr."];
+---
+<div class="relative bg-white rounded-2xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.06)] border border-neutral-100 overflow-hidden">
+  <!-- Synthesio badge -->
+  <div class="flex items-start justify-between mb-4">
+    <div>
+      <div class="text-xs font-medium text-neutral-500 uppercase tracking-wide">Perception en ligne</div>
+      <div class="text-[11px] text-neutral-400 mt-0.5">Sentiment sur 6 mois</div>
+    </div>
+    <span class="bg-blue-50 text-blue-600 text-[10px] font-semibold px-2 py-0.5 rounded-full">Synthesio</span>
+  </div>
+
+  <!-- Gauge -->
+  <div class="flex items-center justify-center mb-3">
+    <svg viewBox="0 0 100 55" class="w-32 h-auto">
+      <!-- Background arc -->
+      <path
+        d="M 10 50 A 40 40 0 0 1 90 50"
+        fill="none"
+        stroke="#E5E5E5"
+        stroke-width="8"
+        stroke-linecap="round"
+      />
+      <!-- Filled arc -->
+      <path
+        d="M 10 50 A 40 40 0 0 1 90 50"
+        fill="none"
+        stroke={gaugeColor}
+        stroke-width="8"
+        stroke-linecap="round"
+        stroke-dasharray={`${circumference}`}
+        stroke-dashoffset={`${offset}`}
+      />
+      <!-- Score text -->
+      <text x="50" y="46" text-anchor="middle" class="text-lg" font-family="JetBrains Mono, monospace" font-weight="700" font-size="16" fill="#171717">
+        {data.score}%
+      </text>
+      <text x="50" y="54" text-anchor="middle" font-family="Inter, sans-serif" font-size="6" fill="#737373">
+        {gaugeLabel}
+      </text>
+    </svg>
+  </div>
+
+  <!-- Sparkline trend -->
+  <div class="mb-3">
+    <svg viewBox={`0 0 ${sparkW} ${sparkH}`} class="w-full h-9" preserveAspectRatio="none">
+      <polygon points={areaPoints} fill={gaugeColor} opacity="0.1" />
+      <polyline points={sparkPoints} fill="none" stroke={gaugeColor} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+    <div class="flex justify-between text-[10px] text-neutral-400 mt-0.5">
+      <span>{months[0]}</span>
+      <span>{months[months.length - 1]}</span>
+    </div>
+  </div>
+
+  <!-- Volume + sources -->
+  <div class="flex items-center justify-between text-xs text-neutral-500 border-t border-neutral-100 pt-2">
+    <span><span class="font-mono font-medium text-neutral-700">{data.mentions}</span> mentions</span>
+    <span class="text-neutral-400">X, Facebook, Forums, Presse</span>
+  </div>
+
+  <!-- Placeholder overlay -->
+  {isPlaceholder && (
+    <div class="absolute inset-0 bg-white/75 backdrop-blur-[2px] flex flex-col items-center justify-center rounded-2xl">
+      <div class="text-sm font-medium text-neutral-600">Donn&eacute;es bient&ocirc;t disponibles</div>
+      <div class="text-xs text-neutral-400 mt-1">Propuls&eacute; par Synthesio</div>
+    </div>
+  )}
+</div>

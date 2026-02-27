@@ -1,0 +1,84 @@
+---
+interface Props {
+  commune: string;
+}
+
+const { commune } = Astro.props;
+
+interface Signal {
+  title: string;
+  description: string;
+  change: string;
+  date: string;
+  confidence: string;
+}
+
+// Placeholder signals per commune (realistic, city-specific)
+const PLACEHOLDER_DATA: Record<string, Signal[]> = {
+  "75056": [
+    { title: "JO 2024 : bilan et h\u00e9ritage", change: "+280%", description: "Les discussions sur l'h\u00e9ritage des JO et les infrastructures sportives repartent \u00e0 la hausse.", date: "12 f\u00e9vr. 2026", confidence: "\u00c9lev\u00e9e" },
+    { title: "Propret\u00e9 des rues", change: "+145%", description: "Forte augmentation des plaintes sur la propret\u00e9 dans les 18e, 19e et 20e arrondissements.", date: "8 f\u00e9vr. 2026", confidence: "Mod\u00e9r\u00e9e" },
+  ],
+  "13055": [
+    { title: "Logement insalubre", change: "+320%", description: "R\u00e9surgence du sujet apr\u00e8s un reportage sur les copropri\u00e9t\u00e9s d\u00e9grad\u00e9es du centre-ville.", date: "15 f\u00e9vr. 2026", confidence: "\u00c9lev\u00e9e" },
+    { title: "M\u00e9tro ligne 2", change: "+190%", description: "Les retards de la ligne 2 alimentent les conversations sur les r\u00e9seaux sociaux.", date: "10 f\u00e9vr. 2026", confidence: "\u00c9lev\u00e9e" },
+  ],
+  "69123": [
+    { title: "ZFE : contestation croissante", change: "+410%", description: "La Zone \u00e0 Faibles \u00c9missions cristallise les d\u00e9bats, surtout sur Facebook et forums locaux.", date: "14 f\u00e9vr. 2026", confidence: "\u00c9lev\u00e9e" },
+    { title: "Vie nocturne et nuisances", change: "+175%", description: "Hausse des discussions sur les nuisances sonores dans la Presqu'\u00eele et Guilloti\u00e8re.", date: "6 f\u00e9vr. 2026", confidence: "Mod\u00e9r\u00e9e" },
+  ],
+  "44109": [
+    { title: "Tramway ligne 4", change: "+340%", description: "Les mentions ont tripl\u00e9 depuis d\u00e9cembre, principalement sur X et les forums locaux.", date: "15 f\u00e9vr. 2026", confidence: "\u00c9lev\u00e9e" },
+    { title: "Inondations et climat", change: "+220%", description: "Apr\u00e8s les crues de janvier, les nantais s'interrogent sur l'adaptation au changement climatique.", date: "3 f\u00e9vr. 2026", confidence: "\u00c9lev\u00e9e" },
+  ],
+};
+
+const defaultSignals: Signal[] = [
+  { title: "Municipales 2026 : mont\u00e9e des discussions", change: "+250%", description: "L'int\u00e9r\u00eat pour les \u00e9lections municipales augmente fortement sur tous les canaux.", date: "13 f\u00e9vr. 2026", confidence: "\u00c9lev\u00e9e" },
+  { title: "Co\u00fbt de la vie", change: "+180%", description: "Les pr\u00e9occupations sur le pouvoir d'achat local et les imp\u00f4ts locaux s'intensifient.", date: "7 f\u00e9vr. 2026", confidence: "Mod\u00e9r\u00e9e" },
+];
+
+const signals = PLACEHOLDER_DATA[commune] || defaultSignals;
+const isPlaceholder = true;
+---
+<div class="relative bg-white rounded-2xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.06)] border border-neutral-100 overflow-hidden">
+  <!-- Synthesio badge -->
+  <div class="flex items-start justify-between mb-4">
+    <div>
+      <div class="text-xs font-medium text-neutral-500 uppercase tracking-wide">Sujets &eacute;mergents</div>
+      <div class="text-[11px] text-neutral-400 mt-0.5">D&eacute;tect&eacute;s par intelligence artificielle</div>
+    </div>
+    <span class="bg-blue-50 text-blue-600 text-[10px] font-semibold px-2 py-0.5 rounded-full">Synthesio</span>
+  </div>
+
+  <!-- Signal cards -->
+  <div class="space-y-3">
+    {signals.map((signal) => (
+      <div class="border border-neutral-100 rounded-xl p-3">
+        <div class="flex items-start gap-2 mb-1.5">
+          <!-- Trending icon -->
+          <svg class="w-4 h-4 text-blue-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <div class="flex-1 min-w-0">
+            <div class="text-sm font-medium text-neutral-800 leading-tight">{signal.title}</div>
+            <span class="text-xs font-mono font-semibold text-blue-600">{signal.change}</span>
+          </div>
+        </div>
+        <p class="text-xs text-neutral-500 leading-relaxed mb-2">{signal.description}</p>
+        <div class="flex items-center justify-between text-[10px]">
+          <span class="text-neutral-400">{signal.date}</span>
+          <span class="bg-emerald-50 text-emerald-800 px-1.5 py-0.5 rounded font-medium">Fiabilit&eacute; : {signal.confidence}</span>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Placeholder overlay -->
+  {isPlaceholder && (
+    <div class="absolute inset-0 bg-white/75 backdrop-blur-[2px] flex flex-col items-center justify-center rounded-2xl">
+      <div class="text-sm font-medium text-neutral-600">Donn&eacute;es bient&ocirc;t disponibles</div>
+      <div class="text-xs text-neutral-400 mt-1">Propuls&eacute; par Synthesio</div>
+    </div>
+  )}
+</div>
