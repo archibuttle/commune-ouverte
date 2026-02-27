@@ -1,0 +1,186 @@
+{
+  "code": "75056",
+  "nom": "Paris",
+  "departement": "Paris",
+  "dep_code": "75",
+  "population": 2243739,
+  "strate": "10",
+  "maire": {
+    "nom": "HIDALGO",
+    "prenom": "Anne",
+    "sexe": "F",
+    "debut_mandat": "2020-07-03"
+  },
+  "finances": {
+    "score_global": 33,
+    "badge_global": "FAIBLE",
+    "kpis": {
+      "encours_dette": {
+        "label": "Encours de dette",
+        "series": [
+          2851.2,
+          3054.9,
+          3111.6,
+          3519.0,
+          3841.0,
+          4269.0,
+          4579.1,
+          4989.1
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "CRITIQUE",
+        "moyenne_strate": 1232.8,
+        "delta_pct": 41.8
+      },
+      "depenses_investissement": {
+        "label": "Dépenses d'investissement",
+        "series": [
+          670.3,
+          659.3,
+          838.0,
+          767.5,
+          816.1,
+          950.9,
+          980.9,
+          1017.4
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "BON",
+        "moyenne_strate": 506.9,
+        "delta_pct": 32.6
+      },
+      "recettes_fonctionnement": {
+        "label": "Recettes de fonctionnement",
+        "series": [
+          2225.1,
+          2232.5,
+          3206.5,
+          2972.3,
+          3222.3,
+          3458.1,
+          3690.6,
+          3743.5
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "BON",
+        "moyenne_strate": 1613.5,
+        "delta_pct": 25.9
+      },
+      "depenses_fonctionnement": {
+        "label": "Dépenses de fonctionnement",
+        "series": [
+          2123.5,
+          2006.7,
+          2951.9,
+          3008.9,
+          3051.8,
+          3237.0,
+          3319.3,
+          3601.4
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "CRITIQUE",
+        "moyenne_strate": 1400.4,
+        "delta_pct": 19.7
+      },
+      "frais_personnel": {
+        "label": "Frais de personnel",
+        "series": [
+          964.5,
+          1008.2,
+          1133.5,
+          1143.6,
+          1162.0,
+          1198.2,
+          1255.3,
+          1340.3
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "CRITIQUE",
+        "moyenne_strate": 798.9,
+        "delta_pct": 17.2
+      },
+      "epargne_brute": {
+        "label": "Épargne brute",
+        "series": [
+          101.6,
+          225.7,
+          254.6,
+          -36.6,
+          170.5,
+          221.1,
+          371.3,
+          142.1
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "CRITIQUE",
+        "moyenne_strate": 213.0,
+        "delta_pct": 488.3
+      }
+    }
+  },
+  "elections": {
+    "t1": null,
+    "t2": null
+  }
+}

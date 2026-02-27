@@ -1,17 +1,41 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/Footer.astro';
+import index from '../../public/data/communes-index.json';
 
+const baseUrl = import.meta.env.BASE_URL;
 ---
+<Layout title="Commune Ouverte - Municipales 2026">
+  <main class="max-w-2xl mx-auto px-4 py-16">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold text-neutral-900 mb-3">Commune Ouverte</h1>
+      <p class="text-lg text-neutral-600">
+        Consultez les finances et le bilan &eacute;lectoral de votre commune avant les municipales 2026.
+      </p>
+    </div>
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+    <div class="bg-white rounded-xl p-6 shadow-sm border border-neutral-200">
+      <label for="city-select" class="block text-sm font-medium text-neutral-700 mb-3">
+        Choisissez une ville
+      </label>
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+        {index.map((city: any) => (
+          <a
+            href={`${baseUrl}commune/${city.code}`}
+            class="flex items-center gap-2 px-4 py-3 rounded-lg border border-neutral-200 hover:border-blue-400 hover:bg-blue-50 transition-colors"
+          >
+            <span class="text-sm font-medium text-neutral-800">{city.nom}</span>
+            <span class="text-xs text-neutral-400">({city.dep_code})</span>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <div class="text-center mt-8 text-sm text-neutral-500">
+      <p>Donn&eacute;es ouvertes : OFGL, RNE, Minist&egrave;re de l'int&eacute;rieur</p>
+      <p class="mt-1">10 plus grandes villes &middot; Extension &agrave; venir</p>
+    </div>
+
+    <Footer />
+  </main>
+</Layout>

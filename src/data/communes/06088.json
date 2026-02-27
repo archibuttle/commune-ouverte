@@ -1,0 +1,264 @@
+{
+  "code": "06088",
+  "nom": "Nice",
+  "departement": "Alpes-Maritimes",
+  "dep_code": "06",
+  "population": 347636,
+  "strate": "10",
+  "maire": {
+    "nom": "ESTROSI",
+    "prenom": "Christian",
+    "sexe": "M",
+    "debut_mandat": "2020-07-03"
+  },
+  "finances": {
+    "score_global": 41,
+    "badge_global": "FAIBLE",
+    "kpis": {
+      "encours_dette": {
+        "label": "Encours de dette",
+        "series": [
+          1467.3,
+          1372.5,
+          1458.4,
+          1435.1,
+          1498.6,
+          1521.1,
+          1589.2,
+          1558.7
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "CRITIQUE",
+        "moyenne_strate": 1232.8,
+        "delta_pct": 8.6
+      },
+      "depenses_investissement": {
+        "label": "Dépenses d'investissement",
+        "series": [
+          357.9,
+          432.1,
+          454.5,
+          356.9,
+          351.0,
+          364.6,
+          409.4,
+          458.4
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "MOYEN",
+        "moyenne_strate": 506.9,
+        "delta_pct": 28.4
+      },
+      "recettes_fonctionnement": {
+        "label": "Recettes de fonctionnement",
+        "series": [
+          1558.9,
+          1577.9,
+          1681.5,
+          1589.8,
+          1568.5,
+          1676.3,
+          1726.1,
+          1853.4
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "CORRECT",
+        "moyenne_strate": 1613.5,
+        "delta_pct": 16.6
+      },
+      "depenses_fonctionnement": {
+        "label": "Dépenses de fonctionnement",
+        "series": [
+          1452.9,
+          1456.0,
+          1541.0,
+          1506.8,
+          1533.1,
+          1571.7,
+          1629.1,
+          1620.9
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "FAIBLE",
+        "moyenne_strate": 1400.4,
+        "delta_pct": 7.6
+      },
+      "frais_personnel": {
+        "label": "Frais de personnel",
+        "series": [
+          858.5,
+          872.3,
+          896.0,
+          897.5,
+          896.4,
+          910.3,
+          911.9,
+          912.9
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "FAIBLE",
+        "moyenne_strate": 798.9,
+        "delta_pct": 1.7
+      },
+      "epargne_brute": {
+        "label": "Épargne brute",
+        "series": [
+          106.0,
+          121.8,
+          140.5,
+          83.0,
+          35.5,
+          104.6,
+          97.0,
+          232.6
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "MOYEN",
+        "moyenne_strate": 213.0,
+        "delta_pct": 180.2
+      }
+    }
+  },
+  "elections": {
+    "t1": {
+      "inscrits": 215478,
+      "votants": 61491,
+      "participation_pct": 28.54,
+      "listes": [
+        {
+          "tete": "Christian ESTROSI",
+          "nuance": "LDVD",
+          "nom_liste": "Christian ESTROSI",
+          "voix_pct": 47.63
+        },
+        {
+          "tete": "Philippe VARDON",
+          "nuance": "LRN",
+          "nom_liste": "RETROUVER NICE",
+          "voix_pct": 16.7
+        },
+        {
+          "tete": "Jean Marc GOVERNATORI",
+          "nuance": "LECO",
+          "nom_liste": "Nice Écologique, soutenue par Europe Écologie-Les Verts et l'Alliance Écologiste Indépendante",
+          "voix_pct": 11.3
+        },
+        {
+          "tete": "Mireille DAMIANO",
+          "nuance": "LDVG",
+          "nom_liste": "VIVA ! Démocratie, Ecologie, Solidarité",
+          "voix_pct": 8.91
+        },
+        {
+          "tete": "Benoît KANDEL",
+          "nuance": "LDVD",
+          "nom_liste": "NICE POUR TOUS",
+          "voix_pct": 7.31
+        },
+        {
+          "tete": "Patrick ALLEMAND",
+          "nuance": "LSOC",
+          "nom_liste": "NICE AU COEUR",
+          "voix_pct": 6.57
+        },
+        {
+          "tete": "Valery SOHM",
+          "nuance": "LDIV",
+          "nom_liste": "TOUS POUR NICE",
+          "voix_pct": 0.92
+        },
+        {
+          "tete": "Estelle JAQUET",
+          "nuance": "LEXG",
+          "nom_liste": "Lutte ouvrière - Faire entendre le camp des travailleurs",
+          "voix_pct": 0.66
+        }
+      ]
+    },
+    "t2": {
+      "inscrits": 215514,
+      "votants": 59806,
+      "participation_pct": 27.75,
+      "listes": [
+        {
+          "tete": "Christian ESTROSI",
+          "nuance": "LDVD",
+          "nom_liste": "Christian ESTROSI",
+          "voix_pct": 59.31
+        },
+        {
+          "tete": "Philippe VARDON",
+          "nuance": "LRN",
+          "nom_liste": "RETROUVER NICE",
+          "voix_pct": 21.39
+        },
+        {
+          "tete": "Jean Marc GOVERNATORI",
+          "nuance": "LECO",
+          "nom_liste": "Nice Écologique, soutenue par Europe Écologie-Les Verts et l'Alliance Écologiste Indépendante",
+          "voix_pct": 19.3
+        }
+      ]
+    }
+  }
+}

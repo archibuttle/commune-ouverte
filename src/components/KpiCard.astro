@@ -1,0 +1,109 @@
+---
+interface Props {
+  label: string;
+  series: number[];
+  annees: number[];
+  unite: string;
+  badge: string;
+  moyenne_strate: number | null;
+  delta_pct: number | null;
+}
+
+const { label, series, annees, unite, badge, moyenne_strate, delta_pct } = Astro.props;
+
+const badgeColors: Record<string, string> = {
+  "BON": "bg-emerald-50 text-emerald-900",
+  "CORRECT": "bg-teal-50 text-teal-900",
+  "MOYEN": "bg-amber-50 text-amber-900",
+  "FAIBLE": "bg-orange-50 text-orange-900",
+  "CRITIQUE": "bg-red-50 text-red-900",
+};
+
+const sparkColors: Record<string, string> = {
+  "BON": "#10B981",
+  "CORRECT": "#14B8A6",
+  "MOYEN": "#F59E0B",
+  "FAIBLE": "#F97316",
+  "CRITIQUE": "#EF4444",
+};
+
+const colorClass = badgeColors[badge] || badgeColors["MOYEN"];
+const strokeColor = sparkColors[badge] || sparkColors["MOYEN"];
+
+// Current value
+const current = series.length > 0 ? series[series.length - 1] : 0;
+
+// Build SVG sparkline
+const width = 100;
+const height = 32;
+const padding = 2;
+const minVal = Math.min(...series);
+const maxVal = Math.max(...series);
+const range = maxVal - minVal || 1;
+
+const points = series.map((v, i) => {
+  const x = padding + (i / (series.length - 1)) * (width - padding * 2);
+  const y = height - padding - ((v - minVal) / range) * (height - padding * 2);
+  return `${x},${y}`;
+}).join(" ");
+
+// Delta arrow
+let deltaIcon = "";
+let deltaColor = "text-neutral-500";
+if (delta_pct !== null) {
+  if (delta_pct > 2) { deltaIcon = "\u2197"; deltaColor = "text-red-600"; }
+  else if (delta_pct < -2) { deltaIcon = "\u2198"; deltaColor = "text-emerald-600"; }
+  else { deltaIcon = "\u2192"; deltaColor = "text-neutral-500"; }
+}
+
+// For inverted KPIs (debt, expenses), up is bad. For positive KPIs, up is good.
+const invertedKpis = ["Encours de dette", "Frais de personnel", "D\u00e9penses de fonctionnement"];
+if (invertedKpis.includes(label) && delta_pct !== null) {
+  if (delta_pct > 2) { deltaColor = "text-red-600"; }
+  else if (delta_pct < -2) { deltaColor = "text-emerald-600"; }
+} else if (delta_pct !== null) {
+  if (delta_pct > 2) { deltaColor = "text-emerald-600"; }
+  else if (delta_pct < -2) { deltaColor = "text-red-600"; }
+}
+---
+<div class="bg-white rounded-xl p-5 shadow-sm border border-neutral-200 flex flex-col">
+  <div class="flex items-start justify-between mb-3">
+    <div class="text-sm font-medium text-neutral-600 leading-tight">{label}</div>
+    <span class={`text-xs font-semibold px-2 py-0.5 rounded ${colorClass}`}>{badge}</span>
+  </div>
+
+  <div class="flex items-end justify-between mb-3">
+    <div>
+      <span class="text-2xl font-mono font-bold text-neutral-900">{current.toLocaleString("fr-FR")}</span>
+      <span class="text-sm text-neutral-500 ml-1">{unite}</span>
+    </div>
+    {delta_pct !== null && (
+      <span class={`text-sm font-medium ${deltaColor}`}>
+        {deltaIcon} {delta_pct > 0 ? "+" : ""}{delta_pct}%
+      </span>
+    )}
+  </div>
+
+  <div class="mb-3">
+    <svg viewBox={`0 0 ${width} ${height}`} class="w-full h-8" preserveAspectRatio="none">
+      <polyline
+        points={points}
+        fill="none"
+        stroke={strokeColor}
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+    <div class="flex justify-between text-[10px] text-neutral-400 mt-0.5">
+      <span>{annees[0]}</span>
+      <span>{annees[annees.length - 1]}</span>
+    </div>
+  </div>
+
+  {moyenne_strate !== null && (
+    <div class="text-xs text-neutral-500 border-t border-neutral-100 pt-2 mt-auto">
+      Moyenne strate : <span class="font-mono font-medium">{moyenne_strate.toLocaleString("fr-FR")}</span> {unite}
+    </div>
+  )}
+</div>

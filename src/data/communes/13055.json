@@ -1,0 +1,186 @@
+{
+  "code": "13055",
+  "nom": "Marseille",
+  "departement": "Bouches-du-Rhône",
+  "dep_code": "13",
+  "population": 866644,
+  "strate": "10",
+  "maire": {
+    "nom": "PAYAN",
+    "prenom": "Benoît",
+    "sexe": "M",
+    "debut_mandat": "2020-10-21"
+  },
+  "finances": {
+    "score_global": 38,
+    "badge_global": "FAIBLE",
+    "kpis": {
+      "encours_dette": {
+        "label": "Encours de dette",
+        "series": [
+          2205.5,
+          2083.5,
+          1979.3,
+          1931.4,
+          1860.2,
+          1736.4,
+          1624.5,
+          1612.4
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "CRITIQUE",
+        "moyenne_strate": 1232.8,
+        "delta_pct": -16.5
+      },
+      "depenses_investissement": {
+        "label": "Dépenses d'investissement",
+        "series": [
+          432.0,
+          401.8,
+          426.6,
+          443.4,
+          430.2,
+          419.1,
+          505.0,
+          494.6
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "MOYEN",
+        "moyenne_strate": 506.9,
+        "delta_pct": 11.5
+      },
+      "recettes_fonctionnement": {
+        "label": "Recettes de fonctionnement",
+        "series": [
+          1358.8,
+          1370.1,
+          1393.4,
+          1371.4,
+          1417.2,
+          1509.9,
+          1599.6,
+          1687.7
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "MOYEN",
+        "moyenne_strate": 1613.5,
+        "delta_pct": 23.1
+      },
+      "depenses_fonctionnement": {
+        "label": "Dépenses de fonctionnement",
+        "series": [
+          1178.2,
+          1140.5,
+          1178.7,
+          1195.5,
+          1204.4,
+          1233.9,
+          1344.3,
+          1499.0
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "MOYEN",
+        "moyenne_strate": 1400.4,
+        "delta_pct": 25.4
+      },
+      "frais_personnel": {
+        "label": "Frais de personnel",
+        "series": [
+          698.7,
+          693.8,
+          706.6,
+          716.8,
+          723.7,
+          750.7,
+          796.8,
+          881.6
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "FAIBLE",
+        "moyenne_strate": 798.9,
+        "delta_pct": 23.0
+      },
+      "epargne_brute": {
+        "label": "Épargne brute",
+        "series": [
+          180.6,
+          229.7,
+          214.7,
+          175.9,
+          212.8,
+          276.1,
+          255.4,
+          188.6
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "FAIBLE",
+        "moyenne_strate": 213.0,
+        "delta_pct": 7.2
+      }
+    }
+  },
+  "elections": {
+    "t1": null,
+    "t2": null
+  }
+}

@@ -1,0 +1,300 @@
+{
+  "code": "34172",
+  "nom": "Montpellier",
+  "departement": "Hérault",
+  "dep_code": "34",
+  "population": 279845,
+  "strate": "10",
+  "maire": {
+    "nom": "DELAFOSSE",
+    "prenom": "Michaël",
+    "sexe": "M",
+    "debut_mandat": "2020-07-09"
+  },
+  "finances": {
+    "score_global": 59,
+    "badge_global": "MOYEN",
+    "kpis": {
+      "encours_dette": {
+        "label": "Encours de dette",
+        "series": [
+          650.4,
+          646.8,
+          695.1,
+          726.6,
+          713.6,
+          817.7,
+          1029.8,
+          1338.6
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "MOYEN",
+        "moyenne_strate": 1232.8,
+        "delta_pct": 84.2
+      },
+      "depenses_investissement": {
+        "label": "Dépenses d'investissement",
+        "series": [
+          288.8,
+          354.0,
+          486.1,
+          363.3,
+          427.3,
+          471.9,
+          637.8,
+          744.1
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "BON",
+        "moyenne_strate": 506.9,
+        "delta_pct": 104.8
+      },
+      "recettes_fonctionnement": {
+        "label": "Recettes de fonctionnement",
+        "series": [
+          1071.4,
+          1058.7,
+          1105.1,
+          1093.7,
+          1127.0,
+          1164.0,
+          1220.7,
+          1221.8
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "FAIBLE",
+        "moyenne_strate": 1613.5,
+        "delta_pct": 11.7
+      },
+      "depenses_fonctionnement": {
+        "label": "Dépenses de fonctionnement",
+        "series": [
+          911.8,
+          905.2,
+          916.4,
+          902.5,
+          935.9,
+          971.4,
+          1016.9,
+          1024.4
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "BON",
+        "moyenne_strate": 1400.4,
+        "delta_pct": 13.5
+      },
+      "frais_personnel": {
+        "label": "Frais de personnel",
+        "series": [
+          608.8,
+          610.2,
+          598.7,
+          604.6,
+          622.7,
+          639.5,
+          655.0,
+          656.5
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "CORRECT",
+        "moyenne_strate": 798.9,
+        "delta_pct": 8.6
+      },
+      "epargne_brute": {
+        "label": "Épargne brute",
+        "series": [
+          159.6,
+          153.6,
+          188.7,
+          191.1,
+          191.0,
+          192.6,
+          203.8,
+          197.4
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "MOYEN",
+        "moyenne_strate": 213.0,
+        "delta_pct": 3.3
+      }
+    }
+  },
+  "elections": {
+    "t1": {
+      "inscrits": 153403,
+      "votants": 53099,
+      "participation_pct": 34.61,
+      "listes": [
+        {
+          "tete": "Philippe SAUREL",
+          "nuance": "LDVG",
+          "nom_liste": "MONTPELLIER LA CITOYENNE",
+          "voix_pct": 19.11
+        },
+        {
+          "tete": "Michaël DELAFOSSE",
+          "nuance": "LDVG",
+          "nom_liste": "LA GAUCHE QUI NOUS RASSEMBLE",
+          "voix_pct": 16.66
+        },
+        {
+          "tete": "Mohed ALTRAD",
+          "nuance": "LDIV",
+          "nom_liste": "LE COEUR ET L'ACTION",
+          "voix_pct": 13.31
+        },
+        {
+          "tete": "Rémi GAILLARD",
+          "nuance": "LDIV",
+          "nom_liste": "N'IMPORTE QUI",
+          "voix_pct": 9.59
+        },
+        {
+          "tete": "Alenka DOULAIN",
+          "nuance": "LDVG",
+          "nom_liste": "NOUS SOMMES MONTPELLIER",
+          "voix_pct": 9.25
+        },
+        {
+          "tete": "Coralie MANTION",
+          "nuance": "LVEC",
+          "nom_liste": "CHOISIR L'ÉCOLOGIE Pour Montpellier avec Europe Écologie Les Verts",
+          "voix_pct": 7.43
+        },
+        {
+          "tete": "Clothilde OLLIER",
+          "nuance": "LECO",
+          "nom_liste": "Rassemblement des écologistes et de la gauche",
+          "voix_pct": 7.26
+        },
+        {
+          "tete": "Patrick VIGNAL",
+          "nuance": "LREM",
+          "nom_liste": "MONTPELLIER EN CAPITALE",
+          "voix_pct": 6.1
+        },
+        {
+          "tete": "Olaf ROKVAM",
+          "nuance": "LRN",
+          "nom_liste": "RASSEMBLEMENT POUR MONTPELLIER",
+          "voix_pct": 4.78
+        },
+        {
+          "tete": "Alex LARUE",
+          "nuance": "LLR",
+          "nom_liste": "POUR MONTPELLIER, IL EST TEMPS DE CHANGER",
+          "voix_pct": 3.83
+        },
+        {
+          "tete": "Jean-Louis ROUMEGAS",
+          "nuance": "LECO",
+          "nom_liste": "ECOLOGIE POUR TOUS",
+          "voix_pct": 1.61
+        },
+        {
+          "tete": "Kamy NAZARIAN",
+          "nuance": "LDIV",
+          "nom_liste": "MONTPELLIER EXEMPLAIRE",
+          "voix_pct": 0.52
+        },
+        {
+          "tete": "Maurice CHAYNES",
+          "nuance": "LEXG",
+          "nom_liste": "Lutte ouvrière - Faire entendre le camp des travailleurs",
+          "voix_pct": 0.41
+        },
+        {
+          "tete": "Sylvie TROUSSELIER",
+          "nuance": "LEXG",
+          "nom_liste": "\"Liste ouvrière d'unité \"\"MONTPELLIER 100% SERVICES PUBLICS\"\", soutenue par le P.O.I.D\"",
+          "voix_pct": 0.12
+        }
+      ]
+    },
+    "t2": {
+      "inscrits": 153711,
+      "votants": 52935,
+      "participation_pct": 34.44,
+      "listes": [
+        {
+          "tete": "Michaël DELAFOSSE",
+          "nuance": "LUG",
+          "nom_liste": "MONTPELLIER UNIE",
+          "voix_pct": 47.23
+        },
+        {
+          "tete": "Philippe SAUREL",
+          "nuance": "LDVG",
+          "nom_liste": "MONTPELLIER LA CITOYENNE",
+          "voix_pct": 34.65
+        },
+        {
+          "tete": "Mohed ALTRAD",
+          "nuance": "LDIV",
+          "nom_liste": "COEUR ECOLOGIE DEMOCRATIE",
+          "voix_pct": 18.12
+        }
+      ]
+    }
+  }
+}

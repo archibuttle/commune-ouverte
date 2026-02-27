@@ -1,0 +1,98 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ScoreBanner from '../../components/ScoreBanner.astro';
+import MayorCard from '../../components/MayorCard.astro';
+import KpiCard from '../../components/KpiCard.astro';
+import ParticipationCard from '../../components/ParticipationCard.astro';
+import ElectionResults from '../../components/ElectionResults.astro';
+import Footer from '../../components/Footer.astro';
+
+// Import all commune JSON files
+const communeFiles = import.meta.glob('../../data/communes/*.json', { eager: true });
+
+export function getStaticPaths() {
+  const files = import.meta.glob('../../data/communes/*.json', { eager: true });
+  return Object.entries(files).map(([path, data]: [string, any]) => {
+    const code = path.split('/').pop()?.replace('.json', '') || '';
+    return {
+      params: { code },
+      props: { commune: data.default || data },
+    };
+  });
+}
+
+const { commune } = Astro.props;
+const baseUrl = import.meta.env.BASE_URL;
+
+const kpiOrder = [
+  'encours_dette',
+  'depenses_investissement',
+  'recettes_fonctionnement',
+  'depenses_fonctionnement',
+  'frais_personnel',
+  'epargne_brute',
+];
+
+// Determine which election round to show results for
+const showT2 = commune.elections?.t2?.listes?.length > 0;
+const mainElection = showT2 ? commune.elections.t2 : commune.elections?.t1;
+const tourLabel = showT2 ? "2nd tour 2020" : "1er tour 2020";
+---
+<Layout title={`${commune.nom} - Commune Ouverte`} description={`Finances et bilan electoral de ${commune.nom} pour les municipales 2026.`}>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <nav class="mb-6">
+      <a href={baseUrl} class="text-sm text-blue-600 hover:text-blue-800">&larr; Toutes les villes</a>
+    </nav>
+
+    <!-- Score Banner -->
+    <ScoreBanner
+      nom={commune.nom}
+      departement={commune.departement}
+      population={commune.population}
+      score={commune.finances.score_global}
+      badge={commune.finances.badge_global}
+    />
+
+    <!-- Mayor -->
+    <div class="mt-4">
+      <MayorCard maire={commune.maire} />
+    </div>
+
+    <!-- Financial KPIs -->
+    <h2 class="text-lg font-semibold text-neutral-900 mt-8 mb-4">Finances du mandat (2020-2024)</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {kpiOrder.map((key) => {
+        const kpi = commune.finances.kpis[key];
+        if (!kpi) return null;
+        return (
+          <KpiCard
+            label={kpi.label}
+            series={kpi.series}
+            annees={kpi.annees}
+            unite={kpi.unite}
+            badge={kpi.badge}
+            moyenne_strate={kpi.moyenne_strate}
+            delta_pct={kpi.delta_pct}
+          />
+        );
+      })}
+    </div>
+
+    <!-- Elections Section -->
+    <h2 class="text-lg font-semibold text-neutral-900 mt-8 mb-4">Municipales 2020</h2>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <ParticipationCard t1={commune.elections?.t1} t2={commune.elections?.t2} />
+      {mainElection?.listes?.length > 0 && (
+        <ElectionResults listes={mainElection.listes} tour={tourLabel} />
+      )}
+    </div>
+
+    {!commune.elections?.t1 && !commune.elections?.t2 && (
+      <div class="bg-white rounded-xl p-5 shadow-sm border border-neutral-200 text-center text-neutral-500">
+        Donn&eacute;es &eacute;lectorales non disponibles pour cette commune (format PLM sp&eacute;cifique).
+      </div>
+    )}
+
+    <Footer />
+  </main>
+</Layout>

@@ -1,0 +1,186 @@
+{
+  "code": "69123",
+  "nom": "Lyon",
+  "departement": "Rhône",
+  "dep_code": "69",
+  "population": 514707,
+  "strate": "10",
+  "maire": {
+    "nom": "DOUCET",
+    "prenom": "Grégory",
+    "sexe": "M",
+    "debut_mandat": "2020-07-04"
+  },
+  "finances": {
+    "score_global": 56,
+    "badge_global": "MOYEN",
+    "kpis": {
+      "encours_dette": {
+        "label": "Encours de dette",
+        "series": [
+          821.4,
+          794.7,
+          751.7,
+          771.8,
+          727.4,
+          686.1,
+          611.3,
+          605.3
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "BON",
+        "moyenne_strate": 1232.8,
+        "delta_pct": -21.6
+      },
+      "depenses_investissement": {
+        "label": "Dépenses d'investissement",
+        "series": [
+          302.5,
+          265.9,
+          376.6,
+          286.7,
+          256.3,
+          267.5,
+          316.3,
+          350.8
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "CRITIQUE",
+        "moyenne_strate": 506.9,
+        "delta_pct": 22.4
+      },
+      "recettes_fonctionnement": {
+        "label": "Recettes de fonctionnement",
+        "series": [
+          1290.4,
+          1324.6,
+          1332.2,
+          1275.8,
+          1317.4,
+          1376.5,
+          1489.5,
+          1510.6
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "MOYEN",
+        "moyenne_strate": 1613.5,
+        "delta_pct": 18.4
+      },
+      "depenses_fonctionnement": {
+        "label": "Dépenses de fonctionnement",
+        "series": [
+          1133.1,
+          1107.8,
+          1107.4,
+          1129.5,
+          1137.9,
+          1177.4,
+          1254.2,
+          1310.6
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "MOYEN",
+        "moyenne_strate": 1400.4,
+        "delta_pct": 16.0
+      },
+      "frais_personnel": {
+        "label": "Frais de personnel",
+        "series": [
+          675.8,
+          663.7,
+          655.9,
+          664.0,
+          672.0,
+          694.9,
+          724.0,
+          764.8
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "MOYEN",
+        "moyenne_strate": 798.9,
+        "delta_pct": 15.2
+      },
+      "epargne_brute": {
+        "label": "Épargne brute",
+        "series": [
+          157.4,
+          216.8,
+          224.8,
+          146.3,
+          179.5,
+          199.1,
+          235.4,
+          200.0
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "MOYEN",
+        "moyenne_strate": 213.0,
+        "delta_pct": 36.7
+      }
+    }
+  },
+  "elections": {
+    "t1": null,
+    "t2": null
+  }
+}

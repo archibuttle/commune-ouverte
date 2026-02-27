@@ -1,0 +1,282 @@
+{
+  "code": "31555",
+  "nom": "Toulouse",
+  "departement": "Haute-Garonne",
+  "dep_code": "31",
+  "population": 474246,
+  "strate": "10",
+  "maire": {
+    "nom": "MOUDENC",
+    "prenom": "Jean-Luc",
+    "sexe": "M",
+    "debut_mandat": "2020-07-03"
+  },
+  "finances": {
+    "score_global": 52,
+    "badge_global": "MOYEN",
+    "kpis": {
+      "encours_dette": {
+        "label": "Encours de dette",
+        "series": [
+          252.4,
+          295.6,
+          313.3,
+          407.9,
+          448.9,
+          474.5,
+          549.0,
+          536.2
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "BON",
+        "moyenne_strate": 1232.8,
+        "delta_pct": 31.5
+      },
+      "depenses_investissement": {
+        "label": "Dépenses d'investissement",
+        "series": [
+          250.8,
+          290.0,
+          317.3,
+          243.6,
+          254.5,
+          303.8,
+          342.3,
+          412.0
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "FAIBLE",
+        "moyenne_strate": 506.9,
+        "delta_pct": 69.1
+      },
+      "recettes_fonctionnement": {
+        "label": "Recettes de fonctionnement",
+        "series": [
+          1214.7,
+          1220.5,
+          1259.4,
+          1216.2,
+          1260.8,
+          1280.8,
+          1367.5,
+          1371.2
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "FAIBLE",
+        "moyenne_strate": 1613.5,
+        "delta_pct": 12.7
+      },
+      "depenses_fonctionnement": {
+        "label": "Dépenses de fonctionnement",
+        "series": [
+          1094.4,
+          1088.2,
+          1105.3,
+          1099.6,
+          1111.6,
+          1146.3,
+          1184.2,
+          1234.4
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "CORRECT",
+        "moyenne_strate": 1400.4,
+        "delta_pct": 12.3
+      },
+      "frais_personnel": {
+        "label": "Frais de personnel",
+        "series": [
+          671.6,
+          666.9,
+          677.7,
+          682.1,
+          679.2,
+          700.3,
+          742.5,
+          771.7
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "MOYEN",
+        "moyenne_strate": 798.9,
+        "delta_pct": 13.1
+      },
+      "epargne_brute": {
+        "label": "Épargne brute",
+        "series": [
+          120.3,
+          132.3,
+          154.2,
+          116.6,
+          149.2,
+          134.5,
+          183.3,
+          136.8
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "CRITIQUE",
+        "moyenne_strate": 213.0,
+        "delta_pct": 17.3
+      }
+    }
+  },
+  "elections": {
+    "t1": {
+      "inscrits": 244761,
+      "votants": 89738,
+      "participation_pct": 36.66,
+      "listes": [
+        {
+          "tete": "Jean-Luc MOUDENC",
+          "nuance": "LDVD",
+          "nom_liste": "AIMER TOULOUSE AVEC JEAN-LUC MOUDENC",
+          "voix_pct": 36.19
+        },
+        {
+          "tete": "Antoine MAURICE",
+          "nuance": "LDVG",
+          "nom_liste": "ARCHIPEL CITOYEN",
+          "voix_pct": 27.57
+        },
+        {
+          "tete": "Nadia PELLEFIGUE",
+          "nuance": "LDVG",
+          "nom_liste": "une nouvelle énergie pour toulouse. La gauche, l'écologie, les toulousain.e.s",
+          "voix_pct": 18.53
+        },
+        {
+          "tete": "Pierre COHEN",
+          "nuance": "LDVG",
+          "nom_liste": "Pour la cohésion! L'autre choix",
+          "voix_pct": 5.66
+        },
+        {
+          "tete": "Quentin LAMOTTE",
+          "nuance": "LRN",
+          "nom_liste": "RASSEMBLEMENT TOULOUSAIN",
+          "voix_pct": 4.31
+        },
+        {
+          "tete": "Franck BIASOTTO",
+          "nuance": "LDVC",
+          "nom_liste": "Toulouse Belle et Forte",
+          "voix_pct": 2.94
+        },
+        {
+          "tete": "Pauline SALINGUE",
+          "nuance": "LEXG",
+          "nom_liste": "Toulouse Anticapitaliste",
+          "voix_pct": 1.52
+        },
+        {
+          "tete": "Quentin CHAROY",
+          "nuance": "LDIV",
+          "nom_liste": "TOULOUSE ANIMALISTE",
+          "voix_pct": 1.52
+        },
+        {
+          "tete": "Francis MANAUD",
+          "nuance": "LDLF",
+          "nom_liste": "DEBOUT TOULOUSE",
+          "voix_pct": 0.95
+        },
+        {
+          "tete": "Malena ADRADA",
+          "nuance": "LEXG",
+          "nom_liste": "Lutte ouvrière- faire entendre le camp des travailleurs",
+          "voix_pct": 0.46
+        },
+        {
+          "tete": "Julian MENENDEZ",
+          "nuance": "LEXG",
+          "nom_liste": "TOULOUSE AUX TRAVAILLEURS, PAS AUX SPECULATEURS",
+          "voix_pct": 0.22
+        },
+        {
+          "tete": "Peov Chankiry DUCH",
+          "nuance": "LDIV",
+          "nom_liste": "EN AVANT TOULOUSE",
+          "voix_pct": 0.14
+        }
+      ]
+    },
+    "t2": {
+      "inscrits": 245018,
+      "votants": 109889,
+      "participation_pct": 44.85,
+      "listes": [
+        {
+          "tete": "Jean-Luc MOUDENC",
+          "nuance": "LDVD",
+          "nom_liste": "AIMER TOULOUSE AVEC JEAN-LUC MOUDENC",
+          "voix_pct": 51.98
+        },
+        {
+          "tete": "Antoine MAURICE",
+          "nuance": "LDVG",
+          "nom_liste": "ARCHIPEL CITOYEN",
+          "voix_pct": 48.02
+        }
+      ]
+    }
+  }
+}

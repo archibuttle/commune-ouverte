@@ -1,0 +1,276 @@
+{
+  "code": "59350",
+  "nom": "Lille",
+  "departement": "Nord",
+  "dep_code": "59",
+  "population": 238381,
+  "strate": "10",
+  "maire": {
+    "nom": "DESLANDES",
+    "prenom": "Arnaud",
+    "sexe": "M",
+    "debut_mandat": "2025-03-21"
+  },
+  "finances": {
+    "score_global": 44,
+    "badge_global": "FAIBLE",
+    "kpis": {
+      "encours_dette": {
+        "label": "Encours de dette",
+        "series": [
+          1668.2,
+          1615.0,
+          1557.8,
+          1504.5,
+          1485.6,
+          1434.1,
+          1458.2,
+          1518.3
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "FAIBLE",
+        "moyenne_strate": 1232.8,
+        "delta_pct": 0.9
+      },
+      "depenses_investissement": {
+        "label": "Dépenses d'investissement",
+        "series": [
+          568.6,
+          427.4,
+          424.9,
+          394.0,
+          444.7,
+          479.0,
+          523.7,
+          551.4
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "MOYEN",
+        "moyenne_strate": 506.9,
+        "delta_pct": 39.9
+      },
+      "recettes_fonctionnement": {
+        "label": "Recettes de fonctionnement",
+        "series": [
+          1527.8,
+          1576.9,
+          1562.4,
+          1540.1,
+          1594.0,
+          1641.8,
+          1772.8,
+          1803.4
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "CORRECT",
+        "moyenne_strate": 1613.5,
+        "delta_pct": 17.1
+      },
+      "depenses_fonctionnement": {
+        "label": "Dépenses de fonctionnement",
+        "series": [
+          1321.9,
+          1325.1,
+          1310.6,
+          1315.7,
+          1314.5,
+          1435.8,
+          1527.3,
+          1573.9
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "FAIBLE",
+        "moyenne_strate": 1400.4,
+        "delta_pct": 19.6
+      },
+      "frais_personnel": {
+        "label": "Frais de personnel",
+        "series": [
+          831.0,
+          826.8,
+          839.1,
+          844.1,
+          866.6,
+          925.7,
+          976.6,
+          1003.8
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "CRITIQUE",
+        "moyenne_strate": 798.9,
+        "delta_pct": 18.9
+      },
+      "epargne_brute": {
+        "label": "Épargne brute",
+        "series": [
+          205.9,
+          251.8,
+          251.8,
+          224.4,
+          279.5,
+          206.0,
+          245.5,
+          229.5
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "MOYEN",
+        "moyenne_strate": 213.0,
+        "delta_pct": 2.3
+      }
+    }
+  },
+  "elections": {
+    "t1": {
+      "inscrits": 124454,
+      "votants": 40592,
+      "participation_pct": 32.62,
+      "listes": [
+        {
+          "tete": "Martine AUBRY",
+          "nuance": "LUG",
+          "nom_liste": "LILLE EN COMMUN, LILLE EN CONFIANCE",
+          "voix_pct": 29.8
+        },
+        {
+          "tete": "Stéphane BALY",
+          "nuance": "LVEC",
+          "nom_liste": "Lille Verte 2020 - pour changer - avec Stéphane Baly",
+          "voix_pct": 24.53
+        },
+        {
+          "tete": "Violette SPILLEBOUT",
+          "nuance": "LUC",
+          "nom_liste": "FAIRE RESPIRER LILLE",
+          "voix_pct": 17.53
+        },
+        {
+          "tete": "Julien POIX",
+          "nuance": "LFI",
+          "nom_liste": "DÉCIDEZ POUR LILLE",
+          "voix_pct": 8.85
+        },
+        {
+          "tete": "Marc-Philippe DAUBRESSE",
+          "nuance": "LLR",
+          "nom_liste": "TOUS POUR LES LILLOIS",
+          "voix_pct": 8.25
+        },
+        {
+          "tete": "Eric CATTELIN-DENU",
+          "nuance": "LRN",
+          "nom_liste": "UNION RASSEMBLEMENT NATIONAL ET INDEPENDANTS",
+          "voix_pct": 6.85
+        },
+        {
+          "tete": "Antoine STATHOULIAS",
+          "nuance": "LDIV",
+          "nom_liste": "LILLE ANIMALISTE",
+          "voix_pct": 1.95
+        },
+        {
+          "tete": "Alexandre CHANTRY",
+          "nuance": "LEXG",
+          "nom_liste": "RESISTANCE ANTICAPITALISTE",
+          "voix_pct": 0.88
+        },
+        {
+          "tete": "Nicole BAUDRIN",
+          "nuance": "LEXG",
+          "nom_liste": "Lutte ouvrière - Faire entendre le camp des travailleurs",
+          "voix_pct": 0.79
+        },
+        {
+          "tete": "Béryl BENYOUCEF",
+          "nuance": "LEXG",
+          "nom_liste": "LILLE : POUR LES TRAVAILLEURS, PAS POUR LES SPÉCULATEURS",
+          "voix_pct": 0.58
+        }
+      ]
+    },
+    "t2": {
+      "inscrits": 124439,
+      "votants": 39481,
+      "participation_pct": 31.73,
+      "listes": [
+        {
+          "tete": "Martine AUBRY",
+          "nuance": "LUG",
+          "nom_liste": "LILLE EN COMMUN, LILLE EN CONFIANCE",
+          "voix_pct": 40.0
+        },
+        {
+          "tete": "Stéphane BALY",
+          "nuance": "LVEC",
+          "nom_liste": "Lille Verte 2020 - pour changer - avec Stéphane Baly",
+          "voix_pct": 39.41
+        },
+        {
+          "tete": "Violette SPILLEBOUT",
+          "nuance": "LUC",
+          "nom_liste": "FAIRE RESPIRER LILLE",
+          "voix_pct": 20.58
+        }
+      ]
+    }
+  }
+}

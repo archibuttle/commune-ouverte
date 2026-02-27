@@ -1,0 +1,282 @@
+{
+  "code": "67482",
+  "nom": "Strasbourg",
+  "departement": "Bas-Rhin",
+  "dep_code": "67",
+  "population": 280680,
+  "strate": "10",
+  "maire": {
+    "nom": "BARSEGHIAN",
+    "prenom": "Jeanne",
+    "sexe": "F",
+    "debut_mandat": "2020-06-28"
+  },
+  "finances": {
+    "score_global": 41,
+    "badge_global": "FAIBLE",
+    "kpis": {
+      "encours_dette": {
+        "label": "Encours de dette",
+        "series": [
+          779.2,
+          688.6,
+          715.6,
+          853.7,
+          953.9,
+          1050.4,
+          1134.1,
+          1284.7
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "MOYEN",
+        "moyenne_strate": 1232.8,
+        "delta_pct": 50.5
+      },
+      "depenses_investissement": {
+        "label": "Dépenses d'investissement",
+        "series": [
+          339.1,
+          351.9,
+          441.1,
+          421.1,
+          403.1,
+          448.2,
+          520.0,
+          491.8
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "MOYEN",
+        "moyenne_strate": 506.9,
+        "delta_pct": 16.8
+      },
+      "recettes_fonctionnement": {
+        "label": "Recettes de fonctionnement",
+        "series": [
+          1359.3,
+          1383.3,
+          1394.3,
+          1365.0,
+          1422.9,
+          1521.0,
+          1528.0,
+          1549.2
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "MOYEN",
+        "moyenne_strate": 1613.5,
+        "delta_pct": 13.5
+      },
+      "depenses_fonctionnement": {
+        "label": "Dépenses de fonctionnement",
+        "series": [
+          1226.9,
+          1232.6,
+          1254.6,
+          1217.8,
+          1287.9,
+          1324.1,
+          1404.5,
+          1421.4
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "MOYEN",
+        "moyenne_strate": 1400.4,
+        "delta_pct": 16.7
+      },
+      "frais_personnel": {
+        "label": "Frais de personnel",
+        "series": [
+          706.9,
+          703.9,
+          705.0,
+          674.5,
+          695.6,
+          712.4,
+          725.8,
+          747.6
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "MOYEN",
+        "moyenne_strate": 798.9,
+        "delta_pct": 10.8
+      },
+      "epargne_brute": {
+        "label": "Épargne brute",
+        "series": [
+          132.4,
+          150.7,
+          139.6,
+          147.1,
+          135.1,
+          196.9,
+          123.5,
+          127.8
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "CRITIQUE",
+        "moyenne_strate": 213.0,
+        "delta_pct": -13.1
+      }
+    }
+  },
+  "elections": {
+    "t1": {
+      "inscrits": 143600,
+      "votants": 49361,
+      "participation_pct": 34.37,
+      "listes": [
+        {
+          "tete": "Jeanne BARSEGHIAN",
+          "nuance": "LVEC",
+          "nom_liste": "STRASBOURG ECOLOGISTE & CITOYENNE",
+          "voix_pct": 27.88
+        },
+        {
+          "tete": "Alain FONTANEL",
+          "nuance": "LUC",
+          "nom_liste": "100 % STRASBOURG",
+          "voix_pct": 19.86
+        },
+        {
+          "tete": "Catherine TRAUTMANN",
+          "nuance": "LSOC",
+          "nom_liste": "FAIRE ENSEMBLE STRASBOURG",
+          "voix_pct": 19.78
+        },
+        {
+          "tete": "Jean-Philippe VETTER",
+          "nuance": "LUD",
+          "nom_liste": "UN NOUVEAU SOUFFLE POUR STRASBOURG (LR - LES CENTRISTES - UDI)",
+          "voix_pct": 18.27
+        },
+        {
+          "tete": "Hombeline DU PARC",
+          "nuance": "LRN",
+          "nom_liste": "RASSEMBLEMENT POUR STRASBOURG",
+          "voix_pct": 6.27
+        },
+        {
+          "tete": "Kevin LOQUAIS",
+          "nuance": "LDVG",
+          "nom_liste": "STRASBOURG EN COMMUN",
+          "voix_pct": 2.99
+        },
+        {
+          "tete": "Chantal CUTAJAR",
+          "nuance": "LDIV",
+          "nom_liste": "Citoyens engagés",
+          "voix_pct": 2.18
+        },
+        {
+          "tete": "Patrick ARBOGAST",
+          "nuance": "LDIV",
+          "nom_liste": "EGALITE ACTIVE",
+          "voix_pct": 1.2
+        },
+        {
+          "tete": "Clément SOUBISE",
+          "nuance": "LEXG",
+          "nom_liste": "STRASBOURG ANTICAPITALISTE ET RÉVOLUTIONNAIRE",
+          "voix_pct": 0.82
+        },
+        {
+          "tete": "Louise FÈVE",
+          "nuance": "LEXG",
+          "nom_liste": "LUTTE OUVRIÈRE - FAIRE ENTENDRE LE CAMP DES TRAVAILLEURS",
+          "voix_pct": 0.44
+        },
+        {
+          "tete": "Mathieu LE TALLEC",
+          "nuance": "LEXG",
+          "nom_liste": "STRASBOURG 100 % SERVICES PUBLICS",
+          "voix_pct": 0.31
+        }
+      ]
+    },
+    "t2": {
+      "inscrits": 143638,
+      "votants": 52653,
+      "participation_pct": 36.66,
+      "listes": [
+        {
+          "tete": "Jeanne BARSEGHIAN",
+          "nuance": "LVEC",
+          "nom_liste": "STRASBOURG ECOLOGISTE & CITOYENNE",
+          "voix_pct": 41.71
+        },
+        {
+          "tete": "Alain FONTANEL",
+          "nuance": "LDVC",
+          "nom_liste": "Unis pour Strasbourg",
+          "voix_pct": 34.96
+        },
+        {
+          "tete": "Catherine TRAUTMANN",
+          "nuance": "LSOC",
+          "nom_liste": "FAIRE ENSEMBLE STRASBOURG",
+          "voix_pct": 23.33
+        }
+      ]
+    }
+  }
+}

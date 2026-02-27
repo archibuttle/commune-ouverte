@@ -1,0 +1,270 @@
+{
+  "code": "44109",
+  "nom": "Nantes",
+  "departement": "Loire-Atlantique",
+  "dep_code": "44",
+  "population": 306495,
+  "strate": "10",
+  "maire": {
+    "nom": "ROLLAND",
+    "prenom": "Johanna",
+    "sexe": "F",
+    "debut_mandat": "2020-07-01"
+  },
+  "finances": {
+    "score_global": 45,
+    "badge_global": "MOYEN",
+    "kpis": {
+      "encours_dette": {
+        "label": "Encours de dette",
+        "series": [
+          667.5,
+          582.2,
+          592.9,
+          647.9,
+          757.8,
+          895.6,
+          898.0,
+          982.1
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "CORRECT",
+        "moyenne_strate": 1232.8,
+        "delta_pct": 51.6
+      },
+      "depenses_investissement": {
+        "label": "Dépenses d'investissement",
+        "series": [
+          258.4,
+          274.9,
+          319.6,
+          339.6,
+          392.7,
+          439.5,
+          393.6,
+          374.9
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "CRITIQUE",
+        "moyenne_strate": 506.9,
+        "delta_pct": 10.4
+      },
+      "recettes_fonctionnement": {
+        "label": "Recettes de fonctionnement",
+        "series": [
+          1306.4,
+          1293.5,
+          1310.2,
+          1303.0,
+          1361.6,
+          1425.2,
+          1507.9,
+          1523.7
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "MOYEN",
+        "moyenne_strate": 1613.5,
+        "delta_pct": 16.9
+      },
+      "depenses_fonctionnement": {
+        "label": "Dépenses de fonctionnement",
+        "series": [
+          1108.3,
+          1136.6,
+          1154.0,
+          1185.2,
+          1202.9,
+          1260.8,
+          1328.1,
+          1378.8
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "MOYEN",
+        "moyenne_strate": 1400.4,
+        "delta_pct": 16.3
+      },
+      "frais_personnel": {
+        "label": "Frais de personnel",
+        "series": [
+          600.5,
+          599.8,
+          602.9,
+          621.7,
+          627.7,
+          662.5,
+          701.7,
+          715.6
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "CORRECT",
+        "moyenne_strate": 798.9,
+        "delta_pct": 15.1
+      },
+      "epargne_brute": {
+        "label": "Épargne brute",
+        "series": [
+          198.0,
+          156.9,
+          156.2,
+          117.8,
+          158.7,
+          164.4,
+          179.8,
+          144.9
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "CRITIQUE",
+        "moyenne_strate": 213.0,
+        "delta_pct": 23.0
+      }
+    }
+  },
+  "elections": {
+    "t1": {
+      "inscrits": 190746,
+      "votants": 73768,
+      "participation_pct": 38.67,
+      "listes": [
+        {
+          "tete": "Johanna ROLLAND",
+          "nuance": "LUG",
+          "nom_liste": "Nantes en confiance",
+          "voix_pct": 31.36
+        },
+        {
+          "tete": "Laurence GARNIER",
+          "nuance": "LUD",
+          "nom_liste": "MIEUX VIVRE À NANTES",
+          "voix_pct": 19.94
+        },
+        {
+          "tete": "Julie LAERNOES",
+          "nuance": "LVEC",
+          "nom_liste": "NANTES ENSEMBLE",
+          "voix_pct": 19.58
+        },
+        {
+          "tete": "Valérie OPPELT",
+          "nuance": "LUC",
+          "nom_liste": "NANTES AVEC VOUS",
+          "voix_pct": 13.0
+        },
+        {
+          "tete": "Margot MEDKOUR",
+          "nuance": "LDVG",
+          "nom_liste": "NANTES EN COMMUN",
+          "voix_pct": 8.95
+        },
+        {
+          "tete": "Eléonore REVEL",
+          "nuance": "LRN",
+          "nom_liste": "LE BON SENS POUR NANTES",
+          "voix_pct": 4.76
+        },
+        {
+          "tete": "Hugo SONNIER",
+          "nuance": "LDIV",
+          "nom_liste": "NANTES EN EXEMPLE !",
+          "voix_pct": 0.92
+        },
+        {
+          "tete": "Riwan CHAMI",
+          "nuance": "LEXG",
+          "nom_liste": "ANTICAPITALISTES ET REVOLUTIONNAIRES ! Nantes aux travailleuses et travailleurs",
+          "voix_pct": 0.88
+        },
+        {
+          "tete": "Nicolas BAZILLE",
+          "nuance": "LEXG",
+          "nom_liste": "faire entendre le camp des travailleurs",
+          "voix_pct": 0.61
+        }
+      ]
+    },
+    "t2": {
+      "inscrits": 190899,
+      "votants": 59107,
+      "participation_pct": 30.96,
+      "listes": [
+        {
+          "tete": "Johanna ROLLAND",
+          "nuance": "LUG",
+          "nom_liste": "ENSEMBLE NANTES EN CONFIANCE",
+          "voix_pct": 59.67
+        },
+        {
+          "tete": "Laurence GARNIER",
+          "nuance": "LUD",
+          "nom_liste": "MIEUX VIVRE À NANTES",
+          "voix_pct": 27.61
+        },
+        {
+          "tete": "Valérie OPPELT",
+          "nuance": "LUC",
+          "nom_liste": "NANTES AVEC VOUS",
+          "voix_pct": 12.71
+        }
+      ]
+    }
+  }
+}

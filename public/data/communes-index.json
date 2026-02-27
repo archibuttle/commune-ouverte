@@ -1,0 +1,72 @@
+[
+  {
+    "code": "75056",
+    "nom": "Paris",
+    "dep_code": "75",
+    "departement": "Paris",
+    "population": 2243739
+  },
+  {
+    "code": "13055",
+    "nom": "Marseille",
+    "dep_code": "13",
+    "departement": "Bouches-du-Rhône",
+    "population": 866644
+  },
+  {
+    "code": "69123",
+    "nom": "Lyon",
+    "dep_code": "69",
+    "departement": "Rhône",
+    "population": 514707
+  },
+  {
+    "code": "31555",
+    "nom": "Toulouse",
+    "dep_code": "31",
+    "departement": "Haute-Garonne",
+    "population": 474246
+  },
+  {
+    "code": "06088",
+    "nom": "Nice",
+    "dep_code": "06",
+    "departement": "Alpes-Maritimes",
+    "population": 347636
+  },
+  {
+    "code": "44109",
+    "nom": "Nantes",
+    "dep_code": "44",
+    "departement": "Loire-Atlantique",
+    "population": 306495
+  },
+  {
+    "code": "34172",
+    "nom": "Montpellier",
+    "dep_code": "34",
+    "departement": "Hérault",
+    "population": 279845
+  },
+  {
+    "code": "67482",
+    "nom": "Strasbourg",
+    "dep_code": "67",
+    "departement": "Bas-Rhin",
+    "population": 280680
+  },
+  {
+    "code": "33063",
+    "nom": "Bordeaux",
+    "dep_code": "33",
+    "departement": "Gironde",
+    "population": 250776
+  },
+  {
+    "code": "59350",
+    "nom": "Lille",
+    "dep_code": "59",
+    "departement": "Nord",
+    "population": 238381
+  }
+]

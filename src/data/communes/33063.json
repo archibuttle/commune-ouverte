@@ -1,0 +1,270 @@
+{
+  "code": "33063",
+  "nom": "Bordeaux",
+  "departement": "Gironde",
+  "dep_code": "33",
+  "population": 250776,
+  "strate": "10",
+  "maire": {
+    "nom": "HURMIC",
+    "prenom": "Pierre",
+    "sexe": "M",
+    "debut_mandat": "2020-07-03"
+  },
+  "finances": {
+    "score_global": 55,
+    "badge_global": "MOYEN",
+    "kpis": {
+      "encours_dette": {
+        "label": "Encours de dette",
+        "series": [
+          1037.4,
+          1003.1,
+          985.2,
+          1051.3,
+          1088.2,
+          1119.6,
+          1101.7,
+          1341.0
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "MOYEN",
+        "moyenne_strate": 1232.8,
+        "delta_pct": 27.6
+      },
+      "depenses_investissement": {
+        "label": "Dépenses d'investissement",
+        "series": [
+          477.4,
+          421.7,
+          416.9,
+          437.2,
+          542.2,
+          540.1,
+          455.1,
+          649.0
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "BON",
+        "moyenne_strate": 506.9,
+        "delta_pct": 48.4
+      },
+      "recettes_fonctionnement": {
+        "label": "Recettes de fonctionnement",
+        "series": [
+          1314.9,
+          1419.6,
+          1374.6,
+          1308.3,
+          1389.6,
+          1436.0,
+          1589.2,
+          1570.9
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "MOYEN",
+        "moyenne_strate": 1613.5,
+        "delta_pct": 20.1
+      },
+      "depenses_fonctionnement": {
+        "label": "Dépenses de fonctionnement",
+        "series": [
+          1147.1,
+          1141.0,
+          1148.6,
+          1161.1,
+          1175.8,
+          1208.3,
+          1343.8,
+          1364.5
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "MOYEN",
+        "moyenne_strate": 1400.4,
+        "delta_pct": 17.5
+      },
+      "frais_personnel": {
+        "label": "Frais de personnel",
+        "series": [
+          558.1,
+          547.5,
+          560.8,
+          568.7,
+          569.0,
+          596.1,
+          633.7,
+          663.4
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "CORRECT",
+        "moyenne_strate": 798.9,
+        "delta_pct": 16.7
+      },
+      "epargne_brute": {
+        "label": "Épargne brute",
+        "series": [
+          167.8,
+          278.5,
+          226.0,
+          147.1,
+          213.8,
+          227.7,
+          245.4,
+          206.4
+        ],
+        "annees": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "unite": "€/hab",
+        "badge": "MOYEN",
+        "moyenne_strate": 213.0,
+        "delta_pct": 40.3
+      }
+    }
+  },
+  "elections": {
+    "t1": {
+      "inscrits": 151147,
+      "votants": 55818,
+      "participation_pct": 36.93,
+      "listes": [
+        {
+          "tete": "Nicolas FLORIAN",
+          "nuance": "LDVD",
+          "nom_liste": "Majorité Municipale",
+          "voix_pct": 34.56
+        },
+        {
+          "tete": "Pierre HURMIC",
+          "nuance": "LUG",
+          "nom_liste": "BORDEAUX RESPIRE !",
+          "voix_pct": 34.38
+        },
+        {
+          "tete": "Thomas CAZENAVE",
+          "nuance": "LREM",
+          "nom_liste": "Renouveau Bordeaux",
+          "voix_pct": 12.69
+        },
+        {
+          "tete": "Philippe POUTOU",
+          "nuance": "LEXG",
+          "nom_liste": "Bordeaux En Luttes",
+          "voix_pct": 11.77
+        },
+        {
+          "tete": "Bruno PALUTEAU",
+          "nuance": "LRN",
+          "nom_liste": "Le Réveil Bordelais",
+          "voix_pct": 3.26
+        },
+        {
+          "tete": "Pascal JARTY",
+          "nuance": "LDIV",
+          "nom_liste": "Servir Bordeaux",
+          "voix_pct": 1.25
+        },
+        {
+          "tete": "Yves SIMONE",
+          "nuance": "LDIV",
+          "nom_liste": "Suivez le guide",
+          "voix_pct": 0.96
+        },
+        {
+          "tete": "Gilles GARÇON",
+          "nuance": "LDIV",
+          "nom_liste": "Le temps des bordelais",
+          "voix_pct": 0.66
+        },
+        {
+          "tete": "Fanny QUANDALLE",
+          "nuance": "LEXG",
+          "nom_liste": "Lutte Ouvrière - Faire entendre le camp des travailleurs",
+          "voix_pct": 0.45
+        }
+      ]
+    },
+    "t2": {
+      "inscrits": 151324,
+      "votants": 58002,
+      "participation_pct": 38.33,
+      "listes": [
+        {
+          "tete": "Pierre HURMIC",
+          "nuance": "LUG",
+          "nom_liste": "BORDEAUX RESPIRE !",
+          "voix_pct": 46.48
+        },
+        {
+          "tete": "Nicolas FLORIAN",
+          "nuance": "LDVC",
+          "nom_liste": "UNION POUR BORDEAUX",
+          "voix_pct": 44.12
+        },
+        {
+          "tete": "Philippe POUTOU",
+          "nuance": "LEXG",
+          "nom_liste": "Bordeaux En Luttes",
+          "voix_pct": 9.39
+        }
+      ]
+    }
+  }
+}
