@@ -80,3 +80,36 @@ body {
   color: var(--color-neutral-800);
   min-height: 100vh;
 }
+
+/* Tab system */
+.tab-btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-neutral-500);
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.tab-btn:hover {
+  color: var(--color-neutral-700);
+}
+
+.tab-btn.active {
+  color: var(--color-blue-600);
+  border-bottom-color: var(--color-blue-600);
+}
+
+.tab-panel {
+  animation: tab-fade-in 0.2s ease-out;
+}
+
+@keyframes tab-fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}

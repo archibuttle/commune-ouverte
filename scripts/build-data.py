@@ -73,6 +73,8 @@ RNE_URL = "https://static.data.gouv.fr/resources/repertoire-national-des-elus-1/
 ELECTIONS_T1_URL = "https://static.data.gouv.fr/resources/elections-municipales-2020-resultats/20200525-133704/2020-05-18-resultats-communes-de-1000-et-plus.txt"
 ELECTIONS_T2_URL = "https://static.data.gouv.fr/resources/municipales-2020-resultats-2nd-tour/20200629-192435/2020-06-29-resultats-t2-communes-de-1000-hab-et-plus.txt"
 
+WIKIDATA_SPARQL_URL = "https://query.wikidata.org/sparql"
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RAW_DIR = os.path.join(BASE_DIR, "raw")
 DATA_DIR = os.path.join(BASE_DIR, "src", "data", "communes")
@@ -91,6 +93,86 @@ def fetch_text(url, encoding="utf-8"):
     req = urllib.request.Request(url, headers={"User-Agent": "commune-ouverte/1.0"})
     with urllib.request.urlopen(req, timeout=120) as resp:
         return resp.read().decode(encoding)
+
+
+def fetch_wikidata_mayor(prenom, nom, ville):
+    """Fetch mayor photo URL and political party from Wikidata REST API."""
+    # Step 1: Search for the entity
+    search_term = f"{prenom} {nom}"
+    params = urllib.parse.urlencode({
+        "action": "wbsearchentities",
+        "search": search_term,
+        "language": "fr",
+        "limit": 3,
+        "format": "json",
+    })
+    search_url = f"https://www.wikidata.org/w/api.php?{params}"
+    try:
+        req = urllib.request.Request(search_url, headers={
+            "User-Agent": "commune-ouverte/1.0 (civic dashboard; contact: github.com/archibuttle)",
+        })
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            search_data = json.loads(resp.read().decode("utf-8"))
+
+        results = search_data.get("search", [])
+        if not results:
+            return None, None
+
+        # Pick the first human result (usually the right one for well-known politicians)
+        entity_id = results[0]["id"]
+
+        # Step 2: Fetch entity details (P18=image, P102=party)
+        params2 = urllib.parse.urlencode({
+            "action": "wbgetentities",
+            "ids": entity_id,
+            "props": "claims",
+            "format": "json",
+        })
+        entity_url = f"https://www.wikidata.org/w/api.php?{params2}"
+        req2 = urllib.request.Request(entity_url, headers={
+            "User-Agent": "commune-ouverte/1.0 (civic dashboard; contact: github.com/archibuttle)",
+        })
+        with urllib.request.urlopen(req2, timeout=15) as resp2:
+            entity_data = json.loads(resp2.read().decode("utf-8"))
+
+        entity = entity_data.get("entities", {}).get(entity_id, {})
+        claims = entity.get("claims", {})
+
+        # Extract P18 (image)
+        photo_url = None
+        if "P18" in claims:
+            filename = claims["P18"][0]["mainsnak"]["datavalue"]["value"]
+            filename_encoded = urllib.parse.quote(filename.replace(" ", "_"))
+            photo_url = f"https://commons.wikimedia.org/wiki/Special:FilePath/{filename_encoded}?width=200"
+
+        # Extract P102 (member of political party) - need to resolve the party entity label
+        parti = None
+        if "P102" in claims:
+            # Get the most recent party (last in list)
+            party_claims = claims["P102"]
+            party_id = party_claims[-1]["mainsnak"]["datavalue"]["value"]["id"]
+
+            # Fetch party label
+            params3 = urllib.parse.urlencode({
+                "action": "wbgetentities",
+                "ids": party_id,
+                "props": "labels",
+                "languages": "fr",
+                "format": "json",
+            })
+            party_url = f"https://www.wikidata.org/w/api.php?{params3}"
+            req3 = urllib.request.Request(party_url, headers={
+                "User-Agent": "commune-ouverte/1.0 (civic dashboard; contact: github.com/archibuttle)",
+            })
+            with urllib.request.urlopen(req3, timeout=10) as resp3:
+                party_data = json.loads(resp3.read().decode("utf-8"))
+            party_entity = party_data.get("entities", {}).get(party_id, {})
+            parti = party_entity.get("labels", {}).get("fr", {}).get("value")
+
+        return photo_url, parti
+    except Exception as e:
+        print(f"    Wikidata error for {prenom} {nom}: {e}")
+        return None, None
 
 
 def fetch_finances(city_code):
@@ -448,8 +530,27 @@ def main():
     elections_t2 = parse_elections(t2_text, city_codes)
     print(f"  T1: {len(elections_t1)} cities, T2: {len(elections_t2)} cities")
 
-    # --- Step 5: Assemble JSON per city ---
-    print("\n=== Step 5: Assembling JSON files ===")
+    # --- Step 5: Fetch Wikidata (mayor photo + party) ---
+    print("\n=== Step 5: Fetching mayor photos and parties from Wikidata ===")
+    for code, mayor in mayors.items():
+        print(f"  Querying Wikidata for {mayor['prenom']} {mayor['nom']}...")
+        photo_url, parti = fetch_wikidata_mayor(mayor["prenom"], mayor["nom"], city_map[code]["nom"])
+        mayor["photo_url"] = photo_url
+        mayor["parti"] = parti
+        status = []
+        if photo_url:
+            status.append("photo OK")
+        else:
+            status.append("no photo")
+        if parti:
+            status.append(f"parti: {parti}")
+        else:
+            status.append("no parti")
+        print(f"    -> {', '.join(status)}")
+        time.sleep(1)  # Be polite to Wikidata SPARQL endpoint
+
+    # --- Step 6: Assemble JSON per city ---
+    print("\n=== Step 6: Assembling JSON files ===")
     index = []
 
     for city in CITIES:

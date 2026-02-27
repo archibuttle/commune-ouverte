@@ -9,7 +9,9 @@
     "nom": "BARSEGHIAN",
     "prenom": "Jeanne",
     "sexe": "F",
-    "debut_mandat": "2020-06-28"
+    "debut_mandat": "2020-06-28",
+    "photo_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Jeanne_Barseghian_par_Claude_Truong-Ngoc_juillet_2020.jpg?width=200",
+    "parti": "Les Écologistes – Europe Écologie Les Verts"
   },
   "finances": {
     "score_global": 41,

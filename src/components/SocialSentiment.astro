@@ -58,7 +58,10 @@ const months = ["Sept.", "Oct.", "Nov.", "D\u00e9c.", "Janv.", "F\u00e9vr."];
       <div class="text-xs font-medium text-neutral-500 uppercase tracking-wide">Perception en ligne</div>
       <div class="text-[11px] text-neutral-400 mt-0.5">Sentiment sur 6 mois</div>
     </div>
-    <span class="bg-blue-50 text-blue-600 text-[10px] font-semibold px-2 py-0.5 rounded-full">Synthesio</span>
+    <div class="flex gap-1.5 shrink-0">
+      <span class="bg-blue-50 text-blue-600 text-[10px] font-semibold px-2 py-0.5 rounded-full">Synthesio</span>
+      <span class="bg-amber-50 text-amber-700 text-[10px] font-semibold px-2 py-0.5 rounded-full">Donn&eacute;es simul&eacute;es</span>
+    </div>
   </div>
 
   <!-- Gauge -->
@@ -110,11 +113,5 @@ const months = ["Sept.", "Oct.", "Nov.", "D\u00e9c.", "Janv.", "F\u00e9vr."];
     <span class="text-neutral-400">X, Facebook, Forums, Presse</span>
   </div>
 
-  <!-- Placeholder overlay -->
-  {isPlaceholder && (
-    <div class="absolute inset-0 bg-white/75 backdrop-blur-[2px] flex flex-col items-center justify-center rounded-2xl">
-      <div class="text-sm font-medium text-neutral-600">Donn&eacute;es bient&ocirc;t disponibles</div>
-      <div class="text-xs text-neutral-400 mt-1">Propuls&eacute; par Synthesio</div>
-    </div>
-  )}
+
 </div>

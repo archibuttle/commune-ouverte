@@ -9,7 +9,9 @@
     "nom": "HIDALGO",
     "prenom": "Anne",
     "sexe": "F",
-    "debut_mandat": "2020-07-03"
+    "debut_mandat": "2020-07-03",
+    "photo_url": "https://commons.wikimedia.org/wiki/Special:FilePath/%28Anne_Hidalgo%29_2020._Jacques_Paquier._P%C3%A9cresse_-_Ollier_-_Hidalgo_%28cropped%29.jpg?width=200",
+    "parti": "Parti socialiste"
   },
   "finances": {
     "score_global": 33,

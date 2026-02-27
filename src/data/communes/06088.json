@@ -9,7 +9,9 @@
     "nom": "ESTROSI",
     "prenom": "Christian",
     "sexe": "M",
-    "debut_mandat": "2020-07-03"
+    "debut_mandat": "2020-07-03",
+    "photo_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Christian_Estrosi.jpg?width=200",
+    "parti": "La France audacieuse"
   },
   "finances": {
     "score_global": 41,

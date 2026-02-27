@@ -9,7 +9,9 @@
     "nom": "DOUCET",
     "prenom": "Grégory",
     "sexe": "M",
-    "debut_mandat": "2020-07-04"
+    "debut_mandat": "2020-07-04",
+    "photo_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Gr%C3%A9gory_Doucet.jpg?width=200",
+    "parti": "Les Écologistes – Europe Écologie Les Verts"
   },
   "finances": {
     "score_global": 56,

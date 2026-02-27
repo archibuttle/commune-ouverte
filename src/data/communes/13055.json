@@ -9,7 +9,9 @@
     "nom": "PAYAN",
     "prenom": "Benoît",
     "sexe": "M",
-    "debut_mandat": "2020-10-21"
+    "debut_mandat": "2020-10-21",
+    "photo_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Benoit_Payan_2024.jpeg?width=200",
+    "parti": "Parti socialiste"
   },
   "finances": {
     "score_global": 38,

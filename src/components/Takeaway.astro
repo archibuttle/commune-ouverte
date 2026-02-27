@@ -5,20 +5,13 @@ interface Kpi {
   delta_pct: number | null;
 }
 
-interface ElectionRound {
-  participation_pct: number;
-  listes: any[];
-}
-
 interface Props {
   kpis: Record<string, Kpi>;
   badge_global: string;
-  t1: ElectionRound | null;
-  t2: ElectionRound | null;
   nom: string;
 }
 
-const { kpis, badge_global, t1, t2, nom } = Astro.props;
+const { kpis, badge_global, nom } = Astro.props;
 
 // Generate 2-3 key takeaways from the data
 const takeaways: string[] = [];
@@ -58,20 +51,7 @@ if (bestKpi) {
   takeaways.push(`Point fort : ${bestKpi.label} est un atout par rapport aux villes comparables.`);
 }
 
-// 2. Participation insight
-const natT2 = 41.60;
-const natT1 = 44.66;
-if (t2 || t1) {
-  const pct = t2?.participation_pct ?? t1?.participation_pct ?? 0;
-  const nat = t2 ? natT2 : natT1;
-  if (pct < nat - 5) {
-    takeaways.push(`La participation en 2020 \u00e9tait faible (\u00e0 ${pct.toFixed(0)}%). Chaque voix comptera en 2026.`);
-  } else if (pct > nat + 5) {
-    takeaways.push(`Les \u00e9lecteurs se sont fortement mobilis\u00e9s en 2020 (${pct.toFixed(0)}%), signe d'un int\u00e9r\u00eat marqu\u00e9 pour la politique locale.`);
-  }
-}
-
-// 3. If no strong takeaway, add a neutral one based on overall badge
+// 2. If not enough takeaways, add one based on overall badge
 if (takeaways.length < 2) {
   if (badge_global === "BON" || badge_global === "CORRECT") {
     takeaways.push(`${nom} pr\u00e9sente une situation financi\u00e8re globalement saine, ce qui laisse de la marge au prochain mandat.`);

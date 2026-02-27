@@ -9,7 +9,9 @@
     "nom": "HURMIC",
     "prenom": "Pierre",
     "sexe": "M",
-    "debut_mandat": "2020-07-03"
+    "debut_mandat": "2020-07-03",
+    "photo_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Portrait_Pierre_Hurmic.jpg?width=200",
+    "parti": "Les Verts"
   },
   "finances": {
     "score_global": 55,

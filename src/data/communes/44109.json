@@ -9,7 +9,9 @@
     "nom": "ROLLAND",
     "prenom": "Johanna",
     "sexe": "F",
-    "debut_mandat": "2020-07-01"
+    "debut_mandat": "2020-07-01",
+    "photo_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Johanna_Rolland%2C_maire_de_Nantes..jpg?width=200",
+    "parti": "Parti socialiste"
   },
   "finances": {
     "score_global": 45,

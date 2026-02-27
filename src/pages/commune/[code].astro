@@ -3,14 +3,11 @@ import Layout from '../../layouts/Layout.astro';
 import ScoreBanner from '../../components/ScoreBanner.astro';
 import MayorCard from '../../components/MayorCard.astro';
 import KpiCard from '../../components/KpiCard.astro';
-import ParticipationCard from '../../components/ParticipationCard.astro';
-import ElectionResults from '../../components/ElectionResults.astro';
-import Footer from '../../components/Footer.astro';
-import VerdictCard from '../../components/VerdictCard.astro';
 import Takeaway from '../../components/Takeaway.astro';
 import SearchTrends from '../../components/SearchTrends.astro';
 import SocialSentiment from '../../components/SocialSentiment.astro';
 import EmergingSignals from '../../components/EmergingSignals.astro';
+import Footer from '../../components/Footer.astro';
 
 // Import all commune JSON files
 const communeFiles = import.meta.glob('../../data/communes/*.json', { eager: true });
@@ -29,19 +26,9 @@ export function getStaticPaths() {
 const { commune } = Astro.props;
 const baseUrl = import.meta.env.BASE_URL;
 
-const kpiOrder = [
-  'encours_dette',
-  'depenses_investissement',
-  'recettes_fonctionnement',
-  'depenses_fonctionnement',
-  'frais_personnel',
-  'epargne_brute',
-];
-
-// Determine which election round to show results for
-const showT2 = commune.elections?.t2?.listes?.length > 0;
-const mainElection = showT2 ? commune.elections.t2 : commune.elections?.t1;
-const tourLabel = showT2 ? "2nd tour 2020" : "1er tour 2020";
+// KPI groups
+const quotidienKeys = ['recettes_fonctionnement', 'depenses_fonctionnement', 'frais_personnel'];
+const longTermeKeys = ['depenses_investissement', 'encours_dette', 'epargne_brute'];
 ---
 <Layout title={`${commune.nom} - Commune Ouverte`} description={`Finances et bilan electoral de ${commune.nom} pour les municipales 2026.`}>
   <main class="max-w-4xl mx-auto px-4 py-8">
@@ -58,76 +45,107 @@ const tourLabel = showT2 ? "2nd tour 2020" : "1er tour 2020";
       badge={commune.finances.badge_global}
     />
 
-    <!-- Mayor -->
+    <!-- Mayor + Verdict (merged) -->
     <div class="mt-4">
-      <MayorCard maire={commune.maire} />
-    </div>
-
-    <!-- Verdict: bilan du mandat -->
-    <div class="mt-4">
-      <VerdictCard
+      <MayorCard
         maire={commune.maire}
         badge_global={commune.finances.badge_global}
         kpis={commune.finances.kpis}
       />
     </div>
 
-    <!-- Financial KPIs -->
-    <h2 class="text-xl font-medium tracking-tight text-neutral-900 mt-10 mb-4">Finances du mandat (2020-2024)</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {kpiOrder.map((key) => {
-        const kpi = commune.finances.kpis[key];
-        if (!kpi) return null;
-        return (
-          <KpiCard
-            label={kpi.label}
-            series={kpi.series}
-            annees={kpi.annees}
-            unite={kpi.unite}
-            badge={kpi.badge}
-            moyenne_strate={kpi.moyenne_strate}
-            delta_pct={kpi.delta_pct}
-          />
-        );
-      })}
-    </div>
-
-    <!-- Elections Section -->
-    <h2 class="text-xl font-medium tracking-tight text-neutral-900 mt-10 mb-4">Municipales 2020</h2>
-    {commune.elections?.t1 || commune.elections?.t2 ? (
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <ParticipationCard t1={commune.elections?.t1} t2={commune.elections?.t2} />
-        {mainElection?.listes?.length > 0 && (
-          <ElectionResults listes={mainElection.listes} tour={tourLabel} />
-        )}
-      </div>
-    ) : (
-      <div class="bg-white rounded-2xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.06)] border border-neutral-100 text-center text-neutral-500">
-        Paris, Lyon et Marseille utilisent un scrutin sp&eacute;cifique (loi PLM).
-        Les r&eacute;sultats d&eacute;taill&eacute;s ne sont pas encore int&eacute;gr&eacute;s.
-      </div>
-    )}
-
-    <!-- Takeaway: a retenir -->
-    <div class="mt-10">
+    <!-- Takeaway -->
+    <div class="mt-4">
       <Takeaway
         kpis={commune.finances.kpis}
         badge_global={commune.finances.badge_global}
-        t1={commune.elections?.t1}
-        t2={commune.elections?.t2}
         nom={commune.nom}
       />
     </div>
 
-    <!-- Intelligence sociale (Synthesio) -->
-    <h2 class="text-xl font-medium tracking-tight text-neutral-900 mt-10 mb-2">Intelligence sociale</h2>
-    <p class="text-sm text-neutral-500 mb-4">Analyse des conversations en ligne et des tendances de recherche</p>
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-      <SearchTrends commune={commune.code} />
-      <SocialSentiment commune={commune.code} />
-      <EmergingSignals commune={commune.code} />
+    <!-- Tab bar -->
+    <div class="flex gap-0 mt-8 border-b border-neutral-200" id="tab-bar">
+      <button data-target="finances" class="tab-btn active">Finances</button>
+      <button data-target="social" class="tab-btn">Opinions en ligne</button>
+    </div>
+
+    <!-- Tab: Finances -->
+    <div id="tab-finances" class="tab-panel pt-6">
+      <h3 class="text-sm font-medium text-neutral-500 uppercase tracking-wide mb-3">Budget au quotidien</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+        {quotidienKeys.map((key) => {
+          const kpi = commune.finances.kpis[key];
+          if (!kpi) return null;
+          return (
+            <KpiCard
+              label={kpi.label}
+              series={kpi.series}
+              annees={kpi.annees}
+              unite={kpi.unite}
+              badge={kpi.badge}
+              moyenne_strate={kpi.moyenne_strate}
+              delta_pct={kpi.delta_pct}
+            />
+          );
+        })}
+      </div>
+
+      <h3 class="text-sm font-medium text-neutral-500 uppercase tracking-wide mb-3">Vision long terme</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {longTermeKeys.map((key) => {
+          const kpi = commune.finances.kpis[key];
+          if (!kpi) return null;
+          return (
+            <KpiCard
+              label={kpi.label}
+              series={kpi.series}
+              annees={kpi.annees}
+              unite={kpi.unite}
+              badge={kpi.badge}
+              moyenne_strate={kpi.moyenne_strate}
+              delta_pct={kpi.delta_pct}
+            />
+          );
+        })}
+      </div>
+    </div>
+
+    <!-- Tab: Opinions en ligne -->
+    <div id="tab-social" class="tab-panel pt-6 hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <SearchTrends commune={commune.code} />
+        <SocialSentiment commune={commune.code} />
+        <EmergingSignals commune={commune.code} />
+      </div>
     </div>
 
     <Footer />
   </main>
 </Layout>
+
+<script>
+  const tabBar = document.getElementById('tab-bar');
+  const panels = {
+    finances: document.getElementById('tab-finances'),
+    social: document.getElementById('tab-social'),
+  };
+
+  tabBar?.addEventListener('click', (e) => {
+    const btn = (e.target as HTMLElement).closest('[data-target]') as HTMLElement;
+    if (!btn) return;
+    const target = btn.dataset.target as keyof typeof panels;
+
+    // Update buttons
+    tabBar.querySelectorAll('.tab-btn').forEach((b) => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // Update panels
+    Object.entries(panels).forEach(([key, panel]) => {
+      if (key === target) {
+        panel?.classList.remove('hidden');
+      } else {
+        panel?.classList.add('hidden');
+      }
+    });
+  });
+</script>

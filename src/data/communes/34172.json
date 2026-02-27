@@ -9,7 +9,9 @@
     "nom": "DELAFOSSE",
     "prenom": "Michaël",
     "sexe": "M",
-    "debut_mandat": "2020-07-09"
+    "debut_mandat": "2020-07-09",
+    "photo_url": "https://commons.wikimedia.org/wiki/Special:FilePath/21.06.20_Micha%C3%ABl_Delafosse_%C3%A0_v%C3%A9lo_dans_une_rue_de_Montpellier.jpg?width=200",
+    "parti": "Parti socialiste"
   },
   "finances": {
     "score_global": 59,

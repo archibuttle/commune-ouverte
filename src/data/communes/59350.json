@@ -9,7 +9,9 @@
     "nom": "DESLANDES",
     "prenom": "Arnaud",
     "sexe": "M",
-    "debut_mandat": "2025-03-21"
+    "debut_mandat": "2025-03-21",
+    "photo_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Arnaud_deslandes_photo_mairedelille.jpg?width=200",
+    "parti": null
   },
   "finances": {
     "score_global": 44,
