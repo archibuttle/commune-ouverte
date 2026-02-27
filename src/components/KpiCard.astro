@@ -149,6 +149,10 @@ const interpretation = interpretations[label]?.[badge] || "";
     </div>
   </div>
 
+  {interpretation && (
+    <p class="text-xs text-neutral-500 italic mb-2">{interpretation}</p>
+  )}
+
   {moyenne_strate !== null && (
     <div class="text-xs text-neutral-500 border-t border-neutral-100 pt-2 mt-auto">
       Moyenne strate : <span class="font-mono font-medium">{moyenne_strate.toLocaleString("fr-FR")}</span> {unite}

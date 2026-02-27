@@ -26,23 +26,31 @@ function formatDate(iso: string): string {
   return d.toLocaleDateString("fr-FR", { month: "long", year: "numeric" });
 }
 
+function toTitleCase(str: string): string {
+  return str.toLowerCase().replace(/(?:^|\s|-)\S/g, (c) => c.toUpperCase());
+}
+
 const title = maire?.sexe === "F" ? "Maire sortante" : "Maire sortant";
+
+// Format name in title case
+const displayPrenom = maire ? toTitleCase(maire.prenom) : "";
+const displayNom = maire ? toTitleCase(maire.nom) : "";
+const fullName = `${displayPrenom} ${displayNom}`;
 
 // Initials fallback for photo
 const initials = maire ? `${maire.prenom[0]}${maire.nom[0]}` : "";
 
-// --- Verdict narrative (merged from VerdictCard) ---
-const fragments: string[] = [];
+// --- Verdict: categorize KPIs ---
 const critiques: string[] = [];
 const bons: string[] = [];
 
 const kpiLabels: Record<string, string> = {
-  "Encours de dette": "l'endettement",
-  "D\u00e9penses d'investissement": "l'investissement",
-  "Recettes de fonctionnement": "les recettes",
-  "D\u00e9penses de fonctionnement": "les d\u00e9penses de fonctionnement",
-  "Frais de personnel": "les frais de personnel",
-  "\u00c9pargne brute": "l'\u00e9pargne",
+  "Encours de dette": "Endettement",
+  "D\u00e9penses d'investissement": "Investissement",
+  "Recettes de fonctionnement": "Recettes",
+  "D\u00e9penses de fonctionnement": "D\u00e9penses courantes",
+  "Frais de personnel": "Masse salariale",
+  "\u00c9pargne brute": "\u00c9pargne",
 };
 
 for (const [key, kpi] of Object.entries(kpis)) {
@@ -51,41 +59,15 @@ for (const [key, kpi] of Object.entries(kpis)) {
   if (kpi.badge === "BON") bons.push(shortLabel);
 }
 
-if (maire) {
-  const startYear = new Date(maire.debut_mandat).getFullYear();
-  fragments.push(`Sous le mandat de ${maire.prenom} ${maire.nom} (depuis ${startYear})`);
-}
-
-if (bons.length > 0) {
-  const joined = bons.length === 1 ? bons[0] : bons.slice(0, -1).join(", ") + " et " + bons[bons.length - 1];
-  fragments.push(`${bons.length === 1 ? "un point fort" : "des points forts"} : ${joined}`);
-}
-
-if (critiques.length > 0) {
-  const joined = critiques.length === 1 ? critiques[0] : critiques.slice(0, -1).join(", ") + " et " + critiques[critiques.length - 1];
-  fragments.push(`${critiques.length === 1 ? "un point de vigilance" : "des points de vigilance"} : ${joined}`);
-}
-
-const verdictMap: Record<string, string> = {
-  "BON": "Le bilan financier global est positif.",
-  "CORRECT": "Le bilan financier global est correct.",
-  "MOYEN": "Le bilan financier global est mitig\u00e9.",
-  "FAIBLE": "Le bilan financier global est pr\u00e9occupant.",
-  "CRITIQUE": "Le bilan financier global est tr\u00e8s pr\u00e9occupant.",
+const verdictMap: Record<string, { text: string; color: string }> = {
+  "BON": { text: "Bilan financier positif", color: "text-emerald-700 bg-emerald-50" },
+  "CORRECT": { text: "Bilan financier correct", color: "text-teal-700 bg-teal-50" },
+  "MOYEN": { text: "Bilan financier mitig\u00e9", color: "text-amber-700 bg-amber-50" },
+  "FAIBLE": { text: "Bilan financier pr\u00e9occupant", color: "text-orange-700 bg-orange-50" },
+  "CRITIQUE": { text: "Bilan financier tr\u00e8s pr\u00e9occupant", color: "text-red-700 bg-red-50" },
 };
 
-const verdict = verdictMap[badge_global] || "";
-
-let narrative = "";
-if (fragments.length > 0) {
-  narrative = fragments[0];
-  if (fragments.length > 1) {
-    narrative += ", " + fragments.slice(1).join(", mais aussi ");
-  }
-  narrative += ". " + verdict;
-} else {
-  narrative = verdict;
-}
+const verdict = verdictMap[badge_global] || verdictMap["MOYEN"];
 ---
 {maire && (
   <div class="bg-white rounded-2xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.06)] border border-neutral-100">
@@ -95,7 +77,7 @@ if (fragments.length > 0) {
       {maire.photo_url ? (
         <img
           src={maire.photo_url}
-          alt={`${maire.prenom} ${maire.nom}`}
+          alt={fullName}
           class="w-16 h-16 rounded-full object-cover shrink-0"
           loading="lazy"
         />
@@ -105,9 +87,7 @@ if (fragments.length > 0) {
         </div>
       )}
       <div>
-        <div class="text-lg font-semibold text-neutral-900">
-          {maire.prenom} {maire.nom}
-        </div>
+        <div class="text-lg font-semibold text-neutral-900">{fullName}</div>
         {maire.parti && (
           <div class="text-sm text-neutral-600 mt-0.5">{maire.parti}</div>
         )}
@@ -118,8 +98,28 @@ if (fragments.length > 0) {
     </div>
 
     <div class="border-t border-neutral-100 mt-4 pt-4">
-      <div class="text-xs font-medium text-blue-600 uppercase tracking-wide mb-2">Bilan du mandat</div>
-      <p class="text-sm text-neutral-700 leading-relaxed">{narrative}</p>
+      <div class="flex items-center gap-2 mb-3">
+        <div class="text-xs font-medium text-neutral-500 uppercase tracking-wide">Bilan du mandat</div>
+        <span class={`text-[11px] font-semibold px-2 py-0.5 rounded-full ${verdict.color}`}>{verdict.text}</span>
+      </div>
+
+      <div class="space-y-1.5">
+        {bons.length > 0 && bons.map((b) => (
+          <div class="flex items-center gap-2 text-sm">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"></span>
+            <span class="text-neutral-700"><span class="font-medium">Point fort</span> : {b}</span>
+          </div>
+        ))}
+        {critiques.length > 0 && critiques.map((c) => (
+          <div class="flex items-center gap-2 text-sm">
+            <span class="w-1.5 h-1.5 rounded-full bg-red-500 shrink-0"></span>
+            <span class="text-neutral-700"><span class="font-medium">Vigilance</span> : {c}</span>
+          </div>
+        ))}
+        {bons.length === 0 && critiques.length === 0 && (
+          <p class="text-sm text-neutral-500">Aucun indicateur ne se d&eacute;marque nettement de la moyenne.</p>
+        )}
+      </div>
     </div>
   </div>
 )}
