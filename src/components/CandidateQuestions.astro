@@ -1,0 +1,85 @@
+---
+interface Kpi {
+  label: string;
+  badge: string;
+  delta_pct: number | null;
+  series: number[];
+}
+
+interface Props {
+  kpis: Record<string, Kpi>;
+  nom: string;
+  commune: string;
+}
+
+const { kpis, nom, commune } = Astro.props;
+
+// Citizen dissatisfactions (same data as Takeaway/CitizenVoice)
+const DISSATISFACTIONS: Record<string, string[]> = {
+  "75056": ["Propret\u00e9 des rues", "Co\u00fbt du logement", "Nuisances sonores"],
+  "13055": ["Ins\u00e9curit\u00e9", "Transports en commun", "Logement insalubre"],
+  "69123": ["ZFE et restrictions auto", "Stationnement", "Vie nocturne et bruit"],
+  "31555": ["Transports en commun", "Stationnement", "\u00c9talement urbain"],
+  "06088": ["Co\u00fbt de la vie", "Stationnement", "Tourisme de masse"],
+  "44109": ["Ins\u00e9curit\u00e9", "Propret\u00e9 des rues", "Risque inondations"],
+  "34172": ["Ins\u00e9curit\u00e9", "Circulation", "Urbanisation rapide"],
+  "67482": ["Stationnement", "Propret\u00e9", "Co\u00fbt du logement"],
+  "33063": ["Co\u00fbt du logement", "Tourisme de masse", "Circulation"],
+  "59350": ["Propret\u00e9 des rues", "Ins\u00e9curit\u00e9", "Climat et grisaille"],
+};
+
+const dissatisfactions = DISSATISFACTIONS[commune] || ["Co\u00fbt de la vie", "Stationnement", "Propret\u00e9"];
+
+// Question templates based on KPI issues
+const financialQuestions: Record<string, string> = {
+  "encours_dette": "Comment comptez-vous r\u00e9duire la dette de la ville, qui d\u00e9passe la moyenne des villes comparables ?",
+  "depenses_investissement": "L'investissement dans les \u00e9quipements publics a recul\u00e9 sur le mandat. Comment relancerez-vous l'investissement ?",
+  "recettes_fonctionnement": "Les recettes sont inf\u00e9rieures aux villes comparables. Quels leviers activerez-vous sans augmenter les imp\u00f4ts ?",
+  "depenses_fonctionnement": "Les d\u00e9penses de fonctionnement sont \u00e9lev\u00e9es. O\u00f9 r\u00e9aliserez-vous des \u00e9conomies ?",
+  "frais_personnel": "La masse salariale p\u00e8se lourd dans le budget. Comment optimiser les effectifs tout en maintenant les services ?",
+  "epargne_brute": "La capacit\u00e9 d'\u00e9pargne s'est d\u00e9grad\u00e9e. Comment restaurerez-vous des marges pour financer les projets futurs ?",
+};
+
+// Collect financial questions from CRITIQUE/FAIBLE KPIs
+const finQuestions: string[] = [];
+for (const [key, kpi] of Object.entries(kpis)) {
+  if ((kpi.badge === "CRITIQUE" || kpi.badge === "FAIBLE") && financialQuestions[key]) {
+    finQuestions.push(financialQuestions[key]);
+  }
+}
+
+// Citizen question from top dissatisfaction
+const citizenQuestion = `Les habitants se plaignent de "${dissatisfactions[0].toLowerCase()}". Que proposez-vous concr\u00e8tement pour y r\u00e9pondre ?`;
+
+// Select 3 questions max: prioritize finance + citizen mix
+const questions: string[] = [];
+if (finQuestions.length >= 2) {
+  questions.push(finQuestions[0], finQuestions[1]);
+  questions.push(citizenQuestion);
+} else if (finQuestions.length === 1) {
+  questions.push(finQuestions[0]);
+  questions.push(citizenQuestion);
+  if (dissatisfactions.length > 1) {
+    questions.push(`Comment am\u00e9liorerez-vous la situation concernant "${dissatisfactions[1].toLowerCase()}" ?`);
+  }
+} else {
+  questions.push(citizenQuestion);
+  questions.push(`Comment maintiendrez-vous la sant\u00e9 financi\u00e8re de ${nom} tout en r\u00e9pondant aux attentes des habitants ?`);
+  if (dissatisfactions.length > 1) {
+    questions.push(`Comment am\u00e9liorerez-vous la situation concernant "${dissatisfactions[1].toLowerCase()}" ?`);
+  }
+}
+---
+{questions.length > 0 && (
+  <div class="bg-neutral-900 rounded-2xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.12)]">
+    <div class="text-sm font-medium text-neutral-400 uppercase tracking-wide mb-4">Questions &agrave; poser aux candidats 2026</div>
+    <ol class="space-y-3">
+      {questions.map((q, i) => (
+        <li class="flex gap-3 text-base text-neutral-200 leading-relaxed">
+          <span class="text-blue-400 font-mono font-bold shrink-0">{i + 1}.</span>
+          <span>{q}</span>
+        </li>
+      ))}
+    </ol>
+  </div>
+)}

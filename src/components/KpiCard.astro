@@ -116,18 +116,18 @@ const interpretation = interpretations[label]?.[badge] || "";
 ---
 <div class="bg-white rounded-2xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.06)] border border-neutral-100 flex flex-col">
   <div class="flex items-start justify-between mb-3">
-    <div class="text-sm font-medium text-neutral-600 leading-tight">{label}</div>
-    <span class={`text-xs font-semibold px-2 py-0.5 rounded ${colorClass} cursor-help`} title={interpretation}>{badge}</span>
+    <div class="text-base font-medium text-neutral-600 leading-tight">{label}</div>
+    <span class={`text-sm font-semibold px-2 py-0.5 rounded ${colorClass} cursor-help`} title={interpretation}>{badge}</span>
   </div>
 
   <div class="flex items-end justify-between mb-3">
     <div>
-      <span class="text-2xl font-mono font-bold text-neutral-900">{current.toLocaleString("fr-FR")}</span>
-      <span class="text-sm text-neutral-500 ml-1">{unite}</span>
+      <span class="text-3xl font-mono font-bold text-neutral-900">{current.toLocaleString("fr-FR")}</span>
+      <span class="text-base text-neutral-500 ml-1">{unite}</span>
     </div>
     {delta_pct !== null && (
       <span class={`text-sm font-medium ${deltaColor}`}>
-        {deltaIcon} {delta_pct > 0 ? "+" : ""}{delta_pct}%
+        Mandat : {delta_pct > 0 ? "+" : ""}{delta_pct}%
       </span>
     )}
   </div>
@@ -143,18 +143,18 @@ const interpretation = interpretations[label]?.[badge] || "";
         stroke-linejoin="round"
       />
     </svg>
-    <div class="flex justify-between text-[10px] text-neutral-400 mt-0.5">
+    <div class="flex justify-between text-xs text-neutral-400 mt-0.5">
       <span>{annees[0]}</span>
       <span>{annees[annees.length - 1]}</span>
     </div>
   </div>
 
   {interpretation && (
-    <p class="text-xs text-neutral-500 italic mb-2">{interpretation}</p>
+    <p class="text-sm text-neutral-500 italic mb-2">{interpretation}</p>
   )}
 
   {moyenne_strate !== null && (
-    <div class="text-xs text-neutral-500 border-t border-neutral-100 pt-2 mt-auto">
+    <div class="text-sm text-neutral-500 border-t border-neutral-100 pt-2 mt-auto">
       Moyenne strate : <span class="font-mono font-medium">{moyenne_strate.toLocaleString("fr-FR")}</span> {unite}
     </div>
   )}

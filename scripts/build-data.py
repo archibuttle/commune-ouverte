@@ -589,14 +589,22 @@ def main():
             json.dump(commune_data, f, ensure_ascii=False, indent=2)
         print(f"  Generated {code}.json ({city['nom']})")
 
-        # Add to index
-        index.append({
+        # Add to index (enriched with score + mayor info for homepage)
+        mayor = mayors.get(code)
+        index_entry = {
             "code": code,
             "nom": city["nom"],
             "dep_code": city["dep_code"],
             "departement": city["dep_nom"],
             "population": pop,
-        })
+            "score_global": global_score,
+            "badge_global": global_badge,
+        }
+        if mayor:
+            index_entry["maire_prenom"] = mayor["prenom"]
+            index_entry["maire_nom"] = mayor["nom"]
+            index_entry["maire_parti"] = mayor.get("parti")
+        index.append(index_entry)
 
     # Write index
     index_path = os.path.join(PUBLIC_DIR, "communes-index.json")

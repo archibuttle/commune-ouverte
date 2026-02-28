@@ -4,34 +4,72 @@ import Footer from '../components/Footer.astro';
 import index from '../../public/data/communes-index.json';
 
 const baseUrl = import.meta.env.BASE_URL;
+
+const badgeColors: Record<string, string> = {
+  "BON": "bg-emerald-50 text-emerald-900 border-emerald-200",
+  "CORRECT": "bg-teal-50 text-teal-900 border-teal-200",
+  "MOYEN": "bg-amber-50 text-amber-900 border-amber-200",
+  "FAIBLE": "bg-orange-50 text-orange-900 border-orange-200",
+  "CRITIQUE": "bg-red-50 text-red-900 border-red-200",
+};
+
+function toTitleCase(str: string): string {
+  return str.toLowerCase().replace(/(?:^|\s|-)\S/g, (c) => c.toUpperCase());
+}
+
+function partiShort(parti: string | null | undefined): string {
+  if (!parti) return "";
+  const shorts: Record<string, string> = {
+    "Parti socialiste": "PS",
+    "Les R\u00e9publicains": "LR",
+    "La R\u00e9publique en marche": "LREM",
+    "Europe \u00c9cologie Les Verts": "EELV",
+    "Rassemblement national": "RN",
+  };
+  return shorts[parti] || parti;
+}
 ---
 <Layout title="Commune Ouverte - Municipales 2026">
-  <main class="max-w-2xl mx-auto px-4 py-20">
-    <div class="text-center mb-14">
+  <main class="max-w-3xl mx-auto px-4 py-16">
+    <div class="text-center mb-12">
       <h1 class="text-5xl font-light text-neutral-900 mb-4">
         Commune <span class="text-blue-600">Ouverte</span>
       </h1>
-      <p class="text-xl text-neutral-500">
-        Consultez les finances et le bilan &eacute;lectoral de votre commune avant les municipales 2026.
+      <p class="text-xl text-neutral-600 max-w-2xl mx-auto leading-relaxed">
+        Finances publiques et voix des citoyens : comprenez votre ville en 5 minutes avant de voter aux municipales 2026.
       </p>
     </div>
 
-    <!-- City grid -->
-    <div class="bg-white rounded-2xl p-6 shadow-[0_2px_12px_rgba(0,0,0,0.06)] border border-neutral-100">
-      <label class="block text-sm font-medium text-neutral-500 mb-4">
-        Choisissez une ville
-      </label>
-      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-        {index.map((city: any) => (
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {index.map((city: any) => {
+        const colorClass = badgeColors[city.badge_global] || badgeColors["MOYEN"];
+        const maireNom = city.maire_prenom && city.maire_nom
+          ? `${toTitleCase(city.maire_prenom)} ${toTitleCase(city.maire_nom)}`
+          : "";
+        const parti = partiShort(city.maire_parti);
+        return (
           <a
             href={`${baseUrl}commune/${city.code}`}
-            class="flex items-center gap-2 px-4 py-3 rounded-xl border border-neutral-100 hover:border-blue-400 hover:bg-blue-50 hover:shadow-md transition-all"
+            class="bg-white rounded-2xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.06)] border border-neutral-100 hover:border-blue-400 hover:shadow-lg transition-all block"
           >
-            <span class="text-sm font-medium text-neutral-800">{city.nom}</span>
-            <span class="text-xs text-neutral-400">({city.dep_code})</span>
+            <div class="flex items-start justify-between mb-2">
+              <div>
+                <div class="text-lg font-semibold text-neutral-900">{city.nom}</div>
+                <div class="text-sm text-neutral-500">{city.departement}</div>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-2xl font-mono font-bold text-neutral-900">{city.score_global}</span>
+                <span class={`text-xs font-semibold px-1.5 py-0.5 rounded border ${colorClass}`}>{city.badge_global}</span>
+              </div>
+            </div>
+            {maireNom && (
+              <div class="text-sm text-neutral-600 border-t border-neutral-100 pt-2 mt-2">
+                {maireNom}{parti ? ` (${parti})` : ""}
+              </div>
+            )}
           </a>
-        ))}
-      </div>
+        );
+      })}
     </div>
 
     <div class="text-center mt-10 text-sm text-neutral-400">

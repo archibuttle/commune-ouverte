@@ -71,7 +71,7 @@ const verdict = verdictMap[badge_global] || verdictMap["MOYEN"];
 ---
 {maire && (
   <div class="bg-white rounded-2xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.06)] border border-neutral-100">
-    <div class="text-xs font-medium text-neutral-500 uppercase tracking-wide mb-3">{title}</div>
+    <div class="text-sm font-medium text-neutral-500 uppercase tracking-wide mb-3">{title}</div>
 
     <div class="flex items-center gap-4">
       {maire.photo_url ? (
@@ -87,7 +87,7 @@ const verdict = verdictMap[badge_global] || verdictMap["MOYEN"];
         </div>
       )}
       <div>
-        <div class="text-lg font-semibold text-neutral-900">{fullName}</div>
+        <div class="text-xl font-semibold text-neutral-900">{fullName}</div>
         {maire.parti && (
           <div class="text-sm text-neutral-600 mt-0.5">{maire.parti}</div>
         )}
@@ -99,25 +99,25 @@ const verdict = verdictMap[badge_global] || verdictMap["MOYEN"];
 
     <div class="border-t border-neutral-100 mt-4 pt-4">
       <div class="flex items-center gap-2 mb-3">
-        <div class="text-xs font-medium text-neutral-500 uppercase tracking-wide">Bilan du mandat</div>
-        <span class={`text-[11px] font-semibold px-2 py-0.5 rounded-full ${verdict.color}`}>{verdict.text}</span>
+        <div class="text-sm font-medium text-neutral-500 uppercase tracking-wide">Bilan du mandat</div>
+        <span class={`text-xs font-semibold px-2 py-0.5 rounded-full ${verdict.color}`}>{verdict.text}</span>
       </div>
 
       <div class="space-y-1.5">
         {bons.length > 0 && bons.map((b) => (
-          <div class="flex items-center gap-2 text-sm">
+          <div class="flex items-center gap-2 text-base">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"></span>
             <span class="text-neutral-700"><span class="font-medium">Point fort</span> : {b}</span>
           </div>
         ))}
         {critiques.length > 0 && critiques.map((c) => (
-          <div class="flex items-center gap-2 text-sm">
+          <div class="flex items-center gap-2 text-base">
             <span class="w-1.5 h-1.5 rounded-full bg-red-500 shrink-0"></span>
             <span class="text-neutral-700"><span class="font-medium">Vigilance</span> : {c}</span>
           </div>
         ))}
         {bons.length === 0 && critiques.length === 0 && (
-          <p class="text-sm text-neutral-500">Aucun indicateur ne se d&eacute;marque nettement de la moyenne.</p>
+          <p class="text-base text-neutral-500">Aucun indicateur ne se d&eacute;marque nettement de la moyenne.</p>
         )}
       </div>
     </div>

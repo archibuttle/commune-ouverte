@@ -4,9 +4,8 @@ import ScoreBanner from '../../components/ScoreBanner.astro';
 import MayorCard from '../../components/MayorCard.astro';
 import KpiCard from '../../components/KpiCard.astro';
 import Takeaway from '../../components/Takeaway.astro';
-import SearchTrends from '../../components/SearchTrends.astro';
-import SocialSentiment from '../../components/SocialSentiment.astro';
-import EmergingSignals from '../../components/EmergingSignals.astro';
+import CitizenVoice from '../../components/CitizenVoice.astro';
+import CandidateQuestions from '../../components/CandidateQuestions.astro';
 import Footer from '../../components/Footer.astro';
 
 // Import all commune JSON files
@@ -43,6 +42,7 @@ const longTermeKeys = ['depenses_investissement', 'encours_dette', 'epargne_brut
       population={commune.population}
       score={commune.finances.score_global}
       badge={commune.finances.badge_global}
+      kpis={commune.finances.kpis}
     />
 
     <!-- Mayor + Verdict (merged) -->
@@ -54,24 +54,33 @@ const longTermeKeys = ['depenses_investissement', 'encours_dette', 'epargne_brut
       />
     </div>
 
+    <!-- Citizen Voice (Synthesio) -->
+    <div class="mt-4">
+      <CitizenVoice commune={commune.code} />
+    </div>
+
     <!-- Takeaway -->
     <div class="mt-4">
       <Takeaway
         kpis={commune.finances.kpis}
         badge_global={commune.finances.badge_global}
         nom={commune.nom}
+        commune={commune.code}
       />
     </div>
 
-    <!-- Tab bar -->
-    <div class="flex gap-0 mt-8 border-b border-neutral-200" id="tab-bar">
-      <button data-target="finances" class="tab-btn active">Finances</button>
-      <button data-target="social" class="tab-btn">Opinions en ligne</button>
+    <!-- Candidate Questions -->
+    <div class="mt-4">
+      <CandidateQuestions
+        kpis={commune.finances.kpis}
+        nom={commune.nom}
+        commune={commune.code}
+      />
     </div>
 
-    <!-- Tab: Finances -->
-    <div id="tab-finances" class="tab-panel pt-6">
-      <h3 class="text-sm font-medium text-neutral-500 uppercase tracking-wide mb-3">Budget au quotidien</h3>
+    <!-- KPI Details -->
+    <div class="mt-8">
+      <h3 class="text-base font-medium text-neutral-500 uppercase tracking-wide mb-3">Budget au quotidien</h3>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
         {quotidienKeys.map((key) => {
           const kpi = commune.finances.kpis[key];
@@ -90,7 +99,7 @@ const longTermeKeys = ['depenses_investissement', 'encours_dette', 'epargne_brut
         })}
       </div>
 
-      <h3 class="text-sm font-medium text-neutral-500 uppercase tracking-wide mb-3">Vision long terme</h3>
+      <h3 class="text-base font-medium text-neutral-500 uppercase tracking-wide mb-3">Vision long terme</h3>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {longTermeKeys.map((key) => {
           const kpi = commune.finances.kpis[key];
@@ -110,42 +119,6 @@ const longTermeKeys = ['depenses_investissement', 'encours_dette', 'epargne_brut
       </div>
     </div>
 
-    <!-- Tab: Opinions en ligne -->
-    <div id="tab-social" class="tab-panel pt-6 hidden">
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        <SearchTrends commune={commune.code} />
-        <SocialSentiment commune={commune.code} />
-        <EmergingSignals commune={commune.code} />
-      </div>
-    </div>
-
     <Footer />
   </main>
 </Layout>
-
-<script>
-  const tabBar = document.getElementById('tab-bar');
-  const panels = {
-    finances: document.getElementById('tab-finances'),
-    social: document.getElementById('tab-social'),
-  };
-
-  tabBar?.addEventListener('click', (e) => {
-    const btn = (e.target as HTMLElement).closest('[data-target]') as HTMLElement;
-    if (!btn) return;
-    const target = btn.dataset.target as keyof typeof panels;
-
-    // Update buttons
-    tabBar.querySelectorAll('.tab-btn').forEach((b) => b.classList.remove('active'));
-    btn.classList.add('active');
-
-    // Update panels
-    Object.entries(panels).forEach(([key, panel]) => {
-      if (key === target) {
-        panel?.classList.remove('hidden');
-      } else {
-        panel?.classList.add('hidden');
-      }
-    });
-  });
-</script>

@@ -1,13 +1,20 @@
 ---
+interface Kpi {
+  label: string;
+  badge: string;
+  delta_pct: number | null;
+}
+
 interface Props {
   nom: string;
   departement: string;
   population: number;
   score: number;
   badge: string;
+  kpis: Record<string, Kpi>;
 }
 
-const { nom, departement, population, score, badge } = Astro.props;
+const { nom, departement, population, score, badge, kpis } = Astro.props;
 
 const badgeColors: Record<string, string> = {
   "BON": "bg-emerald-50 text-emerald-900 border-emerald-500",
@@ -29,34 +36,68 @@ const colorClass = badgeColors[badge] || badgeColors["MOYEN"];
 const barColor = barColors[badge] || barColors["MOYEN"];
 const popFormatted = population.toLocaleString("fr-FR");
 
-// Score interpretation
+// Short labels for dynamic interpretation
+const shortLabels: Record<string, string> = {
+  "Encours de dette": "l'endettement ma\u00eetris\u00e9",
+  "D\u00e9penses d'investissement": "l'investissement public",
+  "Recettes de fonctionnement": "les recettes solides",
+  "D\u00e9penses de fonctionnement": "les d\u00e9penses ma\u00eetris\u00e9es",
+  "Frais de personnel": "la masse salariale contenue",
+  "\u00c9pargne brute": "la capacit\u00e9 d'\u00e9pargne",
+};
+
+const shortLabelsNeg: Record<string, string> = {
+  "Encours de dette": "un endettement \u00e9lev\u00e9",
+  "D\u00e9penses d'investissement": "un manque d'investissement",
+  "Recettes de fonctionnement": "des recettes insuffisantes",
+  "D\u00e9penses de fonctionnement": "des d\u00e9penses \u00e9lev\u00e9es",
+  "Frais de personnel": "une masse salariale lourde",
+  "\u00c9pargne brute": "une \u00e9pargne insuffisante",
+};
+
+// Find best and worst KPIs
+let bestLabel = "";
+let worstLabel = "";
+
+for (const [key, kpi] of Object.entries(kpis)) {
+  if (kpi.badge === "BON" && !bestLabel) {
+    bestLabel = shortLabels[kpi.label] || kpi.label;
+  }
+  if ((kpi.badge === "CRITIQUE" || kpi.badge === "FAIBLE") && !worstLabel) {
+    worstLabel = shortLabelsNeg[kpi.label] || kpi.label;
+  }
+}
+
+// Build dynamic comment
 let scoreComment = "";
-if (score >= 70) {
-  scoreComment = "Une gestion financi\u00e8re solide par rapport aux villes comparables.";
-} else if (score >= 40) {
-  scoreComment = "Une situation financi\u00e8re dans la moyenne, avec des points de vigilance.";
+if (bestLabel && worstLabel) {
+  scoreComment = `${nom} obtient ${score}/100, port\u00e9e par ${bestLabel} mais p\u00e9nalis\u00e9e par ${worstLabel}.`;
+} else if (bestLabel) {
+  scoreComment = `${nom} obtient ${score}/100, port\u00e9e par ${bestLabel}.`;
+} else if (worstLabel) {
+  scoreComment = `${nom} obtient ${score}/100, p\u00e9nalis\u00e9e par ${worstLabel}.`;
 } else {
-  scoreComment = "Des indicateurs financiers pr\u00e9occupants qui m\u00e9ritent attention.";
+  scoreComment = `${nom} obtient ${score}/100, dans la moyenne des villes comparables.`;
 }
 ---
 <div class="bg-white rounded-2xl p-6 shadow-[0_2px_12px_rgba(0,0,0,0.06)] border border-neutral-100">
   <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
     <div>
-      <h1 class="text-2xl font-bold text-neutral-900">{nom}</h1>
+      <h1 class="text-3xl font-bold text-neutral-900">{nom}</h1>
       <p class="text-neutral-500 mt-1">{departement} &middot; {popFormatted} habitants</p>
     </div>
     <div class="text-right">
       <div class="text-sm text-neutral-500 mb-1">Score financier</div>
       <div class="flex items-center gap-3 justify-end">
-        <span class="text-3xl font-mono font-bold text-neutral-900">{score}</span>
-        <span class={`text-xs font-semibold px-2 py-1 rounded border ${colorClass}`}>{badge}</span>
+        <span class="text-4xl font-mono font-bold text-neutral-900">{score}</span>
+        <span class={`text-sm font-semibold px-2 py-1 rounded border ${colorClass}`}>{badge}</span>
       </div>
       <div class="w-32 h-2 bg-neutral-200 rounded-full mt-2 ml-auto">
         <div class={`h-2 rounded-full ${barColor}`} style={`width: ${score}%`}></div>
       </div>
     </div>
   </div>
-  <p class="text-xs text-neutral-500 mt-3 border-t border-neutral-100 pt-3">
+  <p class="text-sm text-neutral-500 mt-3 border-t border-neutral-100 pt-3">
     {scoreComment} <span class="text-neutral-400">Score de 0 (critique) &agrave; 100 (excellent), compar&eacute; aux villes de taille similaire.</span>
   </p>
 </div>
