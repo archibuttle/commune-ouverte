@@ -76,7 +76,7 @@ let scoreComment = "";
 if (bestLabel && worstLabel) {
   scoreComment = `Port\u00e9e par ${bestLabel}, p\u00e9nalis\u00e9e par ${worstLabel}.`;
 } else if (bestLabel) {
-  scoreComment = `Port\u00e9e par ${bestLabel}.`;
+  scoreComment = `Port\u00e9e par ${bestLabel}, le reste des indicateurs est dans la moyenne.`;
 } else if (worstLabel) {
   scoreComment = `P\u00e9nalis\u00e9e par ${worstLabel}.`;
 } else {
@@ -111,11 +111,21 @@ const kpiLabels: Record<string, string> = {
 
 let topBon = "";
 let topVigilance = "";
+let topMoyen = "";
+let topMoyenDelta = -Infinity;
 for (const [key, kpi] of Object.entries(kpis)) {
   const shortLabel = kpiLabels[kpi.label] || kpi.label;
   if (kpi.badge === "BON" && !topBon) topBon = shortLabel;
   if ((kpi.badge === "CRITIQUE" || kpi.badge === "FAIBLE") && !topVigilance) topVigilance = shortLabel;
+  // Track worst MOYEN as fallback for vigilance
+  if (kpi.badge === "MOYEN" && kpi.delta_pct !== null && Math.abs(kpi.delta_pct) > topMoyenDelta) {
+    topMoyenDelta = Math.abs(kpi.delta_pct);
+    topMoyen = shortLabel;
+  }
 }
+// Fallback: if no CRITIQUE/FAIBLE, use worst MOYEN as "À surveiller"
+const isMoyenFallback = !topVigilance && !!topMoyen;
+if (isMoyenFallback) topVigilance = topMoyen;
 
 const verdictMap: Record<string, { text: string; color: string }> = {
   "BON": { text: "Bilan positif", color: "text-emerald-700 bg-emerald-50" },
@@ -136,7 +146,7 @@ const verdict = verdictMap[badge] || verdictMap["MOYEN"];
     <div class="text-right shrink-0">
       <div class="text-xs text-neutral-400 mb-0.5">Score financier</div>
       <div class="flex items-center gap-2 justify-end">
-        <span class="text-4xl font-mono font-bold text-neutral-900">{score}</span>
+        <span class="text-4xl font-mono font-bold text-neutral-900">{score}<span class="text-lg text-neutral-400 font-normal">/100</span></span>
         <span class={`text-sm font-semibold px-2 py-0.5 rounded border ${colorClass}`}>{badge}</span>
       </div>
       <div class="w-28 h-1.5 bg-neutral-200 rounded-full mt-1.5 ml-auto">
@@ -182,8 +192,8 @@ const verdict = verdictMap[badge] || verdictMap["MOYEN"];
           )}
           {topVigilance && (
             <div class="flex items-center gap-1.5 text-sm">
-              <span class="w-1.5 h-1.5 rounded-full bg-red-500 shrink-0"></span>
-              <span class="text-neutral-600">Vigilance : {topVigilance}</span>
+              <span class={`w-1.5 h-1.5 rounded-full shrink-0 ${isMoyenFallback ? 'bg-amber-500' : 'bg-red-500'}`}></span>
+              <span class="text-neutral-600">{isMoyenFallback ? 'À surveiller' : 'Vigilance'} : {topVigilance}</span>
             </div>
           )}
         </div>
@@ -193,6 +203,6 @@ const verdict = verdictMap[badge] || verdictMap["MOYEN"];
 
   <!-- Row 3: Score interpretation -->
   <p class="text-sm text-neutral-500 border-t border-neutral-100 pt-3">
-    {scoreComment} <span class="text-neutral-400">Score de 0 &agrave; 100, compar&eacute; aux villes de taille similaire.</span>
+    {scoreComment} <span class="text-neutral-400">Compar&eacute; aux villes de taille similaire.</span>
   </p>
 </div>
