@@ -42,7 +42,7 @@
         "unite": "€/hab",
         "badge": "CRITIQUE",
         "moyenne_strate": 1232.8,
-        "delta_pct": 8.6
+        "delta_pct": 10.8
       },
       "depenses_investissement": {
         "label": "Dépenses d'investissement",
@@ -69,7 +69,7 @@
         "unite": "€/hab",
         "badge": "MOYEN",
         "moyenne_strate": 506.9,
-        "delta_pct": 28.4
+        "delta_pct": 9.8
       },
       "recettes_fonctionnement": {
         "label": "Recettes de fonctionnement",
@@ -96,7 +96,7 @@
         "unite": "€/hab",
         "badge": "CORRECT",
         "moyenne_strate": 1613.5,
-        "delta_pct": 16.6
+        "delta_pct": 14.1
       },
       "depenses_fonctionnement": {
         "label": "Dépenses de fonctionnement",
@@ -123,7 +123,7 @@
         "unite": "€/hab",
         "badge": "FAIBLE",
         "moyenne_strate": 1400.4,
-        "delta_pct": 7.6
+        "delta_pct": 11.7
       },
       "frais_personnel": {
         "label": "Frais de personnel",
@@ -150,7 +150,7 @@
         "unite": "€/hab",
         "badge": "FAIBLE",
         "moyenne_strate": 798.9,
-        "delta_pct": 1.7
+        "delta_pct": 5.4
       },
       "epargne_brute": {
         "label": "Épargne brute",
@@ -177,7 +177,7 @@
         "unite": "€/hab",
         "badge": "MOYEN",
         "moyenne_strate": 213.0,
-        "delta_pct": 180.2
+        "delta_pct": 44.7
       }
     }
   },

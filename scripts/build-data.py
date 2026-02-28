@@ -313,17 +313,13 @@ def build_finances(city_code):
         annees = [int(r["exer"][:4]) for r in matching]
         series = [round(r["euros_par_habitant"], 1) if r["euros_par_habitant"] else 0 for r in matching]
 
-        # Delta: compare last year vs 2020 (start of mandate)
-        val_2020 = None
-        val_latest = series[-1] if series else None
-        for i, a in enumerate(annees):
-            if a == 2020:
-                val_2020 = series[i]
-                break
-
+        # Delta: average of first 2 years vs last 2 years (smooths COVID anomalies)
         delta_pct = None
-        if val_2020 and val_latest and val_2020 != 0:
-            delta_pct = round((val_latest - val_2020) / abs(val_2020) * 100, 1)
+        if len(series) >= 4:
+            avg_start = sum(series[:2]) / 2
+            avg_end = sum(series[-2:]) / 2
+            if avg_start != 0:
+                delta_pct = round((avg_end - avg_start) / abs(avg_start) * 100, 1)
 
         kpis[key] = {
             "label": AGREGAT_LABELS[key],
