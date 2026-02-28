@@ -7,6 +7,11 @@ interface Kpi {
 }
 
 interface Props {
+  nom: string;
+  departement: string;
+  population: number;
+  score: number;
+  badge: string;
   maire: {
     nom: string;
     prenom: string;
@@ -15,12 +20,70 @@ interface Props {
     photo_url?: string | null;
     parti?: string | null;
   } | null;
-  badge_global: string;
   kpis: Record<string, Kpi>;
 }
 
-const { maire, badge_global, kpis } = Astro.props;
+const { nom, departement, population, score, badge, maire, kpis } = Astro.props;
 
+// --- Score styling ---
+const badgeColors: Record<string, string> = {
+  "BON": "bg-emerald-50 text-emerald-900 border-emerald-500",
+  "CORRECT": "bg-teal-50 text-teal-900 border-teal-500",
+  "MOYEN": "bg-amber-50 text-amber-900 border-amber-500",
+  "FAIBLE": "bg-orange-50 text-orange-900 border-orange-500",
+  "CRITIQUE": "bg-red-50 text-red-900 border-red-500",
+};
+
+const barColors: Record<string, string> = {
+  "BON": "bg-emerald-500",
+  "CORRECT": "bg-teal-500",
+  "MOYEN": "bg-amber-500",
+  "FAIBLE": "bg-orange-500",
+  "CRITIQUE": "bg-red-500",
+};
+
+const colorClass = badgeColors[badge] || badgeColors["MOYEN"];
+const barColor = barColors[badge] || barColors["MOYEN"];
+const popFormatted = population.toLocaleString("fr-FR");
+
+// --- Dynamic score interpretation ---
+const shortLabels: Record<string, string> = {
+  "Encours de dette": "l'endettement ma\u00eetris\u00e9",
+  "D\u00e9penses d'investissement": "l'investissement public",
+  "Recettes de fonctionnement": "les recettes solides",
+  "D\u00e9penses de fonctionnement": "les d\u00e9penses ma\u00eetris\u00e9es",
+  "Frais de personnel": "la masse salariale contenue",
+  "\u00c9pargne brute": "la capacit\u00e9 d'\u00e9pargne",
+};
+
+const shortLabelsNeg: Record<string, string> = {
+  "Encours de dette": "un endettement \u00e9lev\u00e9",
+  "D\u00e9penses d'investissement": "un manque d'investissement",
+  "Recettes de fonctionnement": "des recettes insuffisantes",
+  "D\u00e9penses de fonctionnement": "des d\u00e9penses \u00e9lev\u00e9es",
+  "Frais de personnel": "une masse salariale lourde",
+  "\u00c9pargne brute": "une \u00e9pargne insuffisante",
+};
+
+let bestLabel = "";
+let worstLabel = "";
+for (const [key, kpi] of Object.entries(kpis)) {
+  if (kpi.badge === "BON" && !bestLabel) bestLabel = shortLabels[kpi.label] || kpi.label;
+  if ((kpi.badge === "CRITIQUE" || kpi.badge === "FAIBLE") && !worstLabel) worstLabel = shortLabelsNeg[kpi.label] || kpi.label;
+}
+
+let scoreComment = "";
+if (bestLabel && worstLabel) {
+  scoreComment = `Port\u00e9e par ${bestLabel}, p\u00e9nalis\u00e9e par ${worstLabel}.`;
+} else if (bestLabel) {
+  scoreComment = `Port\u00e9e par ${bestLabel}.`;
+} else if (worstLabel) {
+  scoreComment = `P\u00e9nalis\u00e9e par ${worstLabel}.`;
+} else {
+  scoreComment = "Dans la moyenne des villes comparables.";
+}
+
+// --- Mayor ---
 function formatDate(iso: string): string {
   const d = new Date(iso);
   return d.toLocaleDateString("fr-FR", { month: "long", year: "numeric" });
@@ -31,19 +94,12 @@ function toTitleCase(str: string): string {
 }
 
 const title = maire?.sexe === "F" ? "Maire sortante" : "Maire sortant";
-
-// Format name in title case
 const displayPrenom = maire ? toTitleCase(maire.prenom) : "";
 const displayNom = maire ? toTitleCase(maire.nom) : "";
 const fullName = `${displayPrenom} ${displayNom}`;
-
-// Initials fallback for photo
 const initials = maire ? `${maire.prenom[0]}${maire.nom[0]}` : "";
 
-// --- Verdict: categorize KPIs ---
-const critiques: string[] = [];
-const bons: string[] = [];
-
+// --- Verdict: 1 point fort + 1 vigilance max ---
 const kpiLabels: Record<string, string> = {
   "Encours de dette": "Endettement",
   "D\u00e9penses d'investissement": "Investissement",
@@ -53,73 +109,90 @@ const kpiLabels: Record<string, string> = {
   "\u00c9pargne brute": "\u00c9pargne",
 };
 
+let topBon = "";
+let topVigilance = "";
 for (const [key, kpi] of Object.entries(kpis)) {
   const shortLabel = kpiLabels[kpi.label] || kpi.label;
-  if (kpi.badge === "CRITIQUE") critiques.push(shortLabel);
-  if (kpi.badge === "BON") bons.push(shortLabel);
+  if (kpi.badge === "BON" && !topBon) topBon = shortLabel;
+  if ((kpi.badge === "CRITIQUE" || kpi.badge === "FAIBLE") && !topVigilance) topVigilance = shortLabel;
 }
 
 const verdictMap: Record<string, { text: string; color: string }> = {
-  "BON": { text: "Bilan financier positif", color: "text-emerald-700 bg-emerald-50" },
-  "CORRECT": { text: "Bilan financier correct", color: "text-teal-700 bg-teal-50" },
-  "MOYEN": { text: "Bilan financier mitig\u00e9", color: "text-amber-700 bg-amber-50" },
-  "FAIBLE": { text: "Bilan financier pr\u00e9occupant", color: "text-orange-700 bg-orange-50" },
-  "CRITIQUE": { text: "Bilan financier tr\u00e8s pr\u00e9occupant", color: "text-red-700 bg-red-50" },
+  "BON": { text: "Bilan positif", color: "text-emerald-700 bg-emerald-50" },
+  "CORRECT": { text: "Bilan correct", color: "text-teal-700 bg-teal-50" },
+  "MOYEN": { text: "Bilan mitig\u00e9", color: "text-amber-700 bg-amber-50" },
+  "FAIBLE": { text: "Bilan pr\u00e9occupant", color: "text-orange-700 bg-orange-50" },
+  "CRITIQUE": { text: "Bilan tr\u00e8s pr\u00e9occupant", color: "text-red-700 bg-red-50" },
 };
-
-const verdict = verdictMap[badge_global] || verdictMap["MOYEN"];
+const verdict = verdictMap[badge] || verdictMap["MOYEN"];
 ---
-{maire && (
-  <div class="bg-white rounded-2xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.06)] border border-neutral-100">
-    <div class="text-sm font-medium text-neutral-500 uppercase tracking-wide mb-3">{title}</div>
-
-    <div class="flex items-center gap-4">
-      {maire.photo_url ? (
-        <img
-          src={maire.photo_url}
-          alt={fullName}
-          class="w-16 h-16 rounded-full object-cover shrink-0"
-          loading="lazy"
-        />
-      ) : (
-        <div class="w-16 h-16 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-lg font-semibold shrink-0">
-          {initials}
-        </div>
-      )}
-      <div>
-        <div class="text-xl font-semibold text-neutral-900">{fullName}</div>
-        {maire.parti && (
-          <div class="text-sm text-neutral-600 mt-0.5">{maire.parti}</div>
-        )}
-        <div class="text-sm text-neutral-500 mt-0.5">
-          En fonction depuis {formatDate(maire.debut_mandat)}
-        </div>
-      </div>
+<div class="bg-white rounded-2xl p-6 shadow-[0_2px_12px_rgba(0,0,0,0.06)] border border-neutral-100">
+  <!-- Row 1: City name + Score -->
+  <div class="flex items-start justify-between gap-4 mb-4">
+    <div>
+      <h1 class="text-3xl font-bold text-neutral-900">{nom}</h1>
+      <p class="text-neutral-500 mt-0.5">{departement} &middot; {popFormatted} habitants</p>
     </div>
-
-    <div class="border-t border-neutral-100 mt-4 pt-4">
-      <div class="flex items-center gap-2 mb-3">
-        <div class="text-sm font-medium text-neutral-500 uppercase tracking-wide">Bilan du mandat</div>
-        <span class={`text-xs font-semibold px-2 py-0.5 rounded-full ${verdict.color}`}>{verdict.text}</span>
+    <div class="text-right shrink-0">
+      <div class="text-xs text-neutral-400 mb-0.5">Score financier</div>
+      <div class="flex items-center gap-2 justify-end">
+        <span class="text-4xl font-mono font-bold text-neutral-900">{score}</span>
+        <span class={`text-sm font-semibold px-2 py-0.5 rounded border ${colorClass}`}>{badge}</span>
       </div>
-
-      <div class="space-y-1.5">
-        {bons.length > 0 && bons.map((b) => (
-          <div class="flex items-center gap-2 text-base">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"></span>
-            <span class="text-neutral-700"><span class="font-medium">Point fort</span> : {b}</span>
-          </div>
-        ))}
-        {critiques.length > 0 && critiques.map((c) => (
-          <div class="flex items-center gap-2 text-base">
-            <span class="w-1.5 h-1.5 rounded-full bg-red-500 shrink-0"></span>
-            <span class="text-neutral-700"><span class="font-medium">Vigilance</span> : {c}</span>
-          </div>
-        ))}
-        {bons.length === 0 && critiques.length === 0 && (
-          <p class="text-base text-neutral-500">Aucun indicateur ne se d&eacute;marque nettement de la moyenne.</p>
-        )}
+      <div class="w-28 h-1.5 bg-neutral-200 rounded-full mt-1.5 ml-auto">
+        <div class={`h-1.5 rounded-full ${barColor}`} style={`width: ${score}%`}></div>
       </div>
     </div>
   </div>
-)}
+
+  <!-- Row 2: Mayor + Bilan (side by side) -->
+  {maire && (
+    <div class="flex flex-col sm:flex-row gap-4 border-t border-neutral-100 pt-4 mb-4">
+      <!-- Mayor info -->
+      <div class="flex items-center gap-3 sm:flex-1 min-w-0">
+        {maire.photo_url ? (
+          <img
+            src={maire.photo_url}
+            alt={fullName}
+            class="w-12 h-12 rounded-full object-cover shrink-0"
+            loading="lazy"
+          />
+        ) : (
+          <div class="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-sm font-semibold shrink-0">
+            {initials}
+          </div>
+        )}
+        <div class="min-w-0">
+          <div class="text-base font-semibold text-neutral-900 truncate">{fullName}</div>
+          <div class="text-sm text-neutral-500">
+            {title}{maire.parti ? ` \u00b7 ${maire.parti}` : ""} &middot; depuis {formatDate(maire.debut_mandat)}
+          </div>
+        </div>
+      </div>
+
+      <!-- Bilan summary -->
+      <div class="sm:flex-1 flex flex-col justify-center">
+        <span class={`text-xs font-semibold px-2 py-0.5 rounded-full w-fit mb-1.5 ${verdict.color}`}>{verdict.text}</span>
+        <div class="space-y-1">
+          {topBon && (
+            <div class="flex items-center gap-1.5 text-sm">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"></span>
+              <span class="text-neutral-600">Point fort : {topBon}</span>
+            </div>
+          )}
+          {topVigilance && (
+            <div class="flex items-center gap-1.5 text-sm">
+              <span class="w-1.5 h-1.5 rounded-full bg-red-500 shrink-0"></span>
+              <span class="text-neutral-600">Vigilance : {topVigilance}</span>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  )}
+
+  <!-- Row 3: Score interpretation -->
+  <p class="text-sm text-neutral-500 border-t border-neutral-100 pt-3">
+    {scoreComment} <span class="text-neutral-400">Score de 0 &agrave; 100, compar&eacute; aux villes de taille similaire.</span>
+  </p>
+</div>

@@ -71,12 +71,12 @@ if (finQuestions.length >= 2) {
 }
 ---
 {questions.length > 0 && (
-  <div class="bg-neutral-900 rounded-2xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.12)]">
-    <div class="text-sm font-medium text-neutral-400 uppercase tracking-wide mb-4">Questions &agrave; poser aux candidats 2026</div>
-    <ol class="space-y-3">
+  <div>
+    <div class="text-sm font-medium text-neutral-500 uppercase tracking-wide mb-2">Questions aux candidats</div>
+    <ol class="space-y-2">
       {questions.map((q, i) => (
-        <li class="flex gap-3 text-base text-neutral-200 leading-relaxed">
-          <span class="text-blue-400 font-mono font-bold shrink-0">{i + 1}.</span>
+        <li class="flex gap-2 text-sm text-neutral-700 leading-relaxed">
+          <span class="text-blue-500 font-mono font-bold shrink-0">{i + 1}.</span>
           <span>{q}</span>
         </li>
       ))}

@@ -1,6 +1,5 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import ScoreBanner from '../../components/ScoreBanner.astro';
 import MayorCard from '../../components/MayorCard.astro';
 import KpiCard from '../../components/KpiCard.astro';
 import Takeaway from '../../components/Takeaway.astro';
@@ -35,47 +34,38 @@ const longTermeKeys = ['depenses_investissement', 'encours_dette', 'epargne_brut
       <a href={baseUrl} class="text-sm text-blue-600 hover:text-blue-800">&larr; Toutes les villes</a>
     </nav>
 
-    <!-- Score Banner -->
-    <ScoreBanner
+    <!-- Hero: City + Score + Mayor + Bilan (one card) -->
+    <MayorCard
       nom={commune.nom}
       departement={commune.departement}
       population={commune.population}
       score={commune.finances.score_global}
       badge={commune.finances.badge_global}
+      maire={commune.maire}
       kpis={commune.finances.kpis}
     />
 
-    <!-- Mayor + Verdict (merged) -->
-    <div class="mt-4">
-      <MayorCard
-        maire={commune.maire}
-        badge_global={commune.finances.badge_global}
-        kpis={commune.finances.kpis}
-      />
-    </div>
-
-    <!-- Citizen Voice (Synthesio) -->
-    <div class="mt-4">
+    <!-- Two columns: Citizen Voice | Insights -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
+      <!-- Left: Citizen Voice -->
       <CitizenVoice commune={commune.code} />
-    </div>
 
-    <!-- Takeaway -->
-    <div class="mt-4">
-      <Takeaway
-        kpis={commune.finances.kpis}
-        badge_global={commune.finances.badge_global}
-        nom={commune.nom}
-        commune={commune.code}
-      />
-    </div>
-
-    <!-- Candidate Questions -->
-    <div class="mt-4">
-      <CandidateQuestions
-        kpis={commune.finances.kpis}
-        nom={commune.nom}
-        commune={commune.code}
-      />
+      <!-- Right: Takeaway + Questions in one card -->
+      <div class="bg-white rounded-2xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.06)] border border-neutral-100 flex flex-col gap-4">
+        <Takeaway
+          kpis={commune.finances.kpis}
+          badge_global={commune.finances.badge_global}
+          nom={commune.nom}
+          commune={commune.code}
+        />
+        <div class="border-t border-neutral-100 pt-4">
+          <CandidateQuestions
+            kpis={commune.finances.kpis}
+            nom={commune.nom}
+            commune={commune.code}
+          />
+        </div>
+      </div>
     </div>
 
     <!-- KPI Details -->

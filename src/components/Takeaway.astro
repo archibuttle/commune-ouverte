@@ -151,12 +151,12 @@ if (worstDomain || topDissatisfaction) {
 }
 ---
 {takeaways.length > 0 && (
-  <div class="bg-neutral-900 rounded-2xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.12)]">
-    <div class="text-sm font-medium text-neutral-400 uppercase tracking-wide mb-3">&Agrave; retenir avant de voter</div>
+  <div>
+    <div class="text-sm font-medium text-neutral-500 uppercase tracking-wide mb-2">&Agrave; retenir</div>
     <ul class="space-y-2">
       {takeaways.map((t) => (
-        <li class="flex gap-2 text-base text-neutral-200 leading-relaxed">
-          <span class="text-blue-400 shrink-0 mt-0.5">&bull;</span>
+        <li class="flex gap-2 text-sm text-neutral-700 leading-relaxed">
+          <span class="text-blue-500 shrink-0 mt-0.5">&bull;</span>
           <span>{t}</span>
         </li>
       ))}
