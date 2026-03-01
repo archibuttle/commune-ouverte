@@ -268,5 +268,66 @@
         }
       ]
     }
+  },
+  "candidats_2026": {
+    "listes": [
+      {
+        "tete": "Esteban NADAL",
+        "nuance": "LEXG",
+        "nom_liste": "NPA Révolutionnaires - Bordeaux Ouvrière et Révolutionnaire"
+      },
+      {
+        "tete": "Thomas CAZENAVE",
+        "nuance": "LUC",
+        "nom_liste": "Faire Gagner Bordeaux"
+      },
+      {
+        "tete": "Petra BERNUS",
+        "nuance": "LEXG",
+        "nom_liste": "ARRACHER BORDEAUX AUX RICHES ET AUX SPÉCULATEURS"
+      },
+      {
+        "tete": "Pierre HURMIC",
+        "nuance": "LUG",
+        "nom_liste": "BORDEAUX EN CONFIANCE"
+      },
+      {
+        "tete": "Nordine RAYMOND",
+        "nuance": "LFI",
+        "nom_liste": "FAIRE MIEUX POUR BORDEAUX"
+      },
+      {
+        "tete": "Virginie BONTOUX TOURNAY",
+        "nuance": "LREC",
+        "nom_liste": "A LA RECONQUÊTE DE BORDEAUX"
+      },
+      {
+        "tete": "Philippe DESSERTINE",
+        "nuance": "LDVC",
+        "nom_liste": "PHILIPPE DESSERTINE- L'OPTIMISME EST UNE FORCE"
+      },
+      {
+        "tete": "Fanny QUANDALLE",
+        "nuance": "LEXG",
+        "nom_liste": "Lutte ouvrière - le camp des travailleurs"
+      },
+      {
+        "tete": "Julie RECHAGNEUX",
+        "nuance": "LRN",
+        "nom_liste": "RASSEMBLEMENT NATIONAL POUR BORDEAUX"
+      },
+      {
+        "tete": "Medhi SABOULARD",
+        "nuance": "LDVG",
+        "nom_liste": "UNION DE LA GAUCHE"
+      },
+      {
+        "tete": "Philippe POUTOU",
+        "nuance": "LEXG",
+        "nom_liste": "ROUGE BORDEAUX ANTICAPITALISTE"
+      }
+    ],
+    "source": "Ministère de l'intérieur",
+    "date_publication": "2026-02-28"
   }
 }

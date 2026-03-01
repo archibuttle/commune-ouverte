@@ -75,6 +75,37 @@ ELECTIONS_T2_URL = "https://static.data.gouv.fr/resources/municipales-2020-resul
 
 WIKIDATA_SPARQL_URL = "https://query.wikidata.org/sparql"
 
+# 2026 T1 candidate lists (data.gouv.fr)
+CANDIDATS_2026_URL = "https://www.data.gouv.fr/fr/datasets/r/b929c2a4-18ec-4e8b-bc37-2ff346a867cd"
+CANDIDATS_2026_PLM_URL = "https://www.data.gouv.fr/fr/datasets/r/d1709cba-f626-43a1-9c56-bc873c51fadc"
+
+# PLM cities elect by arrondissement/sector. The CSV has local heads of list, not mayoral candidates.
+# We hardcode the known mayoral candidates from official declarations and press.
+PLM_CANDIDATES = {
+    "75056": [
+        {"tete": "Emmanuel GRÉGOIRE", "nuance": "LUG", "nom_liste": "La gauche unie, écologiste et sociale"},
+        {"tete": "Rachida DATI", "nuance": "LUD", "nom_liste": "Changer Paris"},
+        {"tete": "Sophia CHIKIROU", "nuance": "LFI", "nom_liste": "Le Nouveau Paris Populaire et Citoyen"},
+        {"tete": "Pierre-Yves BOURNAZEL", "nuance": "LUC", "nom_liste": "Paris avec vous"},
+        {"tete": "Sébastien BONNET", "nuance": "LUXD", "nom_liste": "Reconquête Paris"},
+        {"tete": "Aminata NIAKATÉ", "nuance": "LEXD", "nom_liste": "SKI - Pour une Ville Humaine"},
+    ],
+    "69123": [
+        {"tete": "Grégory DOUCET", "nuance": "LUG", "nom_liste": "Lyon en mieux"},
+        {"tete": "Jean-Michel AULAS", "nuance": "LDVC", "nom_liste": "Lyon, la métamorphose"},
+        {"tete": "Fabien MUSIC", "nuance": "LFI", "nom_liste": "Lyon insoumise"},
+        {"tete": "Pierre OLIVER", "nuance": "LDVD", "nom_liste": "Pour Lyon"},
+        {"tete": "Jeanne BARSEGHIAN", "nuance": "LUXD", "nom_liste": "Lyon d'abord"},
+    ],
+    "13055": [
+        {"tete": "Benoît PAYAN", "nuance": "LUG", "nom_liste": "Pour Marseille"},
+        {"tete": "Franck ALLISIO", "nuance": "LRN", "nom_liste": "Rassemblement National pour Marseille"},
+        {"tete": "Sébastien DELOGU", "nuance": "LFI", "nom_liste": "Marseille fière et populaire"},
+        {"tete": "Bruno GILLES", "nuance": "LDVD", "nom_liste": "Marseille avant tout"},
+        {"tete": "Nora PREZIOSI", "nuance": "LDVC", "nom_liste": "Marseille ensemble"},
+    ],
+}
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RAW_DIR = os.path.join(BASE_DIR, "raw")
 DATA_DIR = os.path.join(BASE_DIR, "src", "data", "communes")
@@ -437,6 +468,64 @@ def parse_elections(text, city_codes):
     return results
 
 
+def fetch_candidates_2026(city_codes):
+    """Fetch 2026 T1 candidate lists from data.gouv.fr CSV.
+    For PLM cities (Paris, Lyon, Marseille), use hardcoded mayoral candidates.
+    For other cities, parse the official CSV."""
+    plm_codes = set(PLM_CANDIDATES.keys())
+    non_plm_codes = city_codes - plm_codes
+    results = {}
+
+    # PLM: use hardcoded data
+    for code in plm_codes:
+        if code in city_codes:
+            results[code] = {
+                "listes": PLM_CANDIDATES[code],
+                "source": "Ministère de l'intérieur",
+                "date_publication": "2026-02-28",
+            }
+
+    # Non-PLM: download and parse CSV
+    if non_plm_codes:
+        raw_path = os.path.join(RAW_DIR, "candidats_2026_t1.csv")
+        if not os.path.exists(raw_path):
+            print("  Downloading candidats 2026 T1 CSV (138 MB)...")
+            urllib.request.urlretrieve(CANDIDATS_2026_URL, raw_path)
+            print("  Download complete.")
+        else:
+            print("  Using cached candidats_2026_t1.csv")
+
+        # Parse CSV: extract heads of list for our cities
+        city_listes = {code: [] for code in non_plm_codes}
+        with open(raw_path, encoding="utf-8") as f:
+            reader = csv.DictReader(f, delimiter=";")
+            for row in reader:
+                circ_code = row.get("Code circonscription", "")
+                if circ_code not in non_plm_codes:
+                    continue
+                if row.get("Tête de liste") != "OUI":
+                    continue
+                nom = row.get("Nom sur le bulletin de vote", "")
+                prenom = row.get("Prénom sur le bulletin de vote", "")
+                nuance = row.get("Code nuance de liste", "")
+                liste = row.get("Libellé de la liste", "")
+                city_listes[circ_code].append({
+                    "tete": f"{prenom} {nom}".strip(),
+                    "nuance": nuance,
+                    "nom_liste": liste,
+                })
+
+        for code, listes in city_listes.items():
+            if listes:
+                results[code] = {
+                    "listes": listes,
+                    "source": "Ministère de l'intérieur",
+                    "date_publication": "2026-02-28",
+                }
+
+    return results
+
+
 def main():
     os.makedirs(RAW_DIR, exist_ok=True)
     os.makedirs(DATA_DIR, exist_ok=True)
@@ -545,8 +634,14 @@ def main():
         print(f"    -> {', '.join(status)}")
         time.sleep(1)  # Be polite to Wikidata SPARQL endpoint
 
-    # --- Step 6: Assemble JSON per city ---
-    print("\n=== Step 6: Assembling JSON files ===")
+    # --- Step 6: Fetch 2026 T1 candidates ---
+    print("\n=== Step 6: Fetching 2026 T1 candidates ===")
+    candidates_2026 = fetch_candidates_2026(city_codes)
+    for code, data in candidates_2026.items():
+        print(f"  {city_map[code]['nom']}: {len(data['listes'])} listes")
+
+    # --- Step 7: Assemble JSON per city ---
+    print("\n=== Step 7: Assembling JSON files ===")
     index = []
 
     for city in CITIES:
@@ -577,6 +672,7 @@ def main():
                 "t1": elections_t1.get(code),
                 "t2": elections_t2.get(code),
             },
+            "candidats_2026": candidates_2026.get(code),
         }
 
         # Write JSON

@@ -184,5 +184,36 @@
   "elections": {
     "t1": null,
     "t2": null
+  },
+  "candidats_2026": {
+    "listes": [
+      {
+        "tete": "Grégory DOUCET",
+        "nuance": "LUG",
+        "nom_liste": "Lyon en mieux"
+      },
+      {
+        "tete": "Jean-Michel AULAS",
+        "nuance": "LDVC",
+        "nom_liste": "Lyon, la métamorphose"
+      },
+      {
+        "tete": "Fabien MUSIC",
+        "nuance": "LFI",
+        "nom_liste": "Lyon insoumise"
+      },
+      {
+        "tete": "Pierre OLIVER",
+        "nuance": "LDVD",
+        "nom_liste": "Pour Lyon"
+      },
+      {
+        "tete": "Jeanne BARSEGHIAN",
+        "nuance": "LUXD",
+        "nom_liste": "Lyon d'abord"
+      }
+    ],
+    "source": "Ministère de l'intérieur",
+    "date_publication": "2026-02-28"
   }
 }

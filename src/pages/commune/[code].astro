@@ -5,6 +5,7 @@ import KpiCard from '../../components/KpiCard.astro';
 import Takeaway from '../../components/Takeaway.astro';
 import CitizenVoice from '../../components/CitizenVoice.astro';
 import CandidateQuestions from '../../components/CandidateQuestions.astro';
+import Candidates2026 from '../../components/Candidates2026.astro';
 import Footer from '../../components/Footer.astro';
 
 // Import all commune JSON files
@@ -67,6 +68,13 @@ const longTermeKeys = ['depenses_investissement', 'encours_dette', 'epargne_brut
         </div>
       </div>
     </div>
+
+    <!-- Candidates 2026 -->
+    {commune.candidats_2026 && commune.candidats_2026.listes && commune.candidats_2026.listes.length > 0 && (
+      <div class="mt-4">
+        <Candidates2026 candidats={commune.candidats_2026} />
+      </div>
+    )}
 
     <!-- KPI Details -->
     <div class="mt-8">

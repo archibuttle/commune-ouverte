@@ -268,5 +268,51 @@
         }
       ]
     }
+  },
+  "candidats_2026": {
+    "listes": [
+      {
+        "tete": "Alexandre GAUVIN",
+        "nuance": "LEXG",
+        "nom_liste": "NPA -Révolutionnaires! Nantes ouvrière et Révolutionnaire"
+      },
+      {
+        "tete": "Mounir BELHAMITI",
+        "nuance": "LDVC",
+        "nom_liste": "NANTES MERITE MIEUX"
+      },
+      {
+        "tete": "Nicolas BAZILLE",
+        "nuance": "LEXG",
+        "nom_liste": "Lutte ouvrière - Le camp des travailleurs"
+      },
+      {
+        "tete": "Margot MEDKOUR",
+        "nuance": "LDVG",
+        "nom_liste": "Nantes Populaire"
+      },
+      {
+        "tete": "Jean-Claude HULOT",
+        "nuance": "LRN",
+        "nom_liste": "Pour une Nantes Sûre"
+      },
+      {
+        "tete": "Johanna ROLLAND",
+        "nuance": "LUG",
+        "nom_liste": "La gauche unie pour Nantes"
+      },
+      {
+        "tete": "Foulques CHOMBART DE LAUWE",
+        "nuance": "LDVD",
+        "nom_liste": "VOTRE NOUVEAU SOUFFLE POUR NANTES"
+      },
+      {
+        "tete": "William AUCANT",
+        "nuance": "LFI",
+        "nom_liste": "Nouvelle Nantes"
+      }
+    ],
+    "source": "Ministère de l'intérieur",
+    "date_publication": "2026-02-28"
   }
 }

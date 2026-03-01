@@ -298,5 +298,76 @@
         }
       ]
     }
+  },
+  "candidats_2026": {
+    "listes": [
+      {
+        "tete": "Michaël DELAFOSSE",
+        "nuance": "LUG",
+        "nom_liste": "DEMAIN MONTPELLIER"
+      },
+      {
+        "tete": "France JAMET",
+        "nuance": "LRN",
+        "nom_liste": "LIBÉRER MONTPELLIER !"
+      },
+      {
+        "tete": "Isabelle PERREIN",
+        "nuance": "LDVD",
+        "nom_liste": "AIMER MONTPELLIER"
+      },
+      {
+        "tete": "Morgane LACHIVER",
+        "nuance": "LEXG",
+        "nom_liste": "LUTTE OUVRIÈRE - LE CAMP DES TRAVAILLEURS"
+      },
+      {
+        "tete": "Kadija ZBAIRI",
+        "nuance": "LDIV",
+        "nom_liste": "LA MUNICIPALISTE"
+      },
+      {
+        "tete": "Mohed ALTRAD",
+        "nuance": "LDVC",
+        "nom_liste": "MONTPELLIER NOTRE FIERTÉ"
+      },
+      {
+        "tete": "Nathalie OZIOL",
+        "nuance": "LFI",
+        "nom_liste": "FAIRE MIEUX POUR MONTPELLIER"
+      },
+      {
+        "tete": "Jean-Louis ROUMEGAS",
+        "nuance": "LVEC",
+        "nom_liste": "LE PRINTEMPS MONTPELLIERAIN"
+      },
+      {
+        "tete": "Max MULLER",
+        "nuance": "LEXG",
+        "nom_liste": "RÉVOLUTION PERMANENTE - MAX MULLER, LA VOIX DES TRAVAILLEURS, DE LA JEUNESSE ET DES QUARTIERS POPULAIRES"
+      },
+      {
+        "tete": "Rémi GAILLARD",
+        "nuance": "LDIV",
+        "nom_liste": "YES WE CLOWN"
+      },
+      {
+        "tete": "Sylvie TROUSSELIER",
+        "nuance": "LEXG",
+        "nom_liste": "L'argent pour les travailleurs et les services publics de la commune, pas pour la guerre !"
+      },
+      {
+        "tete": "Thierry TSAGALOS",
+        "nuance": "LDVD",
+        "nom_liste": "UNION MONTPELLIERAINE"
+      },
+      {
+        "tete": "Philippe SAUREL",
+        "nuance": "LDVG",
+        "nom_liste": "Montpellier Citoyenne"
+      }
+    ],
+    "source": "Ministère de l'intérieur",
+    "date_publication": "2026-02-28"
   }
 }

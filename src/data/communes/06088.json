@@ -262,5 +262,46 @@
         }
       ]
     }
+  },
+  "candidats_2026": {
+    "listes": [
+      {
+        "tete": "Mireille DAMIANO",
+        "nuance": "LFI",
+        "nom_liste": "NICE FRONT POPULAIRE"
+      },
+      {
+        "tete": "Céline FORJONNEL",
+        "nuance": "LDIV",
+        "nom_liste": "NICE DEMOCRATIE DIRECTE"
+      },
+      {
+        "tete": "Cedric VELLA",
+        "nuance": "LREC",
+        "nom_liste": "A LA RECONQUETE DE NICE"
+      },
+      {
+        "tete": "Estelle JAQUET",
+        "nuance": "LEXG",
+        "nom_liste": "Lutte ouvrière - Le camp des travailleurs"
+      },
+      {
+        "tete": "Christian ESTROSI",
+        "nuance": "LUD",
+        "nom_liste": "Tous pour Nice"
+      },
+      {
+        "tete": "Juliette CHESNEL-LE ROUX",
+        "nuance": "LUG",
+        "nom_liste": "UNIS POUR NICE"
+      },
+      {
+        "tete": "Eric CIOTTI",
+        "nuance": "LUXD",
+        "nom_liste": "LE MEILLEUR EST A VENIR AVEC ERIC CIOTTI"
+      }
+    ],
+    "source": "Ministère de l'intérieur",
+    "date_publication": "2026-02-28"
   }
 }

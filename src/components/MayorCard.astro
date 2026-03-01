@@ -202,7 +202,25 @@ const verdict = verdictMap[badge] || verdictMap["MOYEN"];
   )}
 
   <!-- Row 3: Score interpretation -->
-  <p class="text-sm text-neutral-500 border-t border-neutral-100 pt-3">
-    {scoreComment} <span class="text-neutral-400">Compar&eacute; aux villes de taille similaire.</span>
-  </p>
+  <div class="border-t border-neutral-100 pt-3">
+    <p class="text-sm text-neutral-500">
+      {scoreComment} <span class="text-neutral-400">Compar&eacute; aux villes de taille similaire.</span>
+    </p>
+    <details class="mt-2">
+      <summary class="text-sm text-blue-600 hover:text-blue-800 cursor-pointer">Comment est calcul&eacute; ce score ?</summary>
+      <div class="mt-2 text-sm text-neutral-500 space-y-2">
+        <p>Le score financier compare 6 indicateurs cl&eacute;s de la commune aux moyennes des villes de taille similaire (m&ecirc;me strate d&eacute;mographique) :</p>
+        <ul class="list-disc list-inside space-y-0.5 text-neutral-500">
+          <li>Encours de dette (25%)</li>
+          <li>D&eacute;penses d'investissement (20%)</li>
+          <li>&Eacute;pargne brute (20%)</li>
+          <li>Frais de personnel (15%)</li>
+          <li>D&eacute;penses de fonctionnement (10%)</li>
+          <li>Recettes de fonctionnement (10%)</li>
+        </ul>
+        <p>Chaque indicateur est not&eacute; de 0 &agrave; 100 selon l'&eacute;cart &agrave; la moyenne, puis pond&eacute;r&eacute; pour obtenir le score global.</p>
+        <p class="text-neutral-400">Source : donn&eacute;es <a href="https://data.ofgl.fr" class="underline hover:text-blue-600" target="_blank" rel="noopener">OFGL</a>, 2017-2024.</p>
+      </div>
+    </details>
+  </div>
 </div>

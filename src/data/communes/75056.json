@@ -184,5 +184,41 @@
   "elections": {
     "t1": null,
     "t2": null
+  },
+  "candidats_2026": {
+    "listes": [
+      {
+        "tete": "Emmanuel GRÉGOIRE",
+        "nuance": "LUG",
+        "nom_liste": "La gauche unie, écologiste et sociale"
+      },
+      {
+        "tete": "Rachida DATI",
+        "nuance": "LUD",
+        "nom_liste": "Changer Paris"
+      },
+      {
+        "tete": "Sophia CHIKIROU",
+        "nuance": "LFI",
+        "nom_liste": "Le Nouveau Paris Populaire et Citoyen"
+      },
+      {
+        "tete": "Pierre-Yves BOURNAZEL",
+        "nuance": "LUC",
+        "nom_liste": "Paris avec vous"
+      },
+      {
+        "tete": "Sébastien BONNET",
+        "nuance": "LUXD",
+        "nom_liste": "Reconquête Paris"
+      },
+      {
+        "tete": "Aminata NIAKATÉ",
+        "nuance": "LEXD",
+        "nom_liste": "SKI - Pour une Ville Humaine"
+      }
+    ],
+    "source": "Ministère de l'intérieur",
+    "date_publication": "2026-02-28"
   }
 }

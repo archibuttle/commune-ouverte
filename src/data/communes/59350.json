@@ -274,5 +274,56 @@
         }
       ]
     }
+  },
+  "candidats_2026": {
+    "listes": [
+      {
+        "tete": "Arnaud DESLANDES",
+        "nuance": "LUG",
+        "nom_liste": "TOUT POUR LILLE"
+      },
+      {
+        "tete": "Violette SPILLEBOUT",
+        "nuance": "LUC",
+        "nom_liste": "FAIRE RESPIRER LILLE"
+      },
+      {
+        "tete": "Louis DELEMER",
+        "nuance": "LLR",
+        "nom_liste": "LILLE AU COEUR AVEC LOUIS DELEMER"
+      },
+      {
+        "tete": "Stéphane BALY",
+        "nuance": "LVEC",
+        "nom_liste": "Lille Demain avec Stéphane Baly"
+      },
+      {
+        "tete": "Damien SCALI",
+        "nuance": "LEXG",
+        "nom_liste": "NPA-Révolutionnaires: Lille Ouvrière et Révolutionnaire"
+      },
+      {
+        "tete": "Pierre MADELAIN",
+        "nuance": "LEXG",
+        "nom_liste": "Lutte ouvrière - Le camp des travailleurs"
+      },
+      {
+        "tete": "Matthieu VALET",
+        "nuance": "LRN",
+        "nom_liste": "UNE AUTRE LILLE"
+      },
+      {
+        "tete": "Béryl BENYOUCEF",
+        "nuance": "LEXG",
+        "nom_liste": "Contre leur économie de guerre - Lille pour les travailleurs"
+      },
+      {
+        "tete": "Lahouaria ADDOUCHE",
+        "nuance": "LFI",
+        "nom_liste": "LILLE INSOUMISE, ÉCOLOGISTE ET POPULAIRE"
+      }
+    ],
+    "source": "Ministère de l'intérieur",
+    "date_publication": "2026-02-28"
   }
 }

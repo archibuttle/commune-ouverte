@@ -1,0 +1,96 @@
+---
+interface Liste {
+  tete: string;
+  nuance: string;
+  nom_liste: string;
+}
+
+interface Props {
+  candidats: {
+    listes: Liste[];
+    source: string;
+    date_publication: string;
+  };
+}
+
+const { candidats } = Astro.props;
+
+// Nuance color mapping
+const nuanceColors: Record<string, string> = {
+  // Gauche
+  "LUG": "bg-rose-50 text-rose-700",
+  "LDVG": "bg-rose-50 text-rose-700",
+  "LSOC": "bg-rose-50 text-rose-700",
+  "LFI": "bg-rose-50 text-rose-700",
+  // Ecologiste
+  "LECO": "bg-emerald-50 text-emerald-700",
+  "LVEC": "bg-emerald-50 text-emerald-700",
+  // Centre
+  "LUC": "bg-amber-50 text-amber-700",
+  "LREM": "bg-amber-50 text-amber-700",
+  "LHORI": "bg-amber-50 text-amber-700",
+  "LMDM": "bg-amber-50 text-amber-700",
+  "LDVC": "bg-amber-50 text-amber-700",
+  // Droite
+  "LUD": "bg-blue-50 text-blue-700",
+  "LDVD": "bg-blue-50 text-blue-700",
+  "LLR": "bg-blue-50 text-blue-700",
+  // Extreme droite
+  "LRN": "bg-neutral-200 text-neutral-700",
+  "LUXD": "bg-neutral-200 text-neutral-700",
+  "LREC": "bg-neutral-200 text-neutral-700",
+  "LEXD": "bg-neutral-200 text-neutral-700",
+  // Extreme gauche
+  "LEXG": "bg-red-50 text-red-700",
+};
+
+const defaultColor = "bg-neutral-100 text-neutral-600";
+
+function toTitleCase(str: string): string {
+  return str.toLowerCase().replace(/(?:^|\s|-)\S/g, (c) => c.toUpperCase());
+}
+
+// Sort: nuance order (left to right political spectrum), then alphabetical
+const nuanceOrder: Record<string, number> = {
+  "LEXG": 0, "LFI": 1, "LUG": 2, "LDVG": 3, "LSOC": 3,
+  "LECO": 4, "LVEC": 4,
+  "LUC": 5, "LREM": 5, "LHORI": 5, "LMDM": 5, "LDVC": 5,
+  "LUD": 6, "LDVD": 6, "LLR": 6,
+  "LRN": 7, "LUXD": 7, "LREC": 7, "LEXD": 7,
+  "LDIV": 8,
+};
+
+const sortedListes = [...candidats.listes].sort((a, b) => {
+  const oa = nuanceOrder[a.nuance] ?? 8;
+  const ob = nuanceOrder[b.nuance] ?? 8;
+  if (oa !== ob) return oa - ob;
+  return a.tete.localeCompare(b.tete, "fr");
+});
+---
+<div class="bg-white rounded-2xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.06)] border border-neutral-100">
+  <div class="flex items-start justify-between mb-4">
+    <div>
+      <div class="text-sm font-medium text-neutral-500 uppercase tracking-wide">Candidats &mdash; 1er tour</div>
+      <div class="text-sm text-neutral-400 mt-0.5">15 mars 2026</div>
+    </div>
+    <span class="text-sm text-neutral-400 shrink-0">{sortedListes.length} listes</span>
+  </div>
+
+  <div class="space-y-2">
+    {sortedListes.map((liste) => (
+      <div class="flex items-center gap-3">
+        <span class={`text-xs font-semibold px-2 py-0.5 rounded shrink-0 w-14 text-center ${nuanceColors[liste.nuance] || defaultColor}`}>
+          {liste.nuance}
+        </span>
+        <div class="min-w-0">
+          <span class="text-base font-semibold text-neutral-900">{toTitleCase(liste.tete)}</span>
+          <span class="text-sm text-neutral-400 ml-1.5 hidden sm:inline">{liste.nom_liste}</span>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <p class="text-xs text-neutral-400 mt-4">
+    Source : {candidats.source}, {candidats.date_publication}
+  </p>
+</div>

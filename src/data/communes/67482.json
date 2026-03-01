@@ -280,5 +280,76 @@
         }
       ]
     }
+  },
+  "candidats_2026": {
+    "listes": [
+      {
+        "tete": "Virginie JORON",
+        "nuance": "LUXD",
+        "nom_liste": "SAUVONS STRASBOURG"
+      },
+      {
+        "tete": "Florian KOBRYN",
+        "nuance": "LFI",
+        "nom_liste": "Strasbourg fière et solidaire"
+      },
+      {
+        "tete": "Eva LACOTE",
+        "nuance": "LEXG",
+        "nom_liste": "Strasbourg pour les jeunes et les travailleurs"
+      },
+      {
+        "tete": "Louise FÈVE",
+        "nuance": "LEXG",
+        "nom_liste": "Lutte ouvrière - Le camp des travailleurs"
+      },
+      {
+        "tete": "Jean-Philippe VETTER",
+        "nuance": "LDVD",
+        "nom_liste": "Aimer Strasbourg"
+      },
+      {
+        "tete": "Mohamed SYLLA",
+        "nuance": "LDVC",
+        "nom_liste": "UTILES POUR STRASBOURG"
+      },
+      {
+        "tete": "Jean Thierry GANGLOFF",
+        "nuance": "LDIV",
+        "nom_liste": "Vision collective 67"
+      },
+      {
+        "tete": "Pierre JAKUBOWICZ",
+        "nuance": "LUC",
+        "nom_liste": "DU NOUVEAU POUR STRASBOURG"
+      },
+      {
+        "tete": "Neïla BOUTGHATA",
+        "nuance": "LDIV",
+        "nom_liste": "ENGAGÉ-E-S POUR STRASBOURG"
+      },
+      {
+        "tete": "Jeanne BARSEGHIAN",
+        "nuance": "LDVG",
+        "nom_liste": "Strasbourg Juste et Vivante"
+      },
+      {
+        "tete": "Catherine TRAUTMANN",
+        "nuance": "LSOC",
+        "nom_liste": "Pour Strasbourg"
+      },
+      {
+        "tete": "Fahad RAJA MUHAMMAD",
+        "nuance": "LDIV",
+        "nom_liste": "Strasbourg sans frontières"
+      },
+      {
+        "tete": "Clément SOUBISE",
+        "nuance": "LEXG",
+        "nom_liste": "NPA Révolutionnaires-STRASBOURG, ouvrière et révolutionnaire"
+      }
+    ],
+    "source": "Ministère de l'intérieur",
+    "date_publication": "2026-02-28"
   }
 }

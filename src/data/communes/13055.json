@@ -184,5 +184,36 @@
   "elections": {
     "t1": null,
     "t2": null
+  },
+  "candidats_2026": {
+    "listes": [
+      {
+        "tete": "Benoît PAYAN",
+        "nuance": "LUG",
+        "nom_liste": "Pour Marseille"
+      },
+      {
+        "tete": "Franck ALLISIO",
+        "nuance": "LRN",
+        "nom_liste": "Rassemblement National pour Marseille"
+      },
+      {
+        "tete": "Sébastien DELOGU",
+        "nuance": "LFI",
+        "nom_liste": "Marseille fière et populaire"
+      },
+      {
+        "tete": "Bruno GILLES",
+        "nuance": "LDVD",
+        "nom_liste": "Marseille avant tout"
+      },
+      {
+        "tete": "Nora PREZIOSI",
+        "nuance": "LDVC",
+        "nom_liste": "Marseille ensemble"
+      }
+    ],
+    "source": "Ministère de l'intérieur",
+    "date_publication": "2026-02-28"
   }
 }

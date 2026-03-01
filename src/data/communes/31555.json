@@ -280,5 +280,61 @@
         }
       ]
     }
+  },
+  "candidats_2026": {
+    "listes": [
+      {
+        "tete": "François BRIANÇON",
+        "nuance": "LUG",
+        "nom_liste": "Vivre mieux La gauche unie, écologiste, citoyenne et solidaire"
+      },
+      {
+        "tete": "Guillaume SCALI",
+        "nuance": "LEXG",
+        "nom_liste": "NPA Révolutionnaires- Toulouse ouvriére et révolutionnaire."
+      },
+      {
+        "tete": "Malena ADRADA",
+        "nuance": "LEXG",
+        "nom_liste": "LUTTE OUVRIÈRE - LE CAMP DES TRAVAILLEURS"
+      },
+      {
+        "tete": "Julian MENENDEZ",
+        "nuance": "LEXG",
+        "nom_liste": "Toulouse pour les jeunes, les travailleurs et les services publics, contre les budgets de guerre"
+      },
+      {
+        "tete": "Jean-Luc MOUDENC",
+        "nuance": "LDVD",
+        "nom_liste": "Avec Jean-Luc MOUDENC, Protégeons l'Avenir de Toulouse"
+      },
+      {
+        "tete": "Julien LEONARDELLI",
+        "nuance": "LRN",
+        "nom_liste": "Le bon sens toulousain"
+      },
+      {
+        "tete": "Arthur COTTREL",
+        "nuance": "LREC",
+        "nom_liste": "A LA RECONQUETE ! DE TOULOUSE"
+      },
+      {
+        "tete": "Lambert MEILHAC",
+        "nuance": "LDVC",
+        "nom_liste": "Nouvel air"
+      },
+      {
+        "tete": "François PIQUEMAL",
+        "nuance": "LFI",
+        "nom_liste": "Demain Toulouse à gauche et écologiste"
+      },
+      {
+        "tete": "Vanessa PEDINOTTI",
+        "nuance": "LEXG",
+        "nom_liste": "UNE TRAVAILLEUSE AU CAPITOLE"
+      }
+    ],
+    "source": "Ministère de l'intérieur",
+    "date_publication": "2026-02-28"
   }
 }
