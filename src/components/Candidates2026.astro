@@ -1,8 +1,17 @@
 ---
+import { getCityVoice } from '../data/citizen-voice';
+
 interface Liste {
   tete: string;
   nuance: string;
   nom_liste: string;
+}
+
+interface Kpi {
+  label: string;
+  badge: string;
+  delta_pct: number | null;
+  series: number[];
 }
 
 interface Props {
@@ -11,11 +20,14 @@ interface Props {
     source: string;
     date_publication: string;
   };
+  kpis: Record<string, Kpi>;
+  nom: string;
+  commune: string;
 }
 
-const { candidats } = Astro.props;
+const { candidats, kpis, nom, commune } = Astro.props;
 
-// Nuance color mapping
+// --- Nuance color mapping ---
 const nuanceColors: Record<string, string> = {
   // Gauche
   "LUG": "bg-rose-50 text-rose-700",
@@ -66,11 +78,50 @@ const sortedListes = [...candidats.listes].sort((a, b) => {
   if (oa !== ob) return oa - ob;
   return a.tete.localeCompare(b.tete, "fr");
 });
+
+// --- Questions for candidates ---
+const dissatisfactions = getCityVoice(commune).dissatisfactions;
+
+const financialQuestions: Record<string, string> = {
+  "encours_dette": "Comment comptez-vous r\u00e9duire la dette de la ville, qui d\u00e9passe la moyenne des villes comparables ?",
+  "depenses_investissement": "L'investissement dans les \u00e9quipements publics a recul\u00e9 sur le mandat. Comment relancerez-vous l'investissement ?",
+  "recettes_fonctionnement": "Les recettes sont inf\u00e9rieures aux villes comparables. Quels leviers activerez-vous sans augmenter les imp\u00f4ts ?",
+  "depenses_fonctionnement": "Les d\u00e9penses de fonctionnement sont \u00e9lev\u00e9es. O\u00f9 r\u00e9aliserez-vous des \u00e9conomies ?",
+  "frais_personnel": "La masse salariale p\u00e8se lourd dans le budget. Comment optimiser les effectifs tout en maintenant les services ?",
+  "epargne_brute": "La capacit\u00e9 d'\u00e9pargne s'est d\u00e9grad\u00e9e. Comment restaurerez-vous des marges pour financer les projets futurs ?",
+};
+
+const finQuestions: string[] = [];
+for (const [key, kpi] of Object.entries(kpis)) {
+  if ((kpi.badge === "CRITIQUE" || kpi.badge === "FAIBLE") && financialQuestions[key]) {
+    finQuestions.push(financialQuestions[key]);
+  }
+}
+
+const citizenQuestion = `Les habitants se plaignent de "${dissatisfactions[0].toLowerCase()}". Que proposez-vous concr\u00e8tement pour y r\u00e9pondre ?`;
+
+const questions: string[] = [];
+if (finQuestions.length >= 2) {
+  questions.push(finQuestions[0], finQuestions[1]);
+  questions.push(citizenQuestion);
+} else if (finQuestions.length === 1) {
+  questions.push(finQuestions[0]);
+  questions.push(citizenQuestion);
+  if (dissatisfactions.length > 1) {
+    questions.push(`Comment am\u00e9liorerez-vous la situation concernant "${dissatisfactions[1].toLowerCase()}" ?`);
+  }
+} else {
+  questions.push(citizenQuestion);
+  questions.push(`Comment maintiendrez-vous la sant\u00e9 financi\u00e8re de ${nom} tout en r\u00e9pondant aux attentes des habitants ?`);
+  if (dissatisfactions.length > 1) {
+    questions.push(`Comment am\u00e9liorerez-vous la situation concernant "${dissatisfactions[1].toLowerCase()}" ?`);
+  }
+}
 ---
 <div class="bg-white rounded-2xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.06)] border border-neutral-100">
   <div class="flex items-start justify-between mb-4">
     <div>
-      <div class="text-sm font-medium text-neutral-500 uppercase tracking-wide">Candidats &mdash; 1er tour</div>
+      <div class="text-sm font-medium text-neutral-500 uppercase tracking-wide">Candidats - 1er tour</div>
       <div class="text-sm text-neutral-400 mt-0.5">15 mars 2026</div>
     </div>
     <span class="text-sm text-neutral-400 shrink-0">{sortedListes.length} listes</span>
@@ -89,6 +140,20 @@ const sortedListes = [...candidats.listes].sort((a, b) => {
       </div>
     ))}
   </div>
+
+  {questions.length > 0 && (
+    <div class="border-t border-neutral-100 pt-4 mt-4">
+      <div class="text-sm font-medium text-neutral-500 uppercase tracking-wide mb-2">Questions &agrave; leur poser</div>
+      <ol class="space-y-2">
+        {questions.map((q, i) => (
+          <li class="flex gap-2 text-sm text-neutral-700 leading-relaxed">
+            <span class="text-blue-500 font-mono font-bold shrink-0">{i + 1}.</span>
+            <span>{q}</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  )}
 
   <p class="text-xs text-neutral-400 mt-4">
     Source : {candidats.source}, {candidats.date_publication}

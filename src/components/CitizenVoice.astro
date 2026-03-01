@@ -1,64 +1,12 @@
 ---
+import { getCityVoice } from '../data/citizen-voice';
+
 interface Props {
   commune: string;
 }
 
 const { commune } = Astro.props;
-
-interface CityVoice {
-  satisfactions: string[];
-  dissatisfactions: string[];
-}
-
-const CITIZEN_VOICE: Record<string, CityVoice> = {
-  "75056": {
-    satisfactions: ["Transports en commun", "Offre culturelle", "Espaces verts"],
-    dissatisfactions: ["Propret\u00e9 des rues", "Co\u00fbt du logement", "Nuisances sonores"],
-  },
-  "13055": {
-    satisfactions: ["Cadre de vie et climat", "Plages et littoral", "Gastronomie locale"],
-    dissatisfactions: ["Ins\u00e9curit\u00e9", "Transports en commun", "Logement insalubre"],
-  },
-  "69123": {
-    satisfactions: ["Pistes cyclables", "Gastronomie", "Universit\u00e9s et recherche"],
-    dissatisfactions: ["ZFE et restrictions auto", "Stationnement", "Vie nocturne et bruit"],
-  },
-  "31555": {
-    satisfactions: ["A\u00e9rospatiale et emploi", "Cadre de vie", "Universit\u00e9s"],
-    dissatisfactions: ["Transports en commun", "Stationnement", "\u00c9talement urbain"],
-  },
-  "06088": {
-    satisfactions: ["Climat et cadre de vie", "Promenade des Anglais", "S\u00e9curit\u00e9"],
-    dissatisfactions: ["Co\u00fbt de la vie", "Stationnement", "Tourisme de masse"],
-  },
-  "44109": {
-    satisfactions: ["Transports en commun", "Cadre de vie", "Dynamisme \u00e9conomique"],
-    dissatisfactions: ["Ins\u00e9curit\u00e9", "Propret\u00e9 des rues", "Risque inondations"],
-  },
-  "34172": {
-    satisfactions: ["Tramway", "Universit\u00e9s", "Climat"],
-    dissatisfactions: ["Ins\u00e9curit\u00e9", "Circulation", "Urbanisation rapide"],
-  },
-  "67482": {
-    satisfactions: ["Tramway et transports", "Centre historique", "Dimension europ\u00e9enne"],
-    dissatisfactions: ["Stationnement", "Propret\u00e9", "Co\u00fbt du logement"],
-  },
-  "33063": {
-    satisfactions: ["Cadre de vie", "Tramway", "Gastronomie et vin"],
-    dissatisfactions: ["Co\u00fbt du logement", "Tourisme de masse", "Circulation"],
-  },
-  "59350": {
-    satisfactions: ["Offre culturelle", "Transports m\u00e9tropolitains", "Universit\u00e9s"],
-    dissatisfactions: ["Propret\u00e9 des rues", "Ins\u00e9curit\u00e9", "Climat et grisaille"],
-  },
-};
-
-const defaultVoice: CityVoice = {
-  satisfactions: ["Cadre de vie", "Offre de services", "Espaces verts"],
-  dissatisfactions: ["Co\u00fbt de la vie", "Stationnement", "Propret\u00e9"],
-};
-
-const voice = CITIZEN_VOICE[commune] || defaultVoice;
+const voice = getCityVoice(commune);
 ---
 <div class="bg-white rounded-2xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.06)] border border-neutral-100">
   <div class="flex items-start justify-between mb-4">

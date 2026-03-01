@@ -4,7 +4,6 @@ import MayorCard from '../../components/MayorCard.astro';
 import KpiCard from '../../components/KpiCard.astro';
 import Takeaway from '../../components/Takeaway.astro';
 import CitizenVoice from '../../components/CitizenVoice.astro';
-import CandidateQuestions from '../../components/CandidateQuestions.astro';
 import Candidates2026 from '../../components/Candidates2026.astro';
 import Footer from '../../components/Footer.astro';
 
@@ -35,7 +34,7 @@ const longTermeKeys = ['depenses_investissement', 'encours_dette', 'epargne_brut
       <a href={baseUrl} class="text-sm text-blue-600 hover:text-blue-800">&larr; Toutes les villes</a>
     </nav>
 
-    <!-- Hero: City + Score + Mayor + Bilan (one card) -->
+    <!-- Hero: City + Score + Mayor + Bilan -->
     <MayorCard
       nom={commune.nom}
       departement={commune.departement}
@@ -46,22 +45,15 @@ const longTermeKeys = ['depenses_investissement', 'encours_dette', 'epargne_brut
       kpis={commune.finances.kpis}
     />
 
-    <!-- Two columns: Citizen Voice | Insights -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
-      <!-- Left: Citizen Voice -->
-      <CitizenVoice commune={commune.code} />
-
-      <!-- Right: Takeaway + Questions in one card -->
-      <div class="bg-white rounded-2xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.06)] border border-neutral-100 flex flex-col gap-4">
-        <Takeaway
-          kpis={commune.finances.kpis}
-          badge_global={commune.finances.badge_global}
-          nom={commune.nom}
-          commune={commune.code}
-        />
-        <div class="border-t border-neutral-100 pt-4">
-          <CandidateQuestions
+    <!-- Chapter 1: Citizen voice + Synthesis -->
+    <div class="mt-10">
+      <h2 class="text-sm font-medium text-neutral-500 uppercase tracking-wide mb-4">Ce qu'en pensent les habitants</h2>
+      <div class="space-y-4">
+        <CitizenVoice commune={commune.code} />
+        <div class="bg-white rounded-2xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.06)] border border-neutral-100">
+          <Takeaway
             kpis={commune.finances.kpis}
+            badge_global={commune.finances.badge_global}
             nom={commune.nom}
             commune={commune.code}
           />
@@ -69,16 +61,24 @@ const longTermeKeys = ['depenses_investissement', 'encours_dette', 'epargne_brut
       </div>
     </div>
 
-    <!-- Candidates 2026 -->
+    <!-- Chapter 2: Elections 2026 -->
     {commune.candidats_2026 && commune.candidats_2026.listes && commune.candidats_2026.listes.length > 0 && (
-      <div class="mt-4">
-        <Candidates2026 candidats={commune.candidats_2026} />
+      <div class="mt-10">
+        <h2 class="text-sm font-medium text-neutral-500 uppercase tracking-wide mb-4">&Eacute;lections 2026</h2>
+        <Candidates2026
+          candidats={commune.candidats_2026}
+          kpis={commune.finances.kpis}
+          nom={commune.nom}
+          commune={commune.code}
+        />
       </div>
     )}
 
-    <!-- KPI Details -->
-    <div class="mt-8">
-      <h3 class="text-base font-medium text-neutral-500 uppercase tracking-wide mb-3">Budget au quotidien</h3>
+    <!-- Chapter 3: Financial deep dive -->
+    <div class="mt-10">
+      <h2 class="text-sm font-medium text-neutral-500 uppercase tracking-wide mb-4">Les finances en d&eacute;tail</h2>
+
+      <h3 class="text-sm font-medium text-neutral-400 uppercase tracking-wide mb-3">Budget au quotidien</h3>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
         {quotidienKeys.map((key) => {
           const kpi = commune.finances.kpis[key];
@@ -97,7 +97,7 @@ const longTermeKeys = ['depenses_investissement', 'encours_dette', 'epargne_brut
         })}
       </div>
 
-      <h3 class="text-base font-medium text-neutral-500 uppercase tracking-wide mb-3">Vision long terme</h3>
+      <h3 class="text-sm font-medium text-neutral-400 uppercase tracking-wide mb-3">Vision long terme</h3>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {longTermeKeys.map((key) => {
           const kpi = commune.finances.kpis[key];

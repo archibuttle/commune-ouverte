@@ -1,4 +1,6 @@
 ---
+import { getCityVoice } from '../data/citizen-voice';
+
 interface Kpi {
   label: string;
   badge: string;
@@ -15,21 +17,7 @@ interface Props {
 
 const { kpis, badge_global, nom, commune } = Astro.props;
 
-// --- Citizen voice data (duplicated from CitizenVoice for cross-referencing) ---
-const DISSATISFACTIONS: Record<string, string[]> = {
-  "75056": ["Propret\u00e9 des rues", "Co\u00fbt du logement", "Nuisances sonores"],
-  "13055": ["Ins\u00e9curit\u00e9", "Transports en commun", "Logement insalubre"],
-  "69123": ["ZFE et restrictions auto", "Stationnement", "Vie nocturne et bruit"],
-  "31555": ["Transports en commun", "Stationnement", "\u00c9talement urbain"],
-  "06088": ["Co\u00fbt de la vie", "Stationnement", "Tourisme de masse"],
-  "44109": ["Ins\u00e9curit\u00e9", "Propret\u00e9 des rues", "Risque inondations"],
-  "34172": ["Ins\u00e9curit\u00e9", "Circulation", "Urbanisation rapide"],
-  "67482": ["Stationnement", "Propret\u00e9", "Co\u00fbt du logement"],
-  "33063": ["Co\u00fbt du logement", "Tourisme de masse", "Circulation"],
-  "59350": ["Propret\u00e9 des rues", "Ins\u00e9curit\u00e9", "Climat et grisaille"],
-};
-
-const dissatisfactions = DISSATISFACTIONS[commune] || ["Co\u00fbt de la vie", "Stationnement", "Propret\u00e9"];
+const dissatisfactions = getCityVoice(commune).dissatisfactions;
 const topDissatisfaction = dissatisfactions[0];
 
 // --- Short labels ---
